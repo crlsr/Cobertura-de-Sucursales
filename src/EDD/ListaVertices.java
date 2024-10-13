@@ -23,11 +23,11 @@ public class ListaVertices {
         return vfirst == null;
     }
     
-    public Vertice buscarVertice(Vertice v){
+    public Vertice buscarVertice(Estacion tinfo){
         Vertice aux = this.getVfirst();
         if(!esVacio()){
             while(aux!= null){
-                if(aux == v){
+                if(aux.getTinfo().getNombre().equals(tinfo.getNombre())){
                     break;
                 }
                 aux = aux.getNext();
@@ -43,7 +43,7 @@ public class ListaVertices {
             vfirst = newVertice;
             this.setSize(getSize() + 1);
         }else{
-            if(this.buscarVertice(newVertice) == null){
+            if(this.buscarVertice(tinfo) == null){
                 newVertice.setNext(this.getVfirst());
                 this.setVfirst(newVertice);
                 this.setSize(getSize() + 1);
@@ -51,17 +51,18 @@ public class ListaVertices {
         }
     }
     
-    public void eliminarVertice(Vertice v){
-        if(!esVacio() && v != null){
-            if(this.buscarVertice(v) != null){
-                if(v == this.getVfirst()){
-                    this.setVfirst(v.getNext());
-                    v.setNext(null);
+    public void eliminarVertice(Estacion tinfo){
+        if(!esVacio() && tinfo.getNombre() != null){
+            if(this.buscarVertice(tinfo) != null){
+                if(this.getVfirst().getTinfo().getNombre().equals(tinfo.getNombre())){
+                    Vertice aux = this.getVfirst();
+                    this.setVfirst(aux.getNext());
+                    aux.setNext(null);
                 }else{
                     Vertice aux1 = vfirst.getNext();
                     Vertice aux2 = vfirst;
                     while(aux1!= null){
-                        if(v == aux1){
+                        if(aux1.getTinfo().getNombre().equals(tinfo.getNombre())){
                             aux2.setNext(aux1.getNext());
                             aux1.setNext(null);
                             break;
@@ -78,6 +79,18 @@ public class ListaVertices {
         
     }
     
+    public String print(){
+        String cadena = "";
+        if(!esVacio()){
+            Vertice aux = vfirst;
+            while(aux!= null){
+                cadena += aux.getTinfo().getNombre();
+                aux = aux.getNext();
+            }
+            
+        }
+        return cadena;
+    }
     
     public Vertice getVfirst() {
         return vfirst;

@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package proyectocoberturasucursales;
-import JSON.LecturaJSON;
+import EDD.Grafo;
+import Objetos.Estacion;
 /**
  *
  * @author pseba
@@ -15,7 +16,16 @@ public class ProyectoCoberturaSucursales {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Grafo nuevo = new Grafo();
+        Estacion x = new Estacion("La hoyada");
+        Estacion y = new Estacion("Manao");
+        Estacion z = new Estacion("Chacaito");
         
+        nuevo.agregarVertice(z);
+        nuevo.agregarVertice(y);
+        nuevo.agregarVertice(x);
+        System.out.println(nuevo.getListavertices().print());
+        System.out.println(nuevo.getListavertices().print());
         
         
         
