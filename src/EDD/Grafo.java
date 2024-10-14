@@ -3,12 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package EDD;
-import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Random;
 import javax.swing.JOptionPane;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
@@ -63,14 +57,12 @@ public class Grafo {
                     this.desconcectarVertices(aux.getTinfo(), tinfo);
                     aux = aux.getNext();  
                 }
-                
                 this.getListavertices().eliminarVertice(tinfo);
                 graph.removeNode(tinfo.getNombre());
                 this.setNumVertices(getNumVertices()-1);
                 JOptionPane.showMessageDialog(null,
                     ((String) tinfo.getNombre() + " eliminado con exito"),
                     "", JOptionPane.INFORMATION_MESSAGE);
-                
             }
         }
     }
@@ -98,7 +90,6 @@ public class Grafo {
                         vertice1.getAdyacencia().agregarNodo(vertice2);
                         vertice2.getAdyacencia().agregarNodo(vertice1); 
                         graph.addEdge(tinfo1.getNombre() + "-" + tinfo2.getNombre(), tinfo1.getNombre(), tinfo2.getNombre());
-                        
                     }
                 }
             }
@@ -120,7 +111,11 @@ public class Grafo {
                     if(adyacente!= null){
                         vertice1.getAdyacencia().eliminarNodo(vertice2);
                         vertice2.getAdyacencia().eliminarNodo(vertice1);
-                       graph.removeEdge(tinfo1.getNombre() + "-" + tinfo2.getNombre());
+                        try{
+                            graph.removeEdge(tinfo1.getNombre() + "-" + tinfo2.getNombre());
+                        }catch(Exception e){
+                            graph.removeEdge(tinfo2.getNombre() + "-" + tinfo1.getNombre());
+                        }
                     }
                 }
             }
