@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package EDD;
-
 /**
  *
  * @author pseba
@@ -22,11 +21,11 @@ public class ListaAdyacencia {
         return pfirst == null;
     }
     
-    public Nodo buscarNodo(Nodo obj){
+    public Nodo buscarNodo(Vertice tinfo){
         Nodo aux = this.getPfirst();
         if(!esVacio()){
             while(aux!= null){
-                if(aux == obj){
+                if(aux.getTinfo().getTinfo().getNombre().equals(tinfo.getTinfo().getNombre())){
                     break;
                 }
                 aux = aux.getPnext();
@@ -42,7 +41,7 @@ public class ListaAdyacencia {
             pfirst = newNodo;
             this.setSize(getSize() + 1);
         }else{
-            if(this.buscarNodo(newNodo) == null){
+            if(this.buscarNodo(v) == null){
                 newNodo.setPnext(this.getPfirst());
                 this.setPfirst(newNodo);
                 this.setSize(getSize() + 1);
@@ -50,17 +49,18 @@ public class ListaAdyacencia {
         }
     }
     
-    public void eliminarNodo(Nodo obj){
-        if(!esVacio() && obj != null){
-            if(this.buscarNodo(obj) != null){
-                if(obj == this.getPfirst()){
-                    this.setPfirst(obj.getPnext());
-                    obj.setPnext(null);
+    public void eliminarNodo(Vertice v){
+        if(!esVacio() && v != null){
+            if(this.buscarNodo(v) != null){
+                if(v.getTinfo().getNombre().equals(this.getPfirst().getTinfo().getTinfo().getNombre())){
+                    Nodo aux = this.getPfirst();
+                    this.setPfirst(aux.getPnext());
+                    aux.setPnext(null);
                 }else{
                     Nodo aux1 = pfirst.getPnext();
                     Nodo aux2 = pfirst;
                     while(aux1!= null){
-                        if(obj == aux1){
+                        if(aux1.getTinfo().getTinfo().getNombre().equals(v.getTinfo().getNombre())){
                             aux2.setPnext(aux1.getPnext());
                             aux1.setPnext(null);
                             break;
@@ -75,6 +75,18 @@ public class ListaAdyacencia {
         }
         
         
+    }
+     public String print(){
+        String cadena = "";
+        if(!esVacio()){
+            Nodo aux = pfirst;
+            while(aux!= null){
+                cadena += aux.getTinfo().getTinfo().getNombre();
+                aux = aux.getPnext();
+            }
+            
+        }
+        return cadena;
     }
 
     public int getSize() {

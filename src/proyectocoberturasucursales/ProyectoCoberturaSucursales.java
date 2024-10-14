@@ -5,6 +5,7 @@
 package proyectocoberturasucursales;
 import EDD.Grafo;
 import Objetos.Estacion;
+import EDD.ListaAdyacencia;
 /**
  *
  * @author pseba
@@ -24,8 +25,21 @@ public class ProyectoCoberturaSucursales {
         nuevo.agregarVertice(z);
         nuevo.agregarVertice(y);
         nuevo.agregarVertice(x);
-        System.out.println(nuevo.getListavertices().print());
-        System.out.println(nuevo.getListavertices().print());
+        nuevo.conectarVertices(z, x);
+        nuevo.conectarVertices(x,y);
+        nuevo.conectarVertices(z, y);
+        nuevo.mostrarGrafo();
+        ListaAdyacencia lista = nuevo.getListavertices().getVfirst().getAdyacencia();
+        System.out.println(nuevo.getListavertices().getVfirst().getTinfo().getNombre());
+        System.out.println(lista.print());
+        nuevo.eliminarVertice(x);
+        nuevo.desconcectarVertices(y, z);
+        lista = nuevo.getListavertices().getVfirst().getAdyacencia();
+        System.out.println(nuevo.getListavertices().getVfirst().getTinfo().getNombre());
+        System.out.println(lista.print());
+        nuevo.mostrarGrafo();
+
+        
         
         
         
