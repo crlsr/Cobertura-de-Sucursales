@@ -10,8 +10,6 @@ import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-
-
 public class LecturaJSON { 
     private JSONObject data;
 
