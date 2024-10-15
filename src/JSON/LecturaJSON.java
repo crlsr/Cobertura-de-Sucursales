@@ -9,9 +9,13 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import EDD.ListaVertices;
+import EXTRAS.Estacion;
+import org.json.JSONArray;
 
 public class LecturaJSON { 
     private JSONObject data;
+    private ListaVertices returnData;
 
     /*
         Constructor de LecturaJSON:
@@ -24,6 +28,7 @@ public class LecturaJSON {
             NOTA: Se le pasa al JSONObject un JSONTokener para poder acceder a la informacion del archivo como string y pasarlo aformato JSONObject.
     */
     public LecturaJSON(File endpoint) {
+        this.returnData = new ListaVertices();
         try(FileReader reader = new FileReader(endpoint)){
             this.data = new JSONObject(new JSONTokener(reader));
         } catch(IOException e){
@@ -32,8 +37,47 @@ public class LecturaJSON {
         
     }
     
-    //Método para poder acceder al información de nuestro JSON
+    //Métodos para poder acceder al información de nuestro JSON y listas de retorno de nuestros vertices.
     public JSONObject getData() {
         return data;
+    }
+
+    public ListaVertices getReturnData() {
+        return returnData;
+    }
+
+    public void setReturnData(ListaVertices returnData) {
+        this.returnData = returnData;
+    }
+    
+    
+    /*
+        Creador de nuestra lista de vertices:
+            Esta función tiene como fin acceder a nuestro JSON y a partir de ahí empezar a recorrer sus keywords y values con el 
+            fin de poder crear una estación con cada una como un objeto de tipo estación y luego convertirlos en vertices para 
+    `       agregarlos a nuestra lisat de vertices. Todo esto accediendo primero a su keyword principal la cual contiene las keyword 
+            de las paradas (Ejm: Linea1, Linea2, etc...), y a partir de ahí acceder a los values de las lineas convirtiendolos en un ARREGLO
+            usando la libreria JSONArray al igual que como haremos con el contenido de la keyword principal, para así poder recorrerla con mayor 
+            facilidad y construirlo con mayor soltura.
+            
+    */
+    public ListaVertices dataConstructor() {
+        String principalKeyWord = this.getData().names().getString(0); //Obtenemos la keyword principal
+        JSONArray principalData = this.getData().getJSONArray(principalKeyWord); //Obtiene el arreglo de JSONs donde se contienen los JSONs individuales para cada linea
+        for (int i = 0; i < principalData.length(); i++) {
+            JSONObject lineValues = principalData.getJSONObject(i); //Obtenemos el JSON de la linea en la que nos encontremos.
+            String lineKey = lineValues.keys().next(); //Obtenemos el key para acceder a los datos del JSON de esta determianda linea.
+            JSONArray lineData = lineValues.getJSONArray(lineKey); //Obtenemos los datos del JSON de la linea en la que estemos usando el keyword para su data.
+            for (int j = 0; j < lineData.length(); j++) {
+                try {
+                    String station = lineData.getString(j); //Al recorrer la lista de estaciones obtenemos el nombre de la estación posteriormente verificamso si es String o otro JSONObject
+
+                    Estacion currentStation = new Estacion(station, lineKey); //Con el nombre de la estacion creamos un objeto estación
+                    this.getReturnData().agregarVertice(currentStation); //Añadimos el objeto esatción a la lista de estación
+                } catch (Exception e) {
+                }
+            }
+        }
+        return this.getReturnData();
     }
 }
