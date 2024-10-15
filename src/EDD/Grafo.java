@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.ui.view.Viewer;
-import Objetos.Estacion;
+import EXTRAS.Estacion;
 /**
  *
  * @author pseba
@@ -16,12 +16,15 @@ public class Grafo {
     private ListaVertices listavertices;
     private int numVertices;
     private Graph graph;
+    private int t;
 
     public Grafo() {
         this.numVertices = 0;
         this.listavertices = new ListaVertices();
         this.graph = new MultiGraph("Grafo Metro");
-        System.setProperty("org.graphstream.ui", "swing"); // Utiliza el renderer Swing
+        this.t = 0;
+        System.setProperty("org.graphstream.ui", "swing");
+        //verificar si estas 3 lineas son necesarias
         graph.setAttribute("ui.stylesheet", "node { fill-color: blue; } edge { fill-color: gray; }");
         graph.setAttribute("ui.quality");
         graph.setAttribute("ui.antialias");
@@ -151,7 +154,13 @@ public class Grafo {
     public void setGraph(Graph graph) {
         this.graph = graph;
     }
-    
-    
+
+    public int getT() {
+        return t;
+    }
+
+    public void setT(int t) {
+        this.t = t;
+    }
     
 }

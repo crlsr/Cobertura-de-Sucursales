@@ -5,7 +5,7 @@
 package proyectocoberturasucursales;
 import EDD.Grafo;
 import JSON.LecturaJSON;
-import Objetos.Estacion;
+import EXTRAS.Estacion;
 import EDD.ListaAdyacencia;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -44,10 +44,10 @@ public class ProyectoCoberturaSucursales {
         
        //Pruebas Pedro 
         Grafo nuevo = new Grafo();
-        Estacion x = new Estacion("La hoyada");
-        Estacion y = new Estacion("Manao");
-        Estacion z = new Estacion("Chacaito");
-        Estacion m = new Estacion("Petare");
+        Estacion x = new Estacion("La hoyada", "Linea 1");
+        Estacion y = new Estacion("Manao", "Linea 1");
+        Estacion z = new Estacion("Chacaito", "Linea 1");
+        Estacion m = new Estacion("Petare", "Linea 1");
         nuevo.agregarVertice(z);
         nuevo.agregarVertice(y);
         nuevo.agregarVertice(x);
