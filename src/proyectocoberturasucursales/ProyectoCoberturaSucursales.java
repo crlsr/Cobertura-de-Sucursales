@@ -7,6 +7,7 @@ import EDD.Grafo;
 import JSON.LecturaJSON;
 import EXTRAS.Estacion;
 import EDD.ListaAdyacencia;
+import EDD.ListaVertices;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -39,7 +40,8 @@ public class ProyectoCoberturaSucursales {
         if(response == JFileChooser.APPROVE_OPTION){
             File selected = finder.getSelectedFile();
             object = new LecturaJSON(selected);
-            System.out.println(object.getData().toString(2));
+            ListaVertices a = object.dataConstructor();
+            System.out.println(a.print());
         }
         
        //Pruebas Pedro 
