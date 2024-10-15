@@ -6,7 +6,6 @@ package proyectocoberturasucursales;
 import EDD.Grafo;
 import JSON.LecturaJSON;
 import EXTRAS.Estacion;
-import EDD.ListaAdyacencia;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -59,7 +58,6 @@ public class ProyectoCoberturaSucursales {
         nuevo.conectarVertices(m, x);
         nuevo.mostrarGrafo();
         
-
     }
     
 }

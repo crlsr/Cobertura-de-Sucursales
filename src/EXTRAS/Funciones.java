@@ -5,7 +5,7 @@
 package EXTRAS;
 
 import javax.swing.JOptionPane;
-
+import EDD.Grafo;
 /**
  *
  * @author pseba
@@ -13,25 +13,26 @@ import javax.swing.JOptionPane;
 public class Funciones {
     
     
-    public void colocarSucursal(Estacion tinfo){
+    public void colocarSucursal(Grafo G, Estacion tinfo){
         if(tinfo.getSucursal()){
             JOptionPane.showMessageDialog(null,
                ("Ya existe una sucursal en " + tinfo.getNombre()),
                         "", JOptionPane.INFORMATION_MESSAGE);
         }else{
             tinfo.setSucursal(true);
+            G.cambiarColorVertice(tinfo, "green");
         }
     }
     
-    public void eliminarSucursal(Estacion tinfo){
+    public void eliminarSucursal(Grafo G, Estacion tinfo){
         if(!tinfo.getSucursal()){
             JOptionPane.showMessageDialog(null,
                ("No existe una sucursal en " + tinfo.getNombre()),
                         "", JOptionPane.INFORMATION_MESSAGE);
         }else{
             tinfo.setSucursal(false);
+            G.cambiarColorVertice(tinfo, "rgb(178, 178, 232)"); // Este es el color original de los nodos
         }
     }
-    
-    
 }
+    
