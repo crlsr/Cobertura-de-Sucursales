@@ -3,19 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package JSON;
+import EDD.Grafo;
+import EDD.Vertice;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import EDD.ListaVertices;
 import EXTRAS.Estacion;
 import org.json.JSONArray;
 
 public class LecturaJSON { 
     private JSONObject data;
-    private ListaVertices returnData;
 
     /*
         Constructor de LecturaJSON:
@@ -28,7 +28,6 @@ public class LecturaJSON {
             NOTA: Se le pasa al JSONObject un JSONTokener para poder acceder a la informacion del archivo como string y pasarlo aformato JSONObject.
     */
     public LecturaJSON(File endpoint) {
-        this.returnData = new ListaVertices();
         try(FileReader reader = new FileReader(endpoint)){
             this.data = new JSONObject(new JSONTokener(reader));
         } catch(IOException e){
@@ -41,15 +40,6 @@ public class LecturaJSON {
     public JSONObject getData() {
         return data;
     }
-
-    public ListaVertices getReturnData() {
-        return returnData;
-    }
-
-    public void setReturnData(ListaVertices returnData) {
-        this.returnData = returnData;
-    }
-    
     
     /*
         Creador de nuestra lista de vertices:
@@ -61,23 +51,80 @@ public class LecturaJSON {
             facilidad y construirlo con mayor soltura.
             
     */
-    public ListaVertices dataConstructor() {
+    public void dataConstructor(Grafo graph) {
         String principalKeyWord = this.getData().names().getString(0); //Obtenemos la keyword principal
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord); //Obtiene el arreglo de JSONs donde se contienen los JSONs individuales para cada linea
         for (int i = 0; i < principalData.length(); i++) {
             JSONObject lineValues = principalData.getJSONObject(i); //Obtenemos el JSON de la linea en la que nos encontremos.
             String lineKey = lineValues.keys().next(); //Obtenemos el key para acceder a los datos del JSON de esta determianda linea.
             JSONArray lineData = lineValues.getJSONArray(lineKey); //Obtenemos los datos del JSON de la linea en la que estemos usando el keyword para su data.
+            Estacion prevStation = null;
+
             for (int j = 0; j < lineData.length(); j++) {
                 try {
-                    String station = lineData.getString(j); //Al recorrer la lista de estaciones obtenemos el nombre de la estación posteriormente verificamso si es String o otro JSONObject
+                    Object station = lineData.getString(j); //Al recorrer la lista de estaciones obtenemos el nombre de la estación posteriormente verificamso si es String o otro JSONObject
 
-                    Estacion currentStation = new Estacion(station, lineKey); //Con el nombre de la estacion creamos un objeto estación
-                    this.getReturnData().agregarVertice(currentStation); //Añadimos el objeto esatción a la lista de estación
+                    if (station instanceof String) {
+                        String stationName = (String) station; //Con el nombre de la estacion creamos un string con el nombre de la estación
+                        Estacion currentStation = findEstacion(graph, stationName, lineKey); //Might be the linekey thing
+                        
+                        if(currentStation == null){
+                            currentStation = new Estacion(stationName, lineKey);
+                            graph.agregarVertice(currentStation);
+                        }
+                        
+                        if(prevStation != null){
+                            graph.conectarVertices(prevStation, currentStation);
+                        }
+                        
+                        prevStation = currentStation;
+                        
+                    } else if(station instanceof JSONObject){
+                        JSONObject connection = (JSONObject) station;
+                        String fromStationData = connection.keys().next();
+                        String toStationData = connection.getString(fromStationData);
+                        
+                        Estacion fromStation = findEstacion(graph, fromStationData, lineKey);
+                        if(fromStationData == null){
+                            fromStation = new Estacion(fromStationData, lineKey);
+                            graph.agregarVertice(fromStation);
+                        }
+                        
+                        Estacion toStation = findEstacion(graph, toStationData, lineKey);
+                        if(toStation == null){
+                            toStation = new Estacion(toStationData, lineKey);
+                            graph.agregarVertice(toStation);
+                        }
+                        
+                        graph.conectarVertices(fromStation, toStation);
+                        
+                        if(prevStation != null){
+                            graph.conectarVertices(prevStation, fromStation);
+                        }
+                        
+                        prevStation = fromStation;
+                    }
                 } catch (Exception e) {
                 }
             }
         }
-        return this.getReturnData();
+    }
+    
+    /*
+        Vqalidación de vertices:
+            Esta es una función la cual recorre la lista de bvertices de nuestro grafo con el que estemos trabajando
+            con el fin de validar si una estación esta o no esta dentro de dicha lista, esta función es usada en el
+            procedimiento dataConstructor() con el fin de no repetir vertices durante el proceso de construcción de datos.
+            
+    */
+    public Estacion findEstacion(Grafo g, String stationName, String lineKey) {
+        Vertice aux = g.getListavertices().getVfirst(); //Inicializamos el puntero recorredor
+        while (aux != null){
+            if(aux.getTinfo().getNombre().equals(stationName) && aux.getTinfo().getLinea().equals(lineKey)){ //Recorremos validando que se encuentre o no dicho vertice
+                return aux.getTinfo(); //Retornamos la estación de ser encontrado
+            }
+            aux = aux.getNext();
+        }
+        return null; //Retornamos null de no encontrar dicho vertice
     }
 }
