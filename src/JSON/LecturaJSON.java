@@ -79,8 +79,7 @@ public class LecturaJSON {
                         g.agregarVertice(currentStation); 
                     }
                     if (previousStation != null) {
-                        if (g.getListavertices().buscarVertice(previousStation)
-                                .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(currentStation)) == null) {
+                        if (g.getListavertices().buscarVertice(previousStation).getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(currentStation)) == null) {
                             g.conectarVertices(previousStation, currentStation); 
                         }
                     }

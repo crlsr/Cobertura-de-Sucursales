@@ -27,7 +27,7 @@ public class ListaVertices {
         Vertice aux = this.getVfirst();
         if(!esVacio()){
             while(aux!= null){
-                if(aux.getTinfo().getNombre().equals(tinfo.getNombre())){
+                if(aux.getTinfo().getNombre().toLowerCase().equals(tinfo.getNombre().toLowerCase())){
                     break;
                 }
                 aux = aux.getNext();

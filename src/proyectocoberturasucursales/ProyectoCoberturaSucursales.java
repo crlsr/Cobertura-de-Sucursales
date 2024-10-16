@@ -7,6 +7,7 @@ import EDD.Grafo;
 import JSON.LecturaJSON;
 import EXTRAS.Estacion;
 import EDD.ListaVertices;
+import EXTRAS.Funciones;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -41,6 +42,13 @@ public class ProyectoCoberturaSucursales {
             object = new LecturaJSON(selected);
             Grafo nuevo = new Grafo();
             object.dataConstructor(nuevo);
+            Estacion x = new Estacion("La hoyada", "Linea 1");
+            Estacion y = new Estacion("CAPItoLIO", "Linea 1");
+            Funciones funciones = new Funciones();
+            funciones.colocarSucursal(nuevo, y);
+            funciones.colocarSucursal(nuevo, x);
+            funciones.colocarSucursal(nuevo, x);
+            funciones.eliminarSucursal(nuevo, x);
             nuevo.mostrarGrafo();
         }
         

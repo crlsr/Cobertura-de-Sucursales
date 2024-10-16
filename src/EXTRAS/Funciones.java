@@ -6,6 +6,8 @@ package EXTRAS;
 
 import javax.swing.JOptionPane;
 import EDD.Grafo;
+import EDD.Vertice;
+import EXTRAS.Estacion;
 /**
  *
  * @author pseba
@@ -13,25 +15,39 @@ import EDD.Grafo;
 public class Funciones {
     
     
-    public void colocarSucursal(Grafo G, Estacion tinfo){
-        if(tinfo.getSucursal()){
-            JOptionPane.showMessageDialog(null,
-               ("Ya existe una sucursal en " + tinfo.getNombre()),
-                        "", JOptionPane.INFORMATION_MESSAGE);
+    public void colocarSucursal(Grafo g, Estacion tinfo){
+        Vertice existe= g.getListavertices().buscarVertice(tinfo);
+        if(existe != null){
+            if(tinfo.getSucursal()){
+                JOptionPane.showMessageDialog(null,
+                    ("Ya existe una sucursal en " + tinfo.getNombre()),
+                            "", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                tinfo.setSucursal(true);
+                g.cambiarColorVertice(existe.getTinfo(), "green");
+            }
         }else{
-            tinfo.setSucursal(true);
-            G.cambiarColorVertice(tinfo, "green");
+            JOptionPane.showMessageDialog(null,
+               ("No existe la parada " + tinfo.getNombre()),
+                        "", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
-    public void eliminarSucursal(Grafo G, Estacion tinfo){
+    public void eliminarSucursal(Grafo g, Estacion tinfo){
+        Vertice existe= g.getListavertices().buscarVertice(tinfo);
+        if(existe != null){
         if(!tinfo.getSucursal()){
             JOptionPane.showMessageDialog(null,
                ("No existe una sucursal en " + tinfo.getNombre()),
                         "", JOptionPane.INFORMATION_MESSAGE);
         }else{
             tinfo.setSucursal(false);
-            G.cambiarColorVertice(tinfo, "rgb(178, 178, 232)"); // Este es el color original de los nodos
+            g.cambiarColorVertice(existe.getTinfo(), "yellow"); 
+        }
+        }else{
+            JOptionPane.showMessageDialog(null,
+               ("No existe la parada " + tinfo.getNombre()),
+                        "", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

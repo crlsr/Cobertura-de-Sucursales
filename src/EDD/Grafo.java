@@ -24,12 +24,6 @@ public class Grafo {
         this.graph = new MultiGraph("Grafo Metro");
         this.t = 0;
         System.setProperty("org.graphstream.ui", "swing");
-        //verificar si estas 3 lineas son necesarias
-        /*
-        graph.setAttribute("ui.stylesheet", "node { fill-color: blue; } edge { fill-color: gray; }");
-        graph.setAttribute("ui.quality");
-        graph.setAttribute("ui.antialias");
-        */
     }
     
     public void agregarVertice(Estacion tinfo){
@@ -129,40 +123,18 @@ public class Grafo {
     
      
     public void mostrarGrafo() {
-        
         Viewer viewer = graph.display();
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.EXIT); 
     }
     
     public void cambiarColorVertice(Estacion tinfo, String color) {
-    if (graph.getNode(tinfo.getNombre()) != null) {
-        graph.getNode(tinfo.getNombre()).setAttribute("ui.style", "fill-color: " + color + "; size: 15px; shape: circle;");
-    }else{
-        JOptionPane.showMessageDialog(null, "La estación " + tinfo.getNombre() + " no existe en el grafo.");
-    }
-    }
-    
-    public void colocarSucursal(Estacion tinfo){
-        if(tinfo.getSucursal()){
-            JOptionPane.showMessageDialog(null,
-               ("Ya existe una sucursal en " + tinfo.getNombre()),
-                        "", JOptionPane.INFORMATION_MESSAGE);
+        if (graph.getNode(tinfo.getNombre()) != null) {
+            graph.getNode(tinfo.getNombre()).setAttribute("ui.style", "fill-color: " + color + "; size: 15px; shape: circle;");
         }else{
-            tinfo.setSucursal(true);
-            cambiarColorVertice(tinfo, "green");
+            JOptionPane.showMessageDialog(null, "La estación " + tinfo.getNombre() + " no existe en el grafo.");
         }
     }
     
-    public void eliminarSucursal(Estacion tinfo){
-        if(!tinfo.getSucursal()){
-            JOptionPane.showMessageDialog(null,
-               ("No existe una sucursal en " + tinfo.getNombre()),
-                        "", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            tinfo.setSucursal(false);
-            cambiarColorVertice(tinfo, "yellow"); 
-        }
-    }
 
     public ListaVertices getListavertices() {
         return listavertices;

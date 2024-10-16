@@ -25,7 +25,7 @@ public class ListaAdyacencia {
         Nodo aux = this.getPfirst();
         if(!esVacio()){
             while(aux!= null){
-                if(aux.getTinfo().getTinfo().getNombre().equals(tinfo.getTinfo().getNombre())){
+                if(aux.getTinfo().getTinfo().getNombre().toLowerCase().equals(tinfo.getTinfo().getNombre().toLowerCase())){
                     break;
                 }
                 aux = aux.getPnext();
