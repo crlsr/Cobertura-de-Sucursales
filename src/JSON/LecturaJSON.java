@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import EDD.ListaVertices;
 import EXTRAS.Estacion;
+import EDD.Grafo;
 import org.json.JSONArray;
 
 public class LecturaJSON { 
@@ -61,23 +62,63 @@ public class LecturaJSON {
             facilidad y construirlo con mayor soltura.
             
     */
-    public ListaVertices dataConstructor() {
-        String principalKeyWord = this.getData().names().getString(0); //Obtenemos la keyword principal
-        JSONArray principalData = this.getData().getJSONArray(principalKeyWord); //Obtiene el arreglo de JSONs donde se contienen los JSONs individuales para cada linea
-        for (int i = 0; i < principalData.length(); i++) {
-            JSONObject lineValues = principalData.getJSONObject(i); //Obtenemos el JSON de la linea en la que nos encontremos.
-            String lineKey = lineValues.keys().next(); //Obtenemos el key para acceder a los datos del JSON de esta determianda linea.
-            JSONArray lineData = lineValues.getJSONArray(lineKey); //Obtenemos los datos del JSON de la linea en la que estemos usando el keyword para su data.
-            for (int j = 0; j < lineData.length(); j++) {
-                try {
-                    String station = lineData.getString(j); //Al recorrer la lista de estaciones obtenemos el nombre de la estación posteriormente verificamso si es String o otro JSONObject
+    public void dataConstructor(Grafo g) { 
+    String principalKeyWord = this.getData().names().getString(0); 
+    JSONArray principalData = this.getData().getJSONArray(principalKeyWord); 
+    for (int i = 0; i < principalData.length(); i++) {
+        JSONObject lineValues = principalData.getJSONObject(i); 
+        String lineKey = lineValues.keys().next(); 
+        JSONArray lineData = lineValues.getJSONArray(lineKey); 
+        Estacion previousStation = null; 
+        for (int j = 0; j < lineData.length(); j++) {
+            try {
+                Object station = lineData.get(j); 
+                if (station instanceof String) {
+                    Estacion currentStation = new Estacion((String) station, lineKey); 
+                    if (g.getListavertices().buscarVertice(currentStation) == null) {
+                        g.agregarVertice(currentStation); 
+                    }
+                    if (previousStation != null) {
+                        if (g.getListavertices().buscarVertice(previousStation)
+                                .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(currentStation)) == null) {
+                            g.conectarVertices(previousStation, currentStation); 
+                        }
+                    }
 
-                    Estacion currentStation = new Estacion(station, lineKey); //Con el nombre de la estacion creamos un objeto estación
-                    this.getReturnData().agregarVertice(currentStation); //Añadimos el objeto esatción a la lista de estación
-                } catch (Exception e) {
+                    previousStation = currentStation; 
+                } else if (station instanceof JSONObject) {
+                    JSONObject connection = (JSONObject) station;
+                    String fromStation = connection.keys().next(); 
+                    String toStation = connection.getString(fromStation); 
+                    Estacion fromEstacion = new Estacion(fromStation, lineKey);
+                    Estacion toEstacion = new Estacion(toStation, "Transferencia");
+                    if (g.getListavertices().buscarVertice(fromEstacion) == null) {
+                        g.agregarVertice(fromEstacion); 
+                    }
+                    if (g.getListavertices().buscarVertice(toEstacion) == null) {
+                        g.agregarVertice(toEstacion); 
+                    }
+                    if (g.getListavertices().buscarVertice(fromEstacion)
+                            .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(toEstacion)) == null) {
+                        g.conectarVertices(fromEstacion, toEstacion); 
+                    }
+                    if (previousStation != null) {
+                        if (g.getListavertices().buscarVertice(previousStation)
+                                .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(fromEstacion)) == null) {
+                            g.conectarVertices(previousStation, fromEstacion); 
+                        }
+                    }
+
+                    previousStation = fromEstacion; 
                 }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+               ("Error inesperado"),
+                        "", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        return this.getReturnData();
     }
+}
+
+
 }

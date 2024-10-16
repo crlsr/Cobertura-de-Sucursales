@@ -39,11 +39,13 @@ public class ProyectoCoberturaSucursales {
         if(response == JFileChooser.APPROVE_OPTION){
             File selected = finder.getSelectedFile();
             object = new LecturaJSON(selected);
-            ListaVertices a = object.dataConstructor();
-            System.out.println(a.print());
+            Grafo nuevo = new Grafo();
+            object.dataConstructor(nuevo);
+            nuevo.mostrarGrafo();
         }
         
        //Pruebas Pedro 
+       /*
         Grafo nuevo = new Grafo();
         Estacion x = new Estacion("La hoyada", "Linea 1");
         Estacion y = new Estacion("Manao", "Linea 1");
@@ -59,6 +61,7 @@ public class ProyectoCoberturaSucursales {
         nuevo.conectarVertices(z, y);
         nuevo.conectarVertices(m, x);
         nuevo.mostrarGrafo();
+        */
         
     }
     

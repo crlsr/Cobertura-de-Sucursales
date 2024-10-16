@@ -42,7 +42,7 @@ public class Grafo {
             }else{
                 this.getListavertices().agregarVertice(tinfo);
                 graph.addNode(tinfo.getNombre()).setAttribute("ui.label", tinfo.getNombre());
-                this.graph.getNode(tinfo.getNombre()).setAttribute("ui.style", "fill-color: red; shape: circle; size: 30px;");
+                this.graph.getNode(tinfo.getNombre()).setAttribute("ui.style", "fill-color: yellow; shape: circle; size: 15px;");
                 this.setNumVertices(getNumVertices() + 1);
             }
             
@@ -136,7 +136,7 @@ public class Grafo {
     
     public void cambiarColorVertice(Estacion tinfo, String color) {
     if (graph.getNode(tinfo.getNombre()) != null) {
-        graph.getNode(tinfo.getNombre()).setAttribute("ui.style", "fill-color: " + color + "; size: 30px; shape: circle;");
+        graph.getNode(tinfo.getNombre()).setAttribute("ui.style", "fill-color: " + color + "; size: 15px; shape: circle;");
     }else{
         JOptionPane.showMessageDialog(null, "La estación " + tinfo.getNombre() + " no existe en el grafo.");
     }
@@ -160,7 +160,7 @@ public class Grafo {
                         "", JOptionPane.INFORMATION_MESSAGE);
         }else{
             tinfo.setSucursal(false);
-            cambiarColorVertice(tinfo, "red"); 
+            cambiarColorVertice(tinfo, "yellow"); 
         }
     }
 
