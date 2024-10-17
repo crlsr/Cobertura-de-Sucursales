@@ -24,8 +24,8 @@ public class ListaAdyacencia {
     public Nodo buscarNodo(Vertice tinfo){
         Nodo aux = this.getPfirst();
         if(!esVacio()){
-            while(aux!= null){
-                if(aux.getTinfo().getTinfo().getNombre().equals(tinfo.getTinfo().getNombre())){
+            while(aux!= ultimo()){
+                if(aux.getTinfo().getTinfo().getNombre().toLowerCase().equals(tinfo.getTinfo().getNombre().toLowerCase())){
                     break;
                 }
                 aux = aux.getPnext();
@@ -59,7 +59,7 @@ public class ListaAdyacencia {
                 }else{
                     Nodo aux1 = pfirst.getPnext();
                     Nodo aux2 = pfirst;
-                    while(aux1!= null){
+                    while(aux1!= ultimo()){
                         if(aux1.getTinfo().getTinfo().getNombre().equals(v.getTinfo().getNombre())){
                             aux2.setPnext(aux1.getPnext());
                             aux1.setPnext(null);
@@ -80,7 +80,7 @@ public class ListaAdyacencia {
         String cadena = "";
         if(!esVacio()){
             Nodo aux = pfirst;
-            while(aux!= null){
+            while(aux!= ultimo()){
                 cadena += aux.getTinfo().getTinfo().getNombre();
                 aux = aux.getPnext();
             }
@@ -89,6 +89,10 @@ public class ListaAdyacencia {
         return cadena;
     }
 
+     
+    public Nodo ultimo(){
+        return null;
+    }
     public int getSize() {
         return size;
     }

@@ -13,11 +13,13 @@ public class Estacion {
     private String nombre;
     private String linea;
     private boolean sucursal;
+    private boolean cubierto;
 
     public Estacion(String nombre, String linea) {
         this.nombre = nombre;
         this.linea = linea;
         this.sucursal = false;
+        this.cubierto = false;
     }
 
     public String getNombre() {
@@ -42,6 +44,14 @@ public class Estacion {
 
     public void setSucursal(boolean sucursal) {
         this.sucursal = sucursal;
+    }
+
+    public boolean getCubierto() {
+        return cubierto;
+    }
+
+    public void setCubierto(boolean cubierto) {
+        this.cubierto = cubierto;
     }
     
 }

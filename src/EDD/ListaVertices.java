@@ -18,7 +18,6 @@ public class ListaVertices {
     }
 
     
-    
     public boolean esVacio(){
         return vfirst == null;
     }
@@ -26,8 +25,8 @@ public class ListaVertices {
     public Vertice buscarVertice(Estacion tinfo){
         Vertice aux = this.getVfirst();
         if(!esVacio()){
-            while(aux!= null){
-                if(aux.getTinfo().getNombre().equals(tinfo.getNombre())){
+            while(aux!= ultimo()){
+                if(aux.getTinfo().getNombre().toLowerCase().equals(tinfo.getNombre().toLowerCase())){
                     break;
                 }
                 aux = aux.getNext();
@@ -61,7 +60,7 @@ public class ListaVertices {
                 }else{
                     Vertice aux1 = vfirst.getNext();
                     Vertice aux2 = vfirst;
-                    while(aux1!= null){
+                    while(aux1!= ultimo()){
                         if(aux1.getTinfo().getNombre().equals(tinfo.getNombre())){
                             aux2.setNext(aux1.getNext());
                             aux1.setNext(null);
@@ -83,7 +82,7 @@ public class ListaVertices {
         String cadena = "";
         if(!esVacio()){
             Vertice aux = vfirst;
-            while(aux!= null){
+            while(aux!= ultimo()){
                 cadena += aux.getTinfo().getNombre();
                 aux = aux.getNext();
             }
@@ -92,6 +91,9 @@ public class ListaVertices {
         return cadena;
     }
     
+    public Vertice ultimo(){
+        return null;
+    }
     public Vertice getVfirst() {
         return vfirst;
     }
@@ -107,11 +109,5 @@ public class ListaVertices {
     public void setSize(int size) {
         this.size = size;
     }
-    
-    
-    
-           
-    
-    
     
 }
