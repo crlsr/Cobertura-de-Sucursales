@@ -22,14 +22,14 @@ public class Cola {
     }
     
 
-    public boolean vacia (){
+    public boolean esVacia (){
     return first == null;
     }
     
 
     public void encolar (Vertice X){
         Nodo nodo = new Nodo (X);
-        if (this.vacia()){
+        if (this.esVacia()){
             this.first = this.last = nodo;
             this.size ++;
         }
@@ -42,7 +42,7 @@ public class Cola {
     
 
     public void desencolar (){
-        if(!vacia()){
+        if(!esVacia()){
             first = first.getPnext();
             size --;
         }
@@ -50,7 +50,7 @@ public class Cola {
 
     public void imprimir (){
         String cadena = "";
-        while (!vacia()){
+        while (!esVacia()){
             cadena += first.getTinfo().getTinfo().getNombre() + ", ";
             desencolar();
         }

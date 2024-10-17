@@ -7,6 +7,7 @@ import EDD.Grafo;
 import JSON.LecturaJSON;
 import EXTRAS.Estacion;
 import EDD.ListaVertices;
+import EDD.Vertice;
 import EXTRAS.Funciones;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -43,33 +44,13 @@ public class ProyectoCoberturaSucursales {
             Grafo nuevo = new Grafo();
             object.dataConstructor(nuevo);
             Estacion x = new Estacion("La hoyada", "Linea 1");
-            Estacion y = new Estacion("CAPItoLIO", "Linea 1");
+            Estacion y = new Estacion("CAPitolio", "Linea 1");
             Funciones funciones = new Funciones();
             funciones.colocarSucursal(nuevo, y);
             funciones.colocarSucursal(nuevo, x);
-            funciones.colocarSucursal(nuevo, x);
-            funciones.eliminarSucursal(nuevo, x);
+            funciones.busquedaBFS(y, 5, nuevo);
             nuevo.mostrarGrafo();
         }
-        
-       //Pruebas Pedro 
-       /*
-        Grafo nuevo = new Grafo();
-        Estacion x = new Estacion("La hoyada", "Linea 1");
-        Estacion y = new Estacion("Manao", "Linea 1");
-        Estacion z = new Estacion("Chacaito", "Linea 1");
-        Estacion m = new Estacion("Petare", "Linea 1");
-        nuevo.agregarVertice(z);
-        nuevo.agregarVertice(y);
-        nuevo.agregarVertice(x);
-        nuevo.agregarVertice(m);
-        System.out.println(nuevo.getListavertices().print());
-        nuevo.conectarVertices(z, x);
-        nuevo.conectarVertices(x,y);
-        nuevo.conectarVertices(z, y);
-        nuevo.conectarVertices(m, x);
-        nuevo.mostrarGrafo();
-        */
         
     }
     
