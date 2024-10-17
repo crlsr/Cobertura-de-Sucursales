@@ -41,6 +41,7 @@ public class ProyectoCoberturaSucursales {
         if(response == JFileChooser.APPROVE_OPTION){
             File selected = finder.getSelectedFile();
             object = new LecturaJSON(selected);
+<<<<<<< Updated upstream
             Grafo nuevo = new Grafo();
             object.dataConstructor(nuevo);
             Estacion x = new Estacion("La hoyada", "Linea 1");
@@ -50,6 +51,9 @@ public class ProyectoCoberturaSucursales {
             funciones.colocarSucursal(nuevo, x);
             funciones.busquedaBFS(y, 5, nuevo);
             nuevo.mostrarGrafo();
+=======
+            
+>>>>>>> Stashed changes
         }
         
     }
