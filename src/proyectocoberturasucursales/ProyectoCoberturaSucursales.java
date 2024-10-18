@@ -46,10 +46,13 @@ public class ProyectoCoberturaSucursales {
             object.dataConstructor(nuevo);
             Estacion x = new Estacion("La hoyada", "Linea 1");
             Estacion y = new Estacion("CAPitolio", "Linea 1");
+            Estacion m = new Estacion("las adjuntas", "linea1");
             Funciones funciones = new Funciones();
             funciones.colocarSucursal(nuevo, y);
             funciones.colocarSucursal(nuevo, x);
-            funciones.busquedaBFS(y, 5, nuevo);
+            funciones.colocarSucursal(nuevo, m);
+            funciones.busquedaDFS(m, 5, nuevo);
+            //funciones.busquedaDFS(y, 5, nuevo);
             nuevo.mostrarGrafo();
 =======
             
