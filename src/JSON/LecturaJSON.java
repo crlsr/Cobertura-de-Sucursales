@@ -62,43 +62,60 @@ public class LecturaJSON {
     public void dataConstructor(Grafo g) {
         String principalKeyWord = this.getData().names().getString(0);
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
+        
         for (int i = 0; i < principalData.length(); i++) {
             JSONObject lineValues = principalData.getJSONObject(i);
             String lineKey = lineValues.keys().next();
             JSONArray lineData = lineValues.getJSONArray(lineKey);
             Estacion previousStation = null;
+            
             for (int j = 0; j < lineData.length(); j++) {
                 try {
                     Object station = lineData.get(j);
                     if (station instanceof String) {
                         Estacion currentStation = new Estacion((String) station, lineKey);
+                        validacionSucursal(currentStation);
+                        
                         if (g.getListavertices().buscarVertice(currentStation) == null) {
                             g.agregarVertice(currentStation);
                         }
+                        
                         if (previousStation != null) {
+                            
                             if (g.getListavertices().buscarVertice(previousStation).getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(currentStation)) == null) {
                                 g.conectarVertices(previousStation, currentStation);
                             }
                         }
 
                         previousStation = currentStation;
+                        
                     } else if (station instanceof JSONObject) {
                         JSONObject connection = (JSONObject) station;
+                        
                         String fromStation = connection.keys().next();
                         String toStation = connection.getString(fromStation);
+                        
                         Estacion fromEstacion = new Estacion(fromStation, lineKey);
+                        validacionSucursal(fromEstacion);
+                        
                         Estacion toEstacion = new Estacion(toStation, "Transferencia");
+                        validacionSucursal(toEstacion);
+
                         if (g.getListavertices().buscarVertice(fromEstacion) == null) {
                             g.agregarVertice(fromEstacion);
                         }
+                        
                         if (g.getListavertices().buscarVertice(toEstacion) == null) {
                             g.agregarVertice(toEstacion);
                         }
+                        
                         if (g.getListavertices().buscarVertice(fromEstacion)
                                 .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(toEstacion)) == null) {
                             g.conectarVertices(fromEstacion, toEstacion);
                         }
+                        
                         if (previousStation != null) {
+                            
                             if (g.getListavertices().buscarVertice(previousStation)
                                     .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(fromEstacion)) == null) {
                                 g.conectarVertices(previousStation, fromEstacion);
@@ -107,6 +124,7 @@ public class LecturaJSON {
 
                         previousStation = fromEstacion;
                     }
+                    
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null,
                             ("Error inesperado"),
