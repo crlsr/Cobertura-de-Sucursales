@@ -4,8 +4,6 @@
  */
 package JSON;
 
-import EDD.Grafo;
-import EDD.Vertice;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +11,7 @@ import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import EXTRAS.Estacion;
+import EDD.Grafo;
 import java.io.FileWriter;
 import org.json.JSONArray;
 
@@ -32,8 +31,8 @@ public class LecturaJSON {
             NOTA: Se le pasa al JSONObject un JSONTokener para poder acceder a la informacion del archivo como string y pasarlo aformato JSONObject.
      */
     public LecturaJSON(File endpoint) {
+        this.originPath = endpoint.getAbsolutePath();
         try (FileReader reader = new FileReader(endpoint)) {
-            this.originPath = endpoint.getAbsolutePath();
             this.data = new JSONObject(new JSONTokener(reader));
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al imntentar abrir: " + e.getMessage());
@@ -60,84 +59,61 @@ public class LecturaJSON {
             facilidad y construirlo con mayor soltura.
             
      */
-    public void dataConstructor(Grafo graph) {
-        String principalKeyWord = this.getData().names().getString(0); //Obtenemos la keyword principal
-        JSONArray principalData = this.getData().getJSONArray(principalKeyWord); //Obtiene el arreglo de JSONs donde se contienen los JSONs individuales para cada linea
+    public void dataConstructor(Grafo g) {
+        String principalKeyWord = this.getData().names().getString(0);
+        JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
         for (int i = 0; i < principalData.length(); i++) {
-            JSONObject lineValues = principalData.getJSONObject(i); //Obtenemos el JSON de la linea en la que nos encontremos.
-            String lineKey = lineValues.keys().next(); //Obtenemos el key para acceder a los datos del JSON de esta determianda linea.
-            JSONArray lineData = lineValues.getJSONArray(lineKey); //Obtenemos los datos del JSON de la linea en la que estemos usando el keyword para su data.
-            Estacion prevStation = null;
-
+            JSONObject lineValues = principalData.getJSONObject(i);
+            String lineKey = lineValues.keys().next();
+            JSONArray lineData = lineValues.getJSONArray(lineKey);
+            Estacion previousStation = null;
             for (int j = 0; j < lineData.length(); j++) {
                 try {
-                    Object station = lineData.getString(j); //Al recorrer la lista de estaciones obtenemos el nombre de la estación posteriormente verificamso si es String o otro JSONObject
-
+                    Object station = lineData.get(j);
                     if (station instanceof String) {
-                        String stationName = (String) station; //Con el nombre de la estacion creamos un string con el nombre de la estación
-                        Estacion currentStation = findEstacion(graph, stationName, lineKey); //Might be the linekey thing
-
-                        if (currentStation == null) {
-                            currentStation = new Estacion(stationName, lineKey);
-                            validacionSucursal(currentStation);
-                            graph.agregarVertice(currentStation);
+                        Estacion currentStation = new Estacion((String) station, lineKey);
+                        if (g.getListavertices().buscarVertice(currentStation) == null) {
+                            g.agregarVertice(currentStation);
+                        }
+                        if (previousStation != null) {
+                            if (g.getListavertices().buscarVertice(previousStation).getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(currentStation)) == null) {
+                                g.conectarVertices(previousStation, currentStation);
+                            }
                         }
 
-                        if (prevStation != null) {
-                            graph.conectarVertices(prevStation, currentStation);
-                        }
-
-                        prevStation = currentStation;
-
+                        previousStation = currentStation;
                     } else if (station instanceof JSONObject) {
                         JSONObject connection = (JSONObject) station;
-                        String fromStationData = connection.keys().next();
-                        String toStationData = connection.getString(fromStationData);
-
-                        Estacion fromStation = findEstacion(graph, fromStationData, lineKey);
-                        if (fromStationData == null) {
-                            fromStation = new Estacion(fromStationData, lineKey);
-                            validacionSucursal(fromStation);
-                            graph.agregarVertice(fromStation);
+                        String fromStation = connection.keys().next();
+                        String toStation = connection.getString(fromStation);
+                        Estacion fromEstacion = new Estacion(fromStation, lineKey);
+                        Estacion toEstacion = new Estacion(toStation, "Transferencia");
+                        if (g.getListavertices().buscarVertice(fromEstacion) == null) {
+                            g.agregarVertice(fromEstacion);
+                        }
+                        if (g.getListavertices().buscarVertice(toEstacion) == null) {
+                            g.agregarVertice(toEstacion);
+                        }
+                        if (g.getListavertices().buscarVertice(fromEstacion)
+                                .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(toEstacion)) == null) {
+                            g.conectarVertices(fromEstacion, toEstacion);
+                        }
+                        if (previousStation != null) {
+                            if (g.getListavertices().buscarVertice(previousStation)
+                                    .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(fromEstacion)) == null) {
+                                g.conectarVertices(previousStation, fromEstacion);
+                            }
                         }
 
-                        Estacion toStation = findEstacion(graph, toStationData, lineKey);
-                        if (toStation == null) {
-                            toStation = new Estacion(toStationData, lineKey);
-                            validacionSucursal(toStation);
-                            graph.agregarVertice(toStation);
-                        }
-
-                        graph.conectarVertices(fromStation, toStation);
-
-                        if (prevStation != null) {
-                            graph.conectarVertices(prevStation, fromStation);
-                        }
-
-                        prevStation = fromStation;
+                        previousStation = fromEstacion;
                     }
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null,
+                            ("Error inesperado"),
+                            "", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
-    }
-
-    /*
-        Validación de vertices:
-            Esta es una función la cual recorre la lista de bvertices de nuestro grafo con el que estemos trabajando
-            con el fin de validar si una estación esta o no esta dentro de dicha lista, esta función es usada en el
-            procedimiento dataConstructor() con el fin de no repetir vertices durante el proceso de construcción de datos.
-            
-     */
-    public Estacion findEstacion(Grafo g, String stationName, String lineKey) {
-        Vertice aux = g.getListavertices().getVfirst(); //Inicializamos el puntero recorredor
-        while (aux != null) {
-            if (aux.getTinfo().getNombre().equals(stationName) && aux.getTinfo().getLinea().equals(lineKey)) { //Recorremos validando que se encuentre o no dicho vertice
-                return aux.getTinfo(); //Retornamos la estación de ser encontrado
-            }
-            aux = aux.getNext();
-        }
-        return null; //Retornamos null de no encontrar dicho vertice
     }
 
     /*
@@ -145,7 +121,7 @@ public class LecturaJSON {
         Validación de Sucursal:
             Esta función valida si la esatción creada tiene o no asignada una sucursal (esto en función
             a si tiene un * en su nombre.
-    */
+     */
     public void validacionSucursal(Estacion station) {
         if (station.getNombre().indexOf('*') != -1) {
             station.setSucursal(true);
