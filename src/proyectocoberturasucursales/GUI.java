@@ -15,6 +15,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,17 +28,79 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Cerrar = new javax.swing.JButton();
+        jLabelicono = new javax.swing.JLabel();
+        CARGAR_JSON = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        AGREGAR_TXT = new javax.swing.JTextField();
+        jLabeljson = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelfondo1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImages(getIconImages());
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        Cerrar.setBackground(new java.awt.Color(255, 0, 0));
+        Cerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Cerrar.setForeground(new java.awt.Color(255, 255, 255));
+        Cerrar.setText("X");
+        Cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
+
+        jLabelicono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/Diseño sin título (6).png"))); // NOI18N
+        getContentPane().add(jLabelicono, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 40, 60));
+
+        CARGAR_JSON.setBackground(new java.awt.Color(0, 51, 51));
+        CARGAR_JSON.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CARGAR_JSON.setForeground(new java.awt.Color(255, 255, 255));
+        CARGAR_JSON.setText("CARGAR JSON");
+        CARGAR_JSON.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CARGAR_JSONActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CARGAR_JSON, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, 30));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("AGREGAR TXT:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 110, 20));
+
+        AGREGAR_TXT.setBackground(new java.awt.Color(0, 0, 51));
+        AGREGAR_TXT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AGREGAR_TXT.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(AGREGAR_TXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 180, 40));
+
+        jLabeljson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/IMAGEN_JSON.png"))); // NOI18N
+        getContentPane().add(jLabeljson, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("INICIO");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 80, -1));
+
+        jLabelfondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
+        getContentPane().add(jLabelfondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_CerrarActionPerformed
+
+    private void CARGAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAR_JSONActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CARGAR_JSONActionPerformed
 
     /**
      * @param args the command line arguments
@@ -75,7 +138,14 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AGREGAR_TXT;
+    private javax.swing.JButton CARGAR_JSON;
+    private javax.swing.JButton Cerrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelfondo1;
+    private javax.swing.JLabel jLabelicono;
+    private javax.swing.JLabel jLabeljson;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
