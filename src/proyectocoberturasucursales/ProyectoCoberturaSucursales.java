@@ -45,7 +45,7 @@ public class ProyectoCoberturaSucursales {
             object.dataConstructor(nuevo);
             Estacion x = new Estacion("La hoyada", "Linea 1");
             Estacion y = new Estacion("CAPitolio", "Linea 1");
-            Estacion m = new Estacion("las adjuntas", "linea1");
+            Estacion m = new Estacion("plaza Venezuela", "linea1");
             Funciones funciones = new Funciones();
             funciones.colocarSucursal(nuevo, y);
             funciones.colocarSucursal(nuevo, x);
