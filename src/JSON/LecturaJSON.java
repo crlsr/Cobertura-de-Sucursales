@@ -12,6 +12,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import EXTRAS.Estacion;
 import EDD.Grafo;
+import EDD.Nodo;
+import EDD.Vertice;
 import java.io.FileWriter;
 import org.json.JSONArray;
 
@@ -49,13 +51,12 @@ public class LecturaJSON {
         return originPath;
     }
 
-    
     //Métodos para cambiar atributos:
     public void setData(JSONObject data) {
         this.data = data;
     }
 
-    public void setOriginPath(String originPath) {    
+    public void setOriginPath(String originPath) {
         this.originPath = originPath;
     }
 
@@ -71,60 +72,60 @@ public class LecturaJSON {
     public void dataConstructor(Grafo g) {
         String principalKeyWord = this.getData().names().getString(0);
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
-        
+
         for (int i = 0; i < principalData.length(); i++) {
             JSONObject lineValues = principalData.getJSONObject(i);
             String lineKey = lineValues.keys().next();
             JSONArray lineData = lineValues.getJSONArray(lineKey);
             Estacion previousStation = null;
-            
+
             for (int j = 0; j < lineData.length(); j++) {
                 try {
                     Object station = lineData.get(j);
                     if (station instanceof String) {
                         Estacion currentStation = new Estacion((String) station, lineKey);
                         validacionSucursal(currentStation);
-                        
+
                         if (g.getListavertices().buscarVertice(currentStation) == null) {
                             g.agregarVertice(currentStation);
                         }
-                        
+
                         if (previousStation != null) {
-                            
+
                             if (g.getListavertices().buscarVertice(previousStation).getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(currentStation)) == null) {
                                 g.conectarVertices(previousStation, currentStation);
                             }
                         }
 
                         previousStation = currentStation;
-                        
+
                     } else if (station instanceof JSONObject) {
                         JSONObject connection = (JSONObject) station;
-                        
+
                         String fromStation = connection.keys().next();
                         String toStation = connection.getString(fromStation);
-                        
+
                         Estacion fromEstacion = new Estacion(fromStation, lineKey);
                         validacionSucursal(fromEstacion);
-                        
+
                         Estacion toEstacion = new Estacion(toStation, "Transferencia");
                         validacionSucursal(toEstacion);
 
                         if (g.getListavertices().buscarVertice(fromEstacion) == null) {
                             g.agregarVertice(fromEstacion);
                         }
-                        
+
                         if (g.getListavertices().buscarVertice(toEstacion) == null) {
                             g.agregarVertice(toEstacion);
                         }
-                        
+
                         if (g.getListavertices().buscarVertice(fromEstacion)
                                 .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(toEstacion)) == null) {
                             g.conectarVertices(fromEstacion, toEstacion);
                         }
-                        
+
                         if (previousStation != null) {
-                            
+
                             if (g.getListavertices().buscarVertice(previousStation)
                                     .getAdyacencia().buscarNodo(g.getListavertices().buscarVertice(fromEstacion)) == null) {
                                 g.conectarVertices(previousStation, fromEstacion);
@@ -133,7 +134,7 @@ public class LecturaJSON {
 
                         previousStation = fromEstacion;
                     }
-                    
+
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null,
                             ("Error inesperado"),
@@ -160,42 +161,60 @@ public class LecturaJSON {
             Esta función tiene como fin sobre escribir nuestro JSON original actualizando el JSONArray de Lineas
             del metro y reflejando eso en el archivo original, esto se logra usando la libreria FileWriter la cual
             nos permite poder editar un archivo partiendo de su path en el directorio.
-    
-            //FIX
      */
-    public void addData(String[] data, String stationName) {
+    public void addData(String[] data, String lineName, Grafo graph) {
         String principalKeyWord = this.getData().names().getString(0); //Obtenemos la keyword principal
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord); // obtenemos arreglo de lineas
 
         JSONObject newLine = new JSONObject(); //creamos el json de la nueva linea
         JSONArray newStations = new JSONArray(); //creamos el jsonarray para las estaciones de esta nueva linea 
 
-        for (String station : data) {
-            newStations.put(station); //agregamos las estaciones a nuestra nueva linea
+        for (Object station : data) {
+            if (station instanceof String) {
+                Estacion tempStation = new Estacion((String) station, lineName);
+                Vertice stationState = graph.getListavertices().buscarVertice(tempStation);
+                if (stationState != null) {
+                    newStations.put((String) station); //agregamos las estaciones a nuestra nueva linea
+                }
+                else{JOptionPane.showMessageDialog(null, "Estación repetida");}
+
+            } else if (station instanceof String[]) {
+                String[] substation = (String[]) station;
+
+                if (substation.length >= 2) {
+                    String fromStation = substation[0];
+                    String toStation = substation[1];
+                    JSONObject pathStations = new JSONObject();
+
+                    pathStations.put(fromStation, toStation);
+                    newStations.put(pathStations);
+                }
+            }
         }
-        newLine.put(stationName, newStations); //agregamos las estaciones a nuestro jsonm de la nueva linea
+
+        newLine.put(lineName, newStations); //agregamos las estaciones a nuestro jsonm de la nueva linea
         principalData.put(newLine); //agregamos al json general la nueva linea.
         updateData();
     }
-    
-    public void updateData(){
+
+    public void updateData() {
         try (FileWriter sobreescribir = new FileWriter(this.getOriginPath())) {
             sobreescribir.write(this.getData().toString(4)); //sobre escribimos el archivo
         } catch (IOException e) {
         }
     }
-    
-    public void changeJSON(File newEndpoint, Grafo g){
+
+    public void changeJSON(File newEndpoint, Grafo g) {
         String newPath = newEndpoint.getAbsolutePath();
         this.setOriginPath(newPath);
-        
+
         try (FileReader reader = new FileReader(newEndpoint)) {
             JSONObject newData = new JSONObject(new JSONTokener(reader));
             this.setData(newData);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al imntentar abrir: " + e.getMessage());
         }
-        
+
         dataConstructor(g);
     }
 }

@@ -4,11 +4,18 @@
  */
 package VENTANAS;
 
+import EDD.Grafo;
+import EDD.ListaVertices;
+import javax.swing.JOptionPane;
+import EXTRAS.Funciones;
+import EXTRAS.Estacion;
+
 /**
  *
  * @author marco
  */
 public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
+    static ListaVertices lista;
 
     /**
      * Creates new form MENU_SUCURSAL
@@ -30,7 +37,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         INPUT_AGREGAR_SUCURSAL = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        AGREGAR_SUCURSAL = new javax.swing.JButton();
         VER_COBERTURA_DFS = new javax.swing.JButton();
         VER_COBERTUTA_TOTAL = new javax.swing.JButton();
         REGRESAR = new javax.swing.JButton();
@@ -41,7 +48,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         CERRAR = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        ELIMINAR_SUCURSAL = new javax.swing.JButton();
         VER_COBERTURA_BFS = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
@@ -65,22 +72,37 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         jLabel1.setText("INGRESA UNA SUCURSAL:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 180, -1));
 
-        jButton1.setBackground(new java.awt.Color(0, 51, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("AGREGAR SUCURSAL");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
+        AGREGAR_SUCURSAL.setBackground(new java.awt.Color(0, 51, 51));
+        AGREGAR_SUCURSAL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AGREGAR_SUCURSAL.setForeground(new java.awt.Color(255, 255, 255));
+        AGREGAR_SUCURSAL.setText("AGREGAR SUCURSAL");
+        AGREGAR_SUCURSAL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AGREGAR_SUCURSALActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AGREGAR_SUCURSAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
 
         VER_COBERTURA_DFS.setBackground(new java.awt.Color(0, 51, 51));
         VER_COBERTURA_DFS.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         VER_COBERTURA_DFS.setForeground(new java.awt.Color(255, 255, 255));
         VER_COBERTURA_DFS.setText("VER COBERTURA DFS");
+        VER_COBERTURA_DFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VER_COBERTURA_DFSActionPerformed(evt);
+            }
+        });
         getContentPane().add(VER_COBERTURA_DFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, -1, -1));
 
         VER_COBERTUTA_TOTAL.setBackground(new java.awt.Color(0, 51, 51));
         VER_COBERTUTA_TOTAL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         VER_COBERTUTA_TOTAL.setForeground(new java.awt.Color(255, 255, 255));
         VER_COBERTUTA_TOTAL.setText("VER COBERTURA TOTAL");
+        VER_COBERTUTA_TOTAL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VER_COBERTUTA_TOTALActionPerformed(evt);
+            }
+        });
         getContentPane().add(VER_COBERTUTA_TOTAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, -1, -1));
 
         REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
@@ -137,11 +159,16 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         jLabel5.setText("ESTACIONES SIN CUBRIR");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 170, -1));
 
-        jButton2.setBackground(new java.awt.Color(0, 51, 51));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("ELIMINAR SUCURSAL");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
+        ELIMINAR_SUCURSAL.setBackground(new java.awt.Color(0, 51, 51));
+        ELIMINAR_SUCURSAL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ELIMINAR_SUCURSAL.setForeground(new java.awt.Color(255, 255, 255));
+        ELIMINAR_SUCURSAL.setText("ELIMINAR SUCURSAL");
+        ELIMINAR_SUCURSAL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ELIMINAR_SUCURSALActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ELIMINAR_SUCURSAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
 
         VER_COBERTURA_BFS.setBackground(new java.awt.Color(0, 51, 51));
         VER_COBERTURA_BFS.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -166,6 +193,40 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CERRARActionPerformed
+
+    private void AGREGAR_SUCURSALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_SUCURSALActionPerformed
+        /*try{
+            String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
+            Estacion estacion = busquedaDFS(nombreEstacion);
+        if (estacion != null) {
+            lista.colocarSucursal(tinfo, t, graph);
+            JOptionPane.showMessageDialog(this, "SU SUCURSAL HA SIDO AÑADIDA EXITOSAMENTE");
+        } else {
+            JOptionPane.showMessageDialog(this, "ESTACION NO ENCONTRADA.");
+        }
+    } catch(Exception e) {
+        JOptionPane.showMessageDialog(this, "ERROR, INGRESA LOS DATOS CORRECTAMENTE!!!");
+    }*/
+    }//GEN-LAST:event_AGREGAR_SUCURSALActionPerformed
+
+    private void VER_COBERTURA_DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTURA_DFSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VER_COBERTURA_DFSActionPerformed
+
+    private void ELIMINAR_SUCURSALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ELIMINAR_SUCURSALActionPerformed
+        /*try{
+            lista.eliminarSucursal(tinfo, t, graph);
+            JOptionPane.showMessageDialog(this, "SU SUCURSAL HA SIDO AÑADIDA EXITOSAMENTE!!!");
+
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this, "ERROR, INGRESA LOS DATOS CORRECTAMENTE!!!");
+        }*/
+    }//GEN-LAST:event_ELIMINAR_SUCURSALActionPerformed
+
+    private void VER_COBERTUTA_TOTALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTUTA_TOTALActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VER_COBERTUTA_TOTALActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,7 +267,9 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AGREGAR_SUCURSAL;
     private javax.swing.JButton CERRAR;
+    private javax.swing.JButton ELIMINAR_SUCURSAL;
     private javax.swing.JLabel FONDO;
     private javax.swing.JTextField INPUT_AGREGAR_SUCURSAL;
     private javax.swing.JTextArea INPUT_ESTACIONAR_SUCURSAL;
@@ -215,8 +278,6 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     private javax.swing.JButton VER_COBERTURA_BFS;
     private javax.swing.JButton VER_COBERTURA_DFS;
     private javax.swing.JButton VER_COBERTUTA_TOTAL;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
