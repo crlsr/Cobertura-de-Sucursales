@@ -35,7 +35,7 @@ public class LecturaJSON {
         try (FileReader reader = new FileReader(endpoint)) {
             this.data = new JSONObject(new JSONTokener(reader));
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al imntentar abrir: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al intentar abrir: " + e.getMessage());
         }
 
     }
@@ -49,15 +49,24 @@ public class LecturaJSON {
         return originPath;
     }
 
+    
+    //Métodos para cambiar atributos:
+    public void setData(JSONObject data) {
+        this.data = data;
+    }
+
+    public void setOriginPath(String originPath) {    
+        this.originPath = originPath;
+    }
+
     /*
-        Creador de nuestra lista de vertices:
-            Esta función tiene como fin acceder a nuestro JSON y a partir de ahí empezar a recorrer sus keywords y values con el 
-            fin de poder crear una estación con cada una como un objeto de tipo estación y luego convertirlos en vertices para 
-    `       agregarlos a nuestra lisat de vertices. Todo esto accediendo primero a su keyword principal la cual contiene las keyword 
-            de las paradas (Ejm: Linea1, Linea2, etc...), y a partir de ahí acceder a los values de las lineas convirtiendolos en un ARREGLO
-            usando la libreria JSONArray al igual que como haremos con el contenido de la keyword principal, para así poder recorrerla con mayor 
-            facilidad y construirlo con mayor soltura.
-            
+    Creador de nuestra lista de vertices:
+    Esta función tiene como fin acceder a nuestro JSON y a partir de ahí empezar a recorrer sus keywords y values con el
+    fin de poder crear una estación con cada una como un objeto de tipo estación y luego convertirlos en vertices para
+    `       agregarlos a nuestra lisat de vertices. Todo esto accediendo primero a su keyword principal la cual contiene las keyword
+    de las paradas (Ejm: Linea1, Linea2, etc...), y a partir de ahí acceder a los values de las lineas convirtiendolos en un ARREGLO
+    usando la libreria JSONArray al igual que como haremos con el contenido de la keyword principal, para así poder recorrerla con mayor
+    facilidad y construirlo con mayor soltura.
      */
     public void dataConstructor(Grafo g) {
         String principalKeyWord = this.getData().names().getString(0);
@@ -166,10 +175,27 @@ public class LecturaJSON {
         }
         newLine.put(stationName, newStations); //agregamos las estaciones a nuestro jsonm de la nueva linea
         principalData.put(newLine); //agregamos al json general la nueva linea.
-
+        updateData();
+    }
+    
+    public void updateData(){
         try (FileWriter sobreescribir = new FileWriter(this.getOriginPath())) {
             sobreescribir.write(this.getData().toString(4)); //sobre escribimos el archivo
         } catch (IOException e) {
         }
+    }
+    
+    public void change(File newEndpoint, Grafo g){
+        String newPath = newEndpoint.getAbsolutePath();
+        this.setOriginPath(newPath);
+        
+        try (FileReader reader = new FileReader(newEndpoint)) {
+            JSONObject newData = new JSONObject(new JSONTokener(reader));
+            this.setData(newData);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al imntentar abrir: " + e.getMessage());
+        }
+        
+        dataConstructor(g);
     }
 }
