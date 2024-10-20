@@ -4,19 +4,36 @@
  */
 package VENTANAS;
 
+import EDD.Grafo;
+import JSON.LecturaJSON;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author marco
  */
 public class MENU_PRINCIPAL extends javax.swing.JFrame {
-
+    static Grafo grafo;
+    static LecturaJSON json;
+    static boolean jsoncargado;
     /**
      * Creates new form MENU_INICIO
      */
     public MENU_PRINCIPAL() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.grafo =new Grafo();
+        this.jsoncargado = false;
     }
+    public MENU_PRINCIPAL(Grafo grafo,LecturaJSON json) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.grafo =grafo;
+        this.json =json;
+        this.jsoncargado = true;
+    }
+    
+         
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,14 +115,18 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EDITAR_DATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITAR_DATAActionPerformed
-        CAMBIAR_JSON MCJ = new CAMBIAR_JSON(); 
-        MCJ.setVisible(true);
-        this.setVisible(false);
+        if(jsoncargado){
+        EDITOR_DATA MED = new EDITOR_DATA(); 
+        MED.setVisible(true);
+        this.setVisible(false);        
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe cargar primero un archivo JSON");
+        }
     }//GEN-LAST:event_EDITAR_DATAActionPerformed
 
     private void CAMBIAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAMBIAR_JSONActionPerformed
-        EDITOR_DATA MED = new EDITOR_DATA(); 
-        MED.setVisible(true);
+        CAMBIAR_JSON MCJ = new CAMBIAR_JSON(grafo, json); 
+        MCJ.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CAMBIAR_JSONActionPerformed
 
@@ -114,9 +135,13 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_CERRARActionPerformed
 
     private void AGREGAR_SUCURSALESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_SUCURSALESActionPerformed
+        if(jsoncargado){
         AGREGAR_SUCURSAL MAG = new AGREGAR_SUCURSAL();
         MAG.setVisible(true);
         this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe cargar primero un archivo JSON");
+        }
     }//GEN-LAST:event_AGREGAR_SUCURSALESActionPerformed
 
     /**

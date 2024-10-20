@@ -15,7 +15,8 @@ import EXTRAS.Estacion;
  * @author marco
  */
 public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
-    static ListaVertices lista;
+    static Grafo grafo;
+    static Funciones funciones;
 
     /**
      * Creates new form MENU_SUCURSAL
@@ -23,6 +24,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     public AGREGAR_SUCURSAL() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Funciones funciones= new Funciones();
     }
 
     /**
@@ -174,6 +176,11 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         VER_COBERTURA_BFS.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         VER_COBERTURA_BFS.setForeground(new java.awt.Color(255, 255, 255));
         VER_COBERTURA_BFS.setText("VER COBERTURA BFS");
+        VER_COBERTURA_BFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VER_COBERTURA_BFSActionPerformed(evt);
+            }
+        });
         getContentPane().add(VER_COBERTURA_BFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/ICONO_ESTACIONES.png"))); // NOI18N
@@ -195,38 +202,65 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     }//GEN-LAST:event_CERRARActionPerformed
 
     private void AGREGAR_SUCURSALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_SUCURSALActionPerformed
-        /*try{
+        try{
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
-            Estacion estacion = busquedaDFS(nombreEstacion);
-        if (estacion != null) {
-            lista.colocarSucursal(tinfo, t, graph);
-            JOptionPane.showMessageDialog(this, "SU SUCURSAL HA SIDO AÑADIDA EXITOSAMENTE");
-        } else {
-            JOptionPane.showMessageDialog(this, "ESTACION NO ENCONTRADA.");
+            Estacion estacion = new Estacion(nombreEstacion," ");
+            funciones.colocarSucursal(grafo,estacion);
+            INPUT_AGREGAR_SUCURSAL.setText("");
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
         }
-    } catch(Exception e) {
-        JOptionPane.showMessageDialog(this, "ERROR, INGRESA LOS DATOS CORRECTAMENTE!!!");
-    }*/
     }//GEN-LAST:event_AGREGAR_SUCURSALActionPerformed
 
     private void VER_COBERTURA_DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTURA_DFSActionPerformed
-        // TODO add your handling code here:
+        try{
+            String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
+            Estacion estacion = new Estacion(nombreEstacion," ");
+            funciones.eliminarCobertura(grafo);
+            funciones.busquedaDFS(estacion, grafo.getT(), grafo);
+            INPUT_AGREGAR_SUCURSAL.setText("");
+        }
+     catch(Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+    }
     }//GEN-LAST:event_VER_COBERTURA_DFSActionPerformed
 
     private void ELIMINAR_SUCURSALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ELIMINAR_SUCURSALActionPerformed
-        /*try{
-            lista.eliminarSucursal(tinfo, t, graph);
-            JOptionPane.showMessageDialog(this, "SU SUCURSAL HA SIDO AÑADIDA EXITOSAMENTE!!!");
-
+        try{
+            String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
+            Estacion estacion = new Estacion(nombreEstacion," ");
+            funciones.eliminarSucursal(grafo, estacion);
+            INPUT_AGREGAR_SUCURSAL.setText("");
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(this, "ERROR, INGRESA LOS DATOS CORRECTAMENTE!!!");
-        }*/
+     catch(Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+    }
     }//GEN-LAST:event_ELIMINAR_SUCURSALActionPerformed
 
     private void VER_COBERTUTA_TOTALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTUTA_TOTALActionPerformed
-        // TODO add your handling code here:
+        try{
+            String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
+            Estacion estacion = new Estacion(nombreEstacion," ");
+            funciones.coberturaTotal(grafo.getT(), grafo);
+            INPUT_AGREGAR_SUCURSAL.setText("");
+        }
+     catch(Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+    }
     }//GEN-LAST:event_VER_COBERTUTA_TOTALActionPerformed
+
+    private void VER_COBERTURA_BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTURA_BFSActionPerformed
+        try{
+            String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
+            Estacion estacion = new Estacion(nombreEstacion," ");
+            funciones.eliminarCobertura(grafo);
+            funciones.busquedaBFS(estacion, grafo.getT(), grafo);
+            INPUT_AGREGAR_SUCURSAL.setText("");
+        }
+     catch(Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+    }
+    }//GEN-LAST:event_VER_COBERTURA_BFSActionPerformed
 
     /**
      * @param args the command line arguments
