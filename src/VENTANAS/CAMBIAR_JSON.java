@@ -34,6 +34,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabeljson = new javax.swing.JLabel();
         CERRAR = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,12 +45,17 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         CARGAR_JSON.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CARGAR_JSON.setForeground(new java.awt.Color(255, 255, 255));
         CARGAR_JSON.setText("CARGAR JSON");
-        getContentPane().add(CARGAR_JSON, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        CARGAR_JSON.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CARGAR_JSONActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CARGAR_JSON, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ESTABLECER RADIO DE COBERTURA:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 260, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 310, -1));
 
         INPUT_T.setBackground(new java.awt.Color(0, 0, 51));
         INPUT_T.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -59,7 +65,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
                 INPUT_TActionPerformed(evt);
             }
         });
-        getContentPane().add(INPUT_T, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 270, -1));
+        getContentPane().add(INPUT_T, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 320, -1));
 
         REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
         REGRESAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -75,10 +81,10 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CAMBIAR JSON");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 190, -1));
 
         jLabeljson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/IMAGEN_JSON.png"))); // NOI18N
-        getContentPane().add(jLabeljson, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        getContentPane().add(jLabeljson, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 200, -1, -1));
 
         CERRAR.setBackground(new java.awt.Color(255, 0, 0));
         CERRAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -89,7 +95,10 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
                 CERRARActionPerformed(evt);
             }
         });
-        getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
+        getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/ICONO_RADIO.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, -1, -1));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 400));
@@ -110,6 +119,10 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         MP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_REGRESARActionPerformed
+
+    private void CARGAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAR_JSONActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CARGAR_JSONActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,6 +170,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
     private javax.swing.JButton REGRESAR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabeljson;
     // End of variables declaration//GEN-END:variables
 }
