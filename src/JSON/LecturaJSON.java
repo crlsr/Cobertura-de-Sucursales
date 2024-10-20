@@ -185,7 +185,7 @@ public class LecturaJSON {
         }
     }
     
-    public void change(File newEndpoint, Grafo g){
+    public void changeJSON(File newEndpoint, Grafo g){
         String newPath = newEndpoint.getAbsolutePath();
         this.setOriginPath(newPath);
         

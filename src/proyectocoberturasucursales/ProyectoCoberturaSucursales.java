@@ -6,8 +6,6 @@ package proyectocoberturasucursales;
 import EDD.Grafo;
 import JSON.LecturaJSON;
 import EXTRAS.Estacion;
-import EDD.ListaVertices;
-import EDD.Vertice;
 import EXTRAS.Funciones;
 import java.io.File;
 import javax.swing.JFileChooser;

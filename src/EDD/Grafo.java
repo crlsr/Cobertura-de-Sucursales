@@ -57,9 +57,13 @@ public class Grafo {
                         ("Ya existe la estacion: " + tinfo.getNombre() + ". No se puede agregar otro."),
                         "", JOptionPane.INFORMATION_MESSAGE);
             }else{
+                int columnas = 10; 
+                int x = (getNumVertices() % columnas) * 80; 
+                int y = (getNumVertices() / columnas) * 80; 
                 this.getListavertices().agregarVertice(tinfo);
                 graph.addNode(tinfo.getNombre()).setAttribute("ui.label", tinfo.getNombre());
                 this.graph.getNode(tinfo.getNombre()).setAttribute("ui.style", "fill-color: yellow; shape: circle; size: 15px;");
+                this.graph.getNode(tinfo.getNombre()).setAttribute("xy", x, y);
                 this.setNumVertices(getNumVertices() + 1);
             }
             

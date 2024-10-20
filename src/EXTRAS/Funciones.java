@@ -11,7 +11,6 @@ import EDD.Nodo;
 import EDD.Cola;
 import EDD.Pila;
 import EDD.ListaVertices;
-import EXTRAS.Estacion;
 /**
  * Clase Funciones
  * Esta clase contiene métodos para gestionar sucursales en el grafo de estaciones.
@@ -173,7 +172,7 @@ public class Funciones {
      * Implementa el algoritmo DFS para recorrer las estaciones en el grafo.
      * Este método utiliza una pila y un enfoque recursivo para visitar las estaciones.
      * Cambia el color a azul claro si una estacion se encuentra en el radio t.
-     * 
+     *
      * @param pilaEstaciones la pila que contiene las estaciones a visitar.
      * @param visitados la lista de estaciones que ya han sido visitadas.
      * @param t el radio de cobertura restante.
@@ -200,6 +199,146 @@ public class Funciones {
         }
         
     }
+
+    /**
+     * Realiza la cobertura total de las estaciones en el grafo, iniciando
+     * una búsqueda en anchura (BFS) desde cada estación que tenga una sucursal.
+     * 
+     * @param t el radio de cobertura que se desea aplicar.
+     * @param graph el grafo que contiene las estaciones.
+     * @author Pedro Sebastiano
+     */
+    public void coberturaTotal(int t, Grafo graph){
+        ListaVertices estaciones = graph.getListavertices();
+        Vertice aux = estaciones.getVfirst();
+        while(aux!= null){
+            if(aux.getTinfo().getSucursal()){
+                this.busquedaBFS(aux.getTinfo(), t, graph);
+            }
+            aux = aux.getNext();
+        }
+    }
     
+    /**
+     * Elimina la cobertura de las estaciones cubiertas por otras sucursales y las coloca en
+     * amarillo en el grafo.
+     * 
+     * @param graph el grafo que contiene las estaciones.
+     * @author Pedro Sebastiano
+     */
+    public void eliminarCobertura(Grafo graph){
+        ListaVertices estaciones = graph.getListavertices();
+        Vertice aux = estaciones.getVfirst();
+        while(aux!= null){
+            if(aux.getTinfo().getCubierto() && !aux.getTinfo().getSucursal()){
+                aux.getTinfo().setCubierto(false);
+                graph.cambiarColorVertice(aux.getTinfo(), "yellow");                
+            }
+            aux = aux.getNext();
+        }
+    }
+    
+    /**
+     * Revisa la cobertura total de las estaciones en el grafo, ejecutando
+     * la búsqueda de cobertura total y luego verificando si hay estaciones
+     * que no están cubiertas. Si se encuentran estaciones no cubiertas,
+     * llama a la funcion sugerirSucursal.
+     * 
+     * @param graph el grafo que contiene las estaciones.
+     * @param t el radio de cobertura que se desea aplicar.
+     * @author Pedro Sebastiano
+     */
+    public void revisarCobertura(Grafo graph, int t){
+        coberturaTotal(t, graph);
+        ListaVertices estaciones = graph.getListavertices();
+        Vertice aux = estaciones.getVfirst();
+        ListaVertices noCubiertas = new ListaVertices();
+        while(aux!= null){
+            if(!aux.getTinfo().getCubierto() && !aux.getTinfo().getSucursal()){
+                noCubiertas.agregarVertice(aux.getTinfo());
+            }
+            aux = aux.getNext();
+        }
+        
+        if(noCubiertas.esVacio()){
+            JOptionPane.showMessageDialog(null, "La ciudad está completamente cubierta.");
+        }
+        else{
+            if(graph.getNumVertices()> noCubiertas.getSize()){
+                sugerirSucursal(noCubiertas, graph, t);
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha colocado ninguna sucursal, por ende no se puede sugerir alguna.");
+            }
+        }
+    }
+    
+    /**
+     * Sugiere una nueva sucursal para cubrir el mayor número de estaciones
+     * que no están cubiertas, llamando a la funcion calcularCobertura para 
+     * conocer la cobertura de cada estación en la lista de estaciones no cubiertas.
+     * 
+     * @param noCubiertas la lista de estaciones que no están cubiertas.
+     * @param graph el grafo que contiene las estaciones.
+     * @param t el radio de cobertura que se desea aplicar.
+     * @author Pedro Sebastiano
+     */
+    public void sugerirSucursal(ListaVertices noCubiertas, Grafo graph, int t){
+        Vertice mejorEstacion = null;
+        int mayorCobertura = 0;
+        Vertice aux = noCubiertas.getVfirst();
+        while(aux != null){
+            int cobertura = calcularCobertura(aux, graph, t);
+            if(cobertura > mayorCobertura){
+                mayorCobertura = cobertura;
+                mejorEstacion = aux;
+            }
+            aux = aux.getNext();
+        }
+        JOptionPane.showMessageDialog(null, "Se sugiere colocar una sucursal en " + 
+            mejorEstacion.getTinfo().getNombre() + " para cubrir " + mayorCobertura + " estaciones.");
+        
+    }
+    
+    /**
+     * Calcula cuántas estaciones puede cubrir una estación dada
+     * en función de su radio de cobertura. Utiliza una cola para
+     * realizar la búsqueda y contabilizar las estaciones cubiertas.
+     * 
+     * @param v el vértice (estación) desde el cual se calcula la cobertura.
+     * @param graph el grafo que contiene las estaciones.
+     * @param t el radio de cobertura que se desea aplicar.
+     * @return el número de estaciones cubiertas por la estación dada.
+     * @author Pedro Sebastiano
+     */
+    public int calcularCobertura(Vertice v, Grafo graph, int t){
+        ListaVertices visitados = new ListaVertices();
+        Cola colaEstaciones = new Cola();
+        colaEstaciones.encolar(v);
+        visitados.agregarVertice(v.getTinfo());
+        int estacionesCubiertas = 1; 
+        while (!colaEstaciones.esVacia() && t > 0) { 
+        int t2 = colaEstaciones.getSize(); 
+        while (t2 > 0) { 
+            Vertice actual = graph.getListavertices().buscarVertice(colaEstaciones.getFirst().getTinfo().getTinfo());
+            colaEstaciones.desencolar(); 
+            Nodo aux = actual.getAdyacencia().getPfirst(); 
+            while (aux != null) {
+                Vertice adyacente = aux.getTinfo();
+                if(!adyacente.getTinfo().getCubierto() && !adyacente.getTinfo().getSucursal()){
+                    if (visitados.buscarVertice(adyacente.getTinfo()) == null) {
+                        colaEstaciones.encolar(adyacente); 
+                        visitados.agregarVertice(adyacente.getTinfo()); 
+                        estacionesCubiertas++; 
+                    }
+                }
+                aux = aux.getPnext(); 
+                
+            }
+            t2--; 
+        }
+        t--; 
+        }
+        return estacionesCubiertas;
+    }
     
 }
