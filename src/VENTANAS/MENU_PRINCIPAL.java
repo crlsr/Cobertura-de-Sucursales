@@ -4,19 +4,34 @@
  */
 package VENTANAS;
 
+import EDD.Grafo;
+import JSON.LecturaJSON;
+
 /**
  *
  * @author marco
  */
 public class MENU_PRINCIPAL extends javax.swing.JFrame {
-
+    static Grafo grafo;
+    static LecturaJSON json;
     /**
      * Creates new form MENU_INICIO
      */
     public MENU_PRINCIPAL() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Grafo grafo=new Grafo();
+        LecturaJSON json;
+         
     }
+    public MENU_PRINCIPAL(Grafo grafo,LecturaJSON json) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.grafo=grafo;
+        this.json=json;
+    }
+    
+         
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,14 +113,14 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EDITAR_DATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITAR_DATAActionPerformed
-        CAMBIAR_JSON MCJ = new CAMBIAR_JSON(); 
-        MCJ.setVisible(true);
-        this.setVisible(false);
+        EDITOR_DATA MED = new EDITOR_DATA(); 
+        MED.setVisible(true);
+        this.setVisible(false);        
     }//GEN-LAST:event_EDITAR_DATAActionPerformed
 
     private void CAMBIAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAMBIAR_JSONActionPerformed
-        EDITOR_DATA MED = new EDITOR_DATA(); 
-        MED.setVisible(true);
+        CAMBIAR_JSON MCJ = new CAMBIAR_JSON(grafo, json); 
+        MCJ.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CAMBIAR_JSONActionPerformed
 
