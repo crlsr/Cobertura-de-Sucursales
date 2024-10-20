@@ -3,6 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package VENTANAS;
+import EDD.Grafo;
+import JSON.LecturaJSON;
+import static VENTANAS.CAMBIAR_JSON.grafo;
+import static VENTANAS.MENU_PRINCIPAL.json;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 /**
  *
@@ -35,8 +44,8 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         CERRAR = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         INPUT_ESTACIONES = new javax.swing.JTextArea();
-        REGRESAR = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        REGRESAR = new javax.swing.JButton();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,6 +103,9 @@ public class EDITOR_DATA extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 280, 260));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/METRO.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, 100));
+
         REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
         REGRESAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         REGRESAR.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,10 +115,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
                 REGRESARActionPerformed(evt);
             }
         });
-        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 120, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/METRO.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, 100));
+        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 470));
@@ -123,7 +132,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
     }//GEN-LAST:event_CERRARActionPerformed
 
     private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
-        MENU_PRINCIPAL MP = new MENU_PRINCIPAL(); 
+        MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json);
         MP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_REGRESARActionPerformed
