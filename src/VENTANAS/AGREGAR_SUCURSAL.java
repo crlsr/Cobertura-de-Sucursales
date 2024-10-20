@@ -8,12 +8,12 @@ package VENTANAS;
  *
  * @author marco
  */
-public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
+public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
 
     /**
      * Creates new form MENU_SUCURSAL
      */
-    public MENU_AGREGAR_SUCURSAL() {
+    public AGREGAR_SUCURSAL() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -31,9 +31,7 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
         INPUT_AGREGAR_SUCURSAL = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        VER_COBERTURA = new javax.swing.JButton();
+        VER_COBERTURA_DFS = new javax.swing.JButton();
         VER_COBERTUTA_TOTAL = new javax.swing.JButton();
         REGRESAR = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -43,8 +41,9 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
         CERRAR = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        VER_COBERTURA_BFS = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,8 +52,8 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("MUNÚ SUCURSAL");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+        jLabel2.setText("SUCURSALES");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
 
         INPUT_AGREGAR_SUCURSAL.setBackground(new java.awt.Color(0, 0, 51));
         INPUT_AGREGAR_SUCURSAL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -70,29 +69,19 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("AGREGAR SUCURSAL");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("INGRESA UNA SUCURSAL:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
-
-        jTextField1.setBackground(new java.awt.Color(0, 0, 51));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 220, -1));
-
-        VER_COBERTURA.setBackground(new java.awt.Color(0, 51, 51));
-        VER_COBERTURA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        VER_COBERTURA.setForeground(new java.awt.Color(255, 255, 255));
-        VER_COBERTURA.setText("VER COBERTURA");
-        getContentPane().add(VER_COBERTURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+        VER_COBERTURA_DFS.setBackground(new java.awt.Color(0, 51, 51));
+        VER_COBERTURA_DFS.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        VER_COBERTURA_DFS.setForeground(new java.awt.Color(255, 255, 255));
+        VER_COBERTURA_DFS.setText("VER COBERTURA DFS");
+        getContentPane().add(VER_COBERTURA_DFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, -1, -1));
 
         VER_COBERTUTA_TOTAL.setBackground(new java.awt.Color(0, 51, 51));
         VER_COBERTUTA_TOTAL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         VER_COBERTUTA_TOTAL.setForeground(new java.awt.Color(255, 255, 255));
         VER_COBERTUTA_TOTAL.setText("VER COBERTURA TOTAL");
-        getContentPane().add(VER_COBERTUTA_TOTAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        getContentPane().add(VER_COBERTUTA_TOTAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, -1, -1));
 
         REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
         REGRESAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -103,21 +92,29 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
                 REGRESARActionPerformed(evt);
             }
         });
-        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
+        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
+        INPUT_MIS_SUCURSALES.setEditable(false);
         INPUT_MIS_SUCURSALES.setBackground(new java.awt.Color(0, 0, 51));
         INPUT_MIS_SUCURSALES.setColumns(20);
+        INPUT_MIS_SUCURSALES.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        INPUT_MIS_SUCURSALES.setForeground(new java.awt.Color(255, 255, 255));
         INPUT_MIS_SUCURSALES.setRows(5);
+        INPUT_MIS_SUCURSALES.setFocusable(false);
         jScrollPane2.setViewportView(INPUT_MIS_SUCURSALES);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 120, 130));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 180, 250));
 
+        INPUT_ESTACIONAR_SUCURSAL.setEditable(false);
         INPUT_ESTACIONAR_SUCURSAL.setBackground(new java.awt.Color(0, 0, 51));
         INPUT_ESTACIONAR_SUCURSAL.setColumns(20);
+        INPUT_ESTACIONAR_SUCURSAL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        INPUT_ESTACIONAR_SUCURSAL.setForeground(new java.awt.Color(255, 255, 255));
         INPUT_ESTACIONAR_SUCURSAL.setRows(5);
+        INPUT_ESTACIONAR_SUCURSAL.setFocusable(false);
         jScrollPane1.setViewportView(INPUT_ESTACIONAR_SUCURSAL);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 120, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 180, 250));
 
         CERRAR.setBackground(new java.awt.Color(255, 0, 0));
         CERRAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -128,35 +125,35 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
                 CERRARActionPerformed(evt);
             }
         });
-        getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
+        getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("ESTACIONAR");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 100, -1));
+        jLabel4.setText("ESTACIONES CUBIERTAS");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 170, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("MIS SUCURSALES");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 120, -1));
+        jLabel5.setText("ESTACIONES SIN CUBRIR");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 170, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("SUGERENCIAS DE LINEA:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 80, 190, -1));
+        jButton2.setBackground(new java.awt.Color(0, 51, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("ELIMINAR SUCURSAL");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(0, 0, 51));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 260, -1));
+        VER_COBERTURA_BFS.setBackground(new java.awt.Color(0, 51, 51));
+        VER_COBERTURA_BFS.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        VER_COBERTURA_BFS.setForeground(new java.awt.Color(255, 255, 255));
+        VER_COBERTURA_BFS.setText("VER COBERTURA BFS");
+        getContentPane().add(VER_COBERTURA_BFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/ICONO_ESTACIONES.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, -1, -1));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
-        getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 470));
+        getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,10 +166,6 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CERRARActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,21 +184,23 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MENU_AGREGAR_SUCURSAL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AGREGAR_SUCURSAL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MENU_AGREGAR_SUCURSAL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AGREGAR_SUCURSAL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MENU_AGREGAR_SUCURSAL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AGREGAR_SUCURSAL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MENU_AGREGAR_SUCURSAL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AGREGAR_SUCURSAL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MENU_AGREGAR_SUCURSAL().setVisible(true);
+                new AGREGAR_SUCURSAL().setVisible(true);
             }
         });
     }
@@ -217,18 +212,17 @@ public class MENU_AGREGAR_SUCURSAL extends javax.swing.JFrame {
     private javax.swing.JTextArea INPUT_ESTACIONAR_SUCURSAL;
     private javax.swing.JTextArea INPUT_MIS_SUCURSALES;
     private javax.swing.JButton REGRESAR;
-    private javax.swing.JButton VER_COBERTURA;
+    private javax.swing.JButton VER_COBERTURA_BFS;
+    private javax.swing.JButton VER_COBERTURA_DFS;
     private javax.swing.JButton VER_COBERTUTA_TOTAL;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
