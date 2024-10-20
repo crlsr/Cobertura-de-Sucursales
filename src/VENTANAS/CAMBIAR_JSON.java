@@ -174,7 +174,6 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
             int t = Integer.parseInt(INPUT_T.getText());
             INPUT_T.setText("");
             if(t<grafo.getNumVertices()){
-                System.out.println("lf");
                 if (t>0){
                 this.grafo.setT(t);
                 JOptionPane.showMessageDialog(this, "Radio de cobertura establecido de forma correcta ✅");

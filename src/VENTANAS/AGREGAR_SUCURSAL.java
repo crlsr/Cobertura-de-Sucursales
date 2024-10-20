@@ -6,9 +6,19 @@ package VENTANAS;
 
 import EDD.Grafo;
 import EDD.ListaVertices;
+import JSON.LecturaJSON;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+
+
 import javax.swing.JOptionPane;
 import EXTRAS.Funciones;
 import EXTRAS.Estacion;
+import static VENTANAS.CAMBIAR_JSON.json;
+
 
 /**
  *
@@ -42,7 +52,6 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         AGREGAR_SUCURSAL = new javax.swing.JButton();
         VER_COBERTURA_DFS = new javax.swing.JButton();
         VER_COBERTUTA_TOTAL = new javax.swing.JButton();
-        REGRESAR = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         INPUT_MIS_SUCURSALES = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -53,6 +62,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         ELIMINAR_SUCURSAL = new javax.swing.JButton();
         VER_COBERTURA_BFS = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        REGRESAR = new javax.swing.JButton();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,17 +116,6 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
             }
         });
         getContentPane().add(VER_COBERTUTA_TOTAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, -1, -1));
-
-        REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
-        REGRESAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        REGRESAR.setForeground(new java.awt.Color(255, 255, 255));
-        REGRESAR.setText("REGRESAR");
-        REGRESAR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                REGRESARActionPerformed(evt);
-            }
-        });
-        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
         INPUT_MIS_SUCURSALES.setEditable(false);
         INPUT_MIS_SUCURSALES.setBackground(new java.awt.Color(0, 0, 51));
@@ -186,16 +185,22 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/ICONO_ESTACIONES.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, -1, -1));
 
+        REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
+        REGRESAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        REGRESAR.setForeground(new java.awt.Color(255, 255, 255));
+        REGRESAR.setText("REGRESAR");
+        REGRESAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                REGRESARActionPerformed(evt);
+            }
+        });
+        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
+
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
-        MENU_PRINCIPAL MP = new MENU_PRINCIPAL(); 
-        MP.setVisible(true);
-        this.setVisible(false);    }//GEN-LAST:event_REGRESARActionPerformed
 
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
@@ -261,6 +266,12 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
     }
     }//GEN-LAST:event_VER_COBERTURA_BFSActionPerformed
+
+    private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
+            MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json);
+            MP.setVisible(true);
+            this.setVisible(false);
+    }//GEN-LAST:event_REGRESARActionPerformed
 
     /**
      * @param args the command line arguments
