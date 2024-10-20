@@ -5,7 +5,12 @@
         <group>
             <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/proyectocoberturasucursales/Utilities.java</file>
             <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/proyectocoberturasucursales/GUI.java</file>
+            <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/VENTANAS/CAMBIAR_JSON.java</file>
             <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/VENTANAS/AGREGAR_SUCURSAL.java</file>
+            <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/JSON/Bogota.json</file>
+            <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/JSON/LecturaJSON.java</file>
+            <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/JSON/Caracas.json</file>
+            <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/EXTRAS/Funciones.java</file>
         </group>
     </open-files>
 </project-private>

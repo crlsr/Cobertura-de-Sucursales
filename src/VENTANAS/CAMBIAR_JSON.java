@@ -4,18 +4,28 @@
  */
 package VENTANAS;
 
+import EDD.Grafo;
+import JSON.LecturaJSON;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author marco
  */
 public class CAMBIAR_JSON extends javax.swing.JFrame {
-
+    static Grafo grafo;
+    static LecturaJSON json;
     /**
      * Creates new form CAMBIAR_JSON
      */
-    public CAMBIAR_JSON() {
+    public CAMBIAR_JSON(Grafo grafo,LecturaJSON json) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.grafo=grafo;
+        this.json=json;        
     }
 
     /**
@@ -35,6 +45,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         jLabeljson = new javax.swing.JLabel();
         CERRAR = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        ESTABLECER_T = new javax.swing.JButton();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,7 +66,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ESTABLECER RADIO DE COBERTURA:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 310, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 250, -1));
 
         INPUT_T.setBackground(new java.awt.Color(0, 0, 51));
         INPUT_T.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -65,7 +76,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
                 INPUT_TActionPerformed(evt);
             }
         });
-        getContentPane().add(INPUT_T, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 320, -1));
+        getContentPane().add(INPUT_T, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 250, -1));
 
         REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
         REGRESAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -81,7 +92,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CAMBIAR JSON");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 190, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 190, -1));
 
         jLabeljson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/IMAGEN_JSON.png"))); // NOI18N
         getContentPane().add(jLabeljson, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 200, -1, -1));
@@ -95,13 +106,24 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
                 CERRARActionPerformed(evt);
             }
         });
-        getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
+        getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/ICONO_RADIO.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+
+        ESTABLECER_T.setBackground(new java.awt.Color(0, 51, 51));
+        ESTABLECER_T.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ESTABLECER_T.setForeground(new java.awt.Color(255, 255, 255));
+        ESTABLECER_T.setText("ESTABLECER");
+        ESTABLECER_T.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ESTABLECER_TActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ESTABLECER_T, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
-        getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 400));
+        getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,14 +137,63 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
     }//GEN-LAST:event_CERRARActionPerformed
 
     private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
-        MENU_PRINCIPAL MP = new MENU_PRINCIPAL(); 
+        if(json!=null && grafo.getT()>0){
+        MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json); 
         MP.setVisible(true);
-        this.setVisible(false);
+        this.setVisible(false);        
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Agregue un JSON y establesca el radio de cobertura primero");
+        }
     }//GEN-LAST:event_REGRESARActionPerformed
 
     private void CARGAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAR_JSONActionPerformed
-        // TODO add your handling code here:
+        try {
+        JFileChooser finder = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos JSON", "json");
+        finder.setFileFilter(filter);
+        int response = finder.showOpenDialog(null);
+        if(response == JFileChooser.APPROVE_OPTION){
+            File selected = finder.getSelectedFile(); 
+            if (json ==null){
+            json=new LecturaJSON(selected);
+            json.dataConstructor(grafo);
+            }else{
+            this.json.changeJSON(selected, this.grafo);
+            }
+        }
+        }    
+        catch (Exception e){
+           JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+       }
     }//GEN-LAST:event_CARGAR_JSONActionPerformed
+
+    private void ESTABLECER_TActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ESTABLECER_TActionPerformed
+        try {
+            if (json != null){
+            int t = Integer.parseInt(INPUT_T.getText());
+            INPUT_T.setText("");
+            if(t<grafo.getNumVertices()){
+                if (t>0){
+                this.grafo.setT(t);
+                JOptionPane.showMessageDialog(this, "Radio de cobertura establecido de forma correcta ✅");
+                }
+                else{
+                JOptionPane.showMessageDialog(this, "No se permiten radios negativos");
+                }
+            }
+            else{
+            JOptionPane.showMessageDialog(this, "El radio de cobertura no puede ser mayor que el numero de estaciones");
+            }
+        }
+            else{
+            JOptionPane.showMessageDialog(this, "Debes cargar primero el JSON");
+            }
+        }    
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Ingresa los datos correctamente ❌");
+        }
+    }//GEN-LAST:event_ESTABLECER_TActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,7 +228,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CAMBIAR_JSON().setVisible(true);
+                new CAMBIAR_JSON(grafo,json).setVisible(true);
             }
         });
     }
@@ -165,6 +236,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CARGAR_JSON;
     private javax.swing.JButton CERRAR;
+    private javax.swing.JButton ESTABLECER_T;
     private javax.swing.JLabel FONDO;
     private javax.swing.JTextField INPUT_T;
     private javax.swing.JButton REGRESAR;
