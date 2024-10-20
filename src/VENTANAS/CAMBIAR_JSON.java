@@ -8,12 +8,12 @@ package VENTANAS;
  *
  * @author marco
  */
-public class MENU_CAMBIAR_JSON extends javax.swing.JFrame {
+public class CAMBIAR_JSON extends javax.swing.JFrame {
 
     /**
      * Creates new form CAMBIAR_JSON
      */
-    public MENU_CAMBIAR_JSON() {
+    public CAMBIAR_JSON() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -70,15 +70,15 @@ public class MENU_CAMBIAR_JSON extends javax.swing.JFrame {
                 REGRESARActionPerformed(evt);
             }
         });
-        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("MENÚ CAMBIAR JSON");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
+        jLabel2.setText("CAMBIAR JSON");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
 
         jLabeljson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/IMAGEN_JSON.png"))); // NOI18N
-        getContentPane().add(jLabeljson, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
+        getContentPane().add(jLabeljson, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         CERRAR.setBackground(new java.awt.Color(255, 0, 0));
         CERRAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -128,21 +128,23 @@ public class MENU_CAMBIAR_JSON extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MENU_CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MENU_CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MENU_CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MENU_CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MENU_CAMBIAR_JSON().setVisible(true);
+                new CAMBIAR_JSON().setVisible(true);
             }
         });
     }

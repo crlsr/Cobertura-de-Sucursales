@@ -8,12 +8,12 @@ package VENTANAS;
  *
  * @author marco
  */
-public class MENU_EDITOR_DATA extends javax.swing.JFrame {
+public class EDITOR_DATA extends javax.swing.JFrame {
 
     /**
      * Creates new form MENU_SIGUIENTE
      */
-    public MENU_EDITOR_DATA() {
+    public EDITOR_DATA() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -31,7 +31,6 @@ public class MENU_EDITOR_DATA extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         AGREGAR_LINEA = new javax.swing.JButton();
-        ACTUALIZAR = new javax.swing.JButton();
         INPUT_LINEA = new javax.swing.JTextField();
         CERRAR = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -51,8 +50,8 @@ public class MENU_EDITOR_DATA extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("MENÚ EDITOR DATA");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
+        jLabel2.setText("EDITOR DATA");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -64,12 +63,6 @@ public class MENU_EDITOR_DATA extends javax.swing.JFrame {
         AGREGAR_LINEA.setForeground(new java.awt.Color(255, 255, 255));
         AGREGAR_LINEA.setText("AGREGAR LINEA");
         getContentPane().add(AGREGAR_LINEA, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, -1));
-
-        ACTUALIZAR.setBackground(new java.awt.Color(0, 51, 51));
-        ACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ACTUALIZAR.setForeground(new java.awt.Color(255, 255, 255));
-        ACTUALIZAR.setText("ACTUALIZAR");
-        getContentPane().add(ACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 120, -1));
 
         INPUT_LINEA.setBackground(new java.awt.Color(0, 0, 51));
         INPUT_LINEA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -99,7 +92,7 @@ public class MENU_EDITOR_DATA extends javax.swing.JFrame {
         INPUT_ESTACIONES.setRows(5);
         jScrollPane1.setViewportView(INPUT_ESTACIONES);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 280, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 280, 260));
 
         REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
         REGRESAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -110,13 +103,13 @@ public class MENU_EDITOR_DATA extends javax.swing.JFrame {
                 REGRESARActionPerformed(evt);
             }
         });
-        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 120, -1));
+        getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 120, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/METRO.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, 100));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
-        getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 400));
+        getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -152,27 +145,28 @@ public class MENU_EDITOR_DATA extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MENU_EDITOR_DATA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EDITOR_DATA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MENU_EDITOR_DATA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EDITOR_DATA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MENU_EDITOR_DATA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EDITOR_DATA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MENU_EDITOR_DATA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EDITOR_DATA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MENU_EDITOR_DATA().setVisible(true);
+                new EDITOR_DATA().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ACTUALIZAR;
     private javax.swing.JButton AGREGAR_LINEA;
     private javax.swing.JButton CERRAR;
     private javax.swing.JLabel FONDO;

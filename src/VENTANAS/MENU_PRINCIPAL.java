@@ -31,8 +31,8 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         AGREGAR_SUCURSALES = new javax.swing.JButton();
         CAMBIAR_JSON = new javax.swing.JButton();
         CERRAR = new javax.swing.JButton();
-        ACTUALIZAR = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +48,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
                 EDITAR_DATAActionPerformed(evt);
             }
         });
-        getContentPane().add(EDITAR_DATA, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
+        getContentPane().add(EDITAR_DATA, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         AGREGAR_SUCURSALES.setBackground(new java.awt.Color(0, 51, 51));
         AGREGAR_SUCURSALES.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -59,7 +59,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
                 AGREGAR_SUCURSALESActionPerformed(evt);
             }
         });
-        getContentPane().add(AGREGAR_SUCURSALES, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        getContentPane().add(AGREGAR_SUCURSALES, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, -1));
 
         CAMBIAR_JSON.setBackground(new java.awt.Color(0, 51, 51));
         CAMBIAR_JSON.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -70,7 +70,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
                 CAMBIAR_JSONActionPerformed(evt);
             }
         });
-        getContentPane().add(CAMBIAR_JSON, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        getContentPane().add(CAMBIAR_JSON, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
 
         CERRAR.setBackground(new java.awt.Color(255, 0, 0));
         CERRAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -83,16 +83,13 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         });
         getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
 
-        ACTUALIZAR.setBackground(new java.awt.Color(0, 51, 51));
-        ACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ACTUALIZAR.setForeground(new java.awt.Color(255, 255, 255));
-        ACTUALIZAR.setText("ACTUALIZAR");
-        getContentPane().add(ACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("MENU PRINCIPAL");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/ICONO_MENU.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 580, 400));
@@ -101,13 +98,13 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EDITAR_DATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITAR_DATAActionPerformed
-        MENU_CAMBIAR_JSON MCJ = new MENU_CAMBIAR_JSON(); 
+        CAMBIAR_JSON MCJ = new CAMBIAR_JSON(); 
         MCJ.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_EDITAR_DATAActionPerformed
 
     private void CAMBIAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAMBIAR_JSONActionPerformed
-        MENU_EDITOR_DATA MED = new MENU_EDITOR_DATA(); 
+        EDITOR_DATA MED = new EDITOR_DATA(); 
         MED.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CAMBIAR_JSONActionPerformed
@@ -117,7 +114,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_CERRARActionPerformed
 
     private void AGREGAR_SUCURSALESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_SUCURSALESActionPerformed
-        MENU_AGREGAR_SUCURSAL MAG = new MENU_AGREGAR_SUCURSAL();
+        AGREGAR_SUCURSAL MAG = new AGREGAR_SUCURSAL();
         MAG.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_AGREGAR_SUCURSALESActionPerformed
@@ -159,12 +156,12 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ACTUALIZAR;
     private javax.swing.JButton AGREGAR_SUCURSALES;
     private javax.swing.JButton CAMBIAR_JSON;
     private javax.swing.JButton CERRAR;
     private javax.swing.JButton EDITAR_DATA;
     private javax.swing.JLabel FONDO;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
