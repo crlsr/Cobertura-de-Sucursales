@@ -136,7 +136,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
     private void AGREGAR_SUCURSALESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_SUCURSALESActionPerformed
         if(jsoncargado){
-        AGREGAR_SUCURSAL MAG = new AGREGAR_SUCURSAL();
+        AGREGAR_SUCURSAL MAG = new AGREGAR_SUCURSAL(grafo, json);
         MAG.setVisible(true);
         this.setVisible(false);
         }else{

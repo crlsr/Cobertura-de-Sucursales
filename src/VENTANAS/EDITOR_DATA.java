@@ -4,11 +4,8 @@
  */
 package VENTANAS;
 import EDD.Grafo;
-import EXTRAS.Estacion;
 import EXTRAS.Funciones;
 import JSON.LecturaJSON;
-import static VENTANAS.AGREGAR_SUCURSAL.funciones;
-import static VENTANAS.AGREGAR_SUCURSAL.grafo;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +24,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.grafo=grafo;
         this.json=json;
+        funciones = new Funciones();
     }
 
     /**
@@ -145,12 +143,12 @@ public class EDITOR_DATA extends javax.swing.JFrame {
     }//GEN-LAST:event_REGRESARActionPerformed
 
     private void AGREGAR_LINEAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_LINEAActionPerformed
-        //try{
+        try{
             String linea = INPUT_LINEA.getText();
             String estaciones = INPUT_ESTACIONES.getText();
             if (!linea.isBlank()){
                 if (!estaciones.isBlank()){
-                    String []estacionesnuevas = estaciones.split("\n");
+                    String[] estacionesnuevas = estaciones.split("\n");
                     funciones.agregarLinea(estacionesnuevas, linea, grafo);
                 }
                 else {
@@ -162,10 +160,9 @@ public class EDITOR_DATA extends javax.swing.JFrame {
             }
             INPUT_LINEA.setText("");
             INPUT_ESTACIONES.setText("");
-       // }//catch(Exception e) {
-            
-            //JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
-       // }
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+         }
     }//GEN-LAST:event_AGREGAR_LINEAActionPerformed
 
     /**

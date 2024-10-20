@@ -8,7 +8,7 @@ import EDD.Grafo;
 import javax.swing.JOptionPane;
 import EXTRAS.Funciones;
 import EXTRAS.Estacion;
-import static VENTANAS.CAMBIAR_JSON.json;
+import JSON.LecturaJSON;
 
 
 /**
@@ -18,13 +18,17 @@ import static VENTANAS.CAMBIAR_JSON.json;
 public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     static Grafo grafo;
     static Funciones funciones;
+    static LecturaJSON json;
 
     /**
      * Creates new form MENU_SUCURSAL
      */
-    public AGREGAR_SUCURSAL() {
+    public AGREGAR_SUCURSAL(Grafo grafo, LecturaJSON json) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.grafo=grafo;
+        this.json=json;   
+        funciones = new Funciones();
     }
 
     /**
@@ -299,7 +303,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AGREGAR_SUCURSAL().setVisible(true);
+                new AGREGAR_SUCURSAL(grafo, json).setVisible(true);
             }
         });
     }
