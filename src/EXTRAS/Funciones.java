@@ -39,6 +39,9 @@ public class Funciones {
             }else{
                 existe.getTinfo().setSucursal(true);
                 g.cambiarColorVertice(existe.getTinfo(), "green");
+                JOptionPane.showMessageDialog(null, "Sucursal agregada con exito");
+                g.mostrarGrafo();
+                this.revisarCobertura(g, g.getT());
             }
         }else{
             JOptionPane.showMessageDialog(null,
@@ -66,6 +69,7 @@ public class Funciones {
         }else{
             existe.getTinfo().setSucursal(false);
             g.cambiarColorVertice(existe.getTinfo(), "yellow"); 
+            JOptionPane.showMessageDialog(null, "Sucursal eliminada con exito");
         }
         }else{
             JOptionPane.showMessageDialog(null,
@@ -294,7 +298,7 @@ public class Funciones {
             aux = aux.getNext();
         }
         JOptionPane.showMessageDialog(null, "Se sugiere colocar una sucursal en " + 
-            mejorEstacion.getTinfo().getNombre() + " para cubrir " + mayorCobertura + " estaciones.");
+                mejorEstacion.getTinfo().getNombre() + " para cubrir " + mayorCobertura + " estaciones.");
         
     }
     
@@ -350,6 +354,7 @@ public class Funciones {
     * estaciones a añadir a la línea.
     * @param linea el nombre de la línea que se está añadiendo.
     * @param graph el grafo que contiene las estaciones y conexiones.
+    *  @author Pedro Sebastiano
     */
     public void agregarLinea(String[] estacionesNuevas, String linea, Grafo graph) {
         if (!linea.isBlank()) {
@@ -423,6 +428,7 @@ public class Funciones {
     *
     * @param texto la cadena de texto que se desea formatear.
     * @return una cadena formateada donde cada palabra comienza con una letra mayúscula.
+    * @author Pedro Sebastiano
     */
     public String formatearTitulo(String texto) {
         texto = texto.trim().toLowerCase();
