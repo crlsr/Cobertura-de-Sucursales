@@ -5,15 +5,6 @@
 package VENTANAS;
 
 import EDD.Grafo;
-import EDD.ListaVertices;
-import JSON.LecturaJSON;
-import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-
-
 import javax.swing.JOptionPane;
 import EXTRAS.Funciones;
 import EXTRAS.Estacion;
@@ -34,7 +25,6 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     public AGREGAR_SUCURSAL() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Funciones funciones= new Funciones();
     }
 
     /**
@@ -223,6 +213,8 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
             Estacion estacion = new Estacion(nombreEstacion," ");
             funciones.eliminarCobertura(grafo);
             funciones.busquedaDFS(estacion, grafo.getT(), grafo);
+            grafo.mostrarGrafo();
+            // Mostrar lista cubiertos y no cubiertos;
             INPUT_AGREGAR_SUCURSAL.setText("");
         }
      catch(Exception e) {
@@ -244,10 +236,9 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
 
     private void VER_COBERTUTA_TOTALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTUTA_TOTALActionPerformed
         try{
-            String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
-            Estacion estacion = new Estacion(nombreEstacion," ");
             funciones.coberturaTotal(grafo.getT(), grafo);
-            INPUT_AGREGAR_SUCURSAL.setText("");
+            grafo.mostrarGrafo();
+            // Mostrar lista cubiertos y no cubiertos;
         }
      catch(Exception e) {
         JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
@@ -261,6 +252,8 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
             funciones.eliminarCobertura(grafo);
             funciones.busquedaBFS(estacion, grafo.getT(), grafo);
             INPUT_AGREGAR_SUCURSAL.setText("");
+            grafo.mostrarGrafo();
+            // Mostrar lista cubiertos y no cubiertos;
         }
      catch(Exception e) {
         JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");

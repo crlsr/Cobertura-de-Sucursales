@@ -116,7 +116,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
     private void EDITAR_DATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITAR_DATAActionPerformed
         if(jsoncargado){
-        EDITOR_DATA MED = new EDITOR_DATA(); 
+        EDITOR_DATA MED = new EDITOR_DATA(grafo, json); 
         MED.setVisible(true);
         this.setVisible(false);        
         }else{

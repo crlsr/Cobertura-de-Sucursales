@@ -4,27 +4,29 @@
  */
 package VENTANAS;
 import EDD.Grafo;
+import EXTRAS.Estacion;
+import EXTRAS.Funciones;
 import JSON.LecturaJSON;
-import static VENTANAS.CAMBIAR_JSON.grafo;
-import static VENTANAS.MENU_PRINCIPAL.json;
-import java.io.File;
-import javax.swing.JFileChooser;
+import static VENTANAS.AGREGAR_SUCURSAL.funciones;
+import static VENTANAS.AGREGAR_SUCURSAL.grafo;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 /**
  *
  * @author marco
  */
 public class EDITOR_DATA extends javax.swing.JFrame {
-
+    static Grafo grafo;
+    static LecturaJSON json;
+    static Funciones funciones;
     /**
      * Creates new form MENU_SIGUIENTE
      */
-    public EDITOR_DATA() {
+    public EDITOR_DATA(Grafo grafo,LecturaJSON json) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.grafo=grafo;
+        this.json=json;
     }
 
     /**
@@ -71,6 +73,11 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         AGREGAR_LINEA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AGREGAR_LINEA.setForeground(new java.awt.Color(255, 255, 255));
         AGREGAR_LINEA.setText("AGREGAR LINEA");
+        AGREGAR_LINEA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AGREGAR_LINEAActionPerformed(evt);
+            }
+        });
         getContentPane().add(AGREGAR_LINEA, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, -1));
 
         INPUT_LINEA.setBackground(new java.awt.Color(0, 0, 51));
@@ -137,6 +144,30 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_REGRESARActionPerformed
 
+    private void AGREGAR_LINEAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_LINEAActionPerformed
+        //try{
+            String linea = INPUT_LINEA.getText();
+            String estaciones = INPUT_ESTACIONES.getText();
+            if (!linea.isBlank()){
+                if (!estaciones.isBlank()){
+                    String []estacionesnuevas = estaciones.split("\n");
+                    funciones.agregarLinea(estacionesnuevas, linea, grafo);
+                }
+                else {
+                JOptionPane.showMessageDialog(this, "Debe ingresar las estaciones 🚄️");
+            }
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Debe ingresar el nombre de la linea 🗒️");
+            }
+            INPUT_LINEA.setText("");
+            INPUT_ESTACIONES.setText("");
+       // }//catch(Exception e) {
+            
+            //JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+       // }
+    }//GEN-LAST:event_AGREGAR_LINEAActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -170,7 +201,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EDITOR_DATA().setVisible(true);
+                new EDITOR_DATA(grafo, json).setVisible(true);
             }
         });
     }
