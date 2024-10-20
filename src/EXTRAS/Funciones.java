@@ -65,7 +65,6 @@ public class Funciones {
                         "", JOptionPane.INFORMATION_MESSAGE);
         }else{
             existe.getTinfo().setSucursal(false);
-            //Verificar el cubierto
             g.cambiarColorVertice(existe.getTinfo(), "yellow"); 
         }
         }else{
@@ -340,5 +339,105 @@ public class Funciones {
         }
         return estacionesCubiertas;
     }
+    
+    
+    /**
+    * Agrega una nueva línea de estaciones al grafo. Verifica que exista al menos una estacion de transferencia 
+    * dentro de la linea, y sino no la agrega. Verifica si hay estaciones repetidas dentro del grafo que no
+    * sean de transferencia. Crea nuevos vertices y sus conexiones.
+    *
+    * @param estacionesNuevas un arreglo de Strings que representa los nombres de las 
+    * estaciones a añadir a la línea.
+    * @param linea el nombre de la línea que se está añadiendo.
+    * @param graph el grafo que contiene las estaciones y conexiones.
+    */
+    public void agregarLinea(String[] estacionesNuevas, String linea, Grafo graph) {
+        if (!linea.isBlank()) {
+            if (estacionesNuevas.length > 0) {
+                String estacionTransferencia;
+                String estacionExistente;
+                linea = formatearTitulo(linea);
+                boolean existeTransferencia = false;
+
+                for (String estacion : estacionesNuevas) {
+                    String estacionNombre = formatearTitulo(estacion.trim());
+                    if (estacionNombre.contains("-")) {
+                        String[] partes = estacionNombre.split("-");
+                        estacionTransferencia = formatearTitulo(partes[0].trim());
+                        estacionExistente = formatearTitulo(partes[1].trim());
+                        Vertice verticeExistente = graph.getListavertices().buscarVertice(new Estacion(estacionExistente, linea));
+                        if (verticeExistente == null) {
+                            JOptionPane.showMessageDialog(null, "La estación de transferencia " + estacionExistente + " no existe en el grafo.");
+                            return;
+                        }else{
+                            existeTransferencia = true;
+                            verticeExistente.getTinfo().setLinea("Transferencia");
+                            Estacion transferencia = new Estacion(estacionTransferencia, "Transferencia");
+                            graph.agregarVertice(transferencia);
+                            graph.conectarVertices(transferencia, verticeExistente.getTinfo());
+                        }
+                    }
+                }
+                if (!existeTransferencia) {
+                    JOptionPane.showMessageDialog(null, "No se ha especificado una estación de transferencia.");
+                    return;
+                }
+                Vertice anterior = null;
+                for (String estacion : estacionesNuevas) {
+                    String estacionNombre = formatearTitulo(estacion.trim());
+                    if (estacionNombre.contains("-")) {
+                        String[] partes = estacionNombre.split("-");
+                        Estacion conexionGrafo = new Estacion(formatearTitulo(partes[0].trim()), "Transferencia");
+                        if (anterior != null) {
+                            graph.conectarVertices(conexionGrafo, anterior.getTinfo());
+                        }
+                        anterior = graph.getListavertices().buscarVertice(conexionGrafo);
+                    }else{
+                        Estacion nuevaEstacion = new Estacion(estacionNombre, linea);
+                        Vertice nuevoVertice = graph.getListavertices().buscarVertice(nuevaEstacion);
+                        if (nuevoVertice == null) {
+                            graph.agregarVertice(nuevaEstacion);
+                            if (anterior != null) {
+                                graph.conectarVertices(nuevaEstacion, anterior.getTinfo());
+                            }
+                            anterior = graph.getListavertices().buscarVertice(nuevaEstacion);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "No se puede conectar la estacion con " + nuevoVertice.getTinfo().getNombre() +
+                                    " porque ya existe en el grafo y no es una estación de transferencia");
+                            continue;
+                        }
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "No se han proporcionado estaciones.");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha proporcionado el nombre de la linea.");
+        }
+    }
+
+    /**
+    * Formatea un texto para que tenga un formato de título (Ej. la hOYAda -> La Hoyada). Convierte el texto a 
+    * minúsculas, elimina espacios en blanco al inicio y al final, y capitaliza la 
+    * primera letra de cada palabra. 
+    *
+    * @param texto la cadena de texto que se desea formatear.
+    * @return una cadena formateada donde cada palabra comienza con una letra mayúscula.
+    */
+    public String formatearTitulo(String texto) {
+        texto = texto.trim().toLowerCase();
+        String[] palabras = texto.split(" ");
+        StringBuilder sb = new StringBuilder();
+
+        for (String palabra : palabras) {
+            if (!palabra.isEmpty()) {
+                sb.append(Character.toUpperCase(palabra.charAt(0))).append(palabra.substring(1)).append(" ");
+        }
+        }
+        return sb.toString().trim();
+    }
+    
+    
+    
     
 }
