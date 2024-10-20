@@ -40,7 +40,6 @@ public class Funciones {
                 existe.getTinfo().setSucursal(true);
                 g.cambiarColorVertice(existe.getTinfo(), "green");
                 JOptionPane.showMessageDialog(null, "Sucursal agregada con exito");
-                g.mostrarGrafo();
                 this.revisarCobertura(g, g.getT());
             }
         }else{
