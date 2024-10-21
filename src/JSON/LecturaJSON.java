@@ -169,17 +169,9 @@ public class LecturaJSON {
         JSONObject newLine = new JSONObject(); //creamos el json de la nueva linea
         JSONArray newStations = new JSONArray(); //creamos el jsonarray para las estaciones de esta nueva linea 
 
-        for (Object station : data) {
-            if (station instanceof String) {
-                Estacion tempStation = new Estacion((String) station, lineName);
-                Vertice stationState = graph.getListavertices().buscarVertice(tempStation);
-                if (stationState != null) {
-                    newStations.put((String) station); //agregamos las estaciones a nuestra nueva linea
-                }
-                else{JOptionPane.showMessageDialog(null, "Estación repetida");}
-
-            } else if (station instanceof String[]) {
-                String[] substation = (String[]) station;
+        for (String station : data) {
+            if (station.contains("-")) {
+                String[] substation = station.split("-");
 
                 if (substation.length >= 2) {
                     String fromStation = substation[0];
@@ -188,6 +180,15 @@ public class LecturaJSON {
 
                     pathStations.put(fromStation, toStation);
                     newStations.put(pathStations);
+                }
+
+            } else {
+                Estacion tempStation = new Estacion((String) station, lineName);
+                Vertice stationState = graph.getListavertices().buscarVertice(tempStation);
+                if (stationState != null) {
+                    newStations.put((String) station); //agregamos las estaciones a nuestra nueva linea
+                } else {
+                    JOptionPane.showMessageDialog(null, "Estación repetida");
                 }
             }
         }
@@ -205,7 +206,7 @@ public class LecturaJSON {
     }
 
     public void changeJSON(File newEndpoint, Grafo g) {
-        
+        updateData();
         g.destructor();
         String newPath = newEndpoint.getAbsolutePath();
         this.setOriginPath(newPath);
