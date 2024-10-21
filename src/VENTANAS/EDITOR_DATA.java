@@ -201,6 +201,9 @@ public class EDITOR_DATA extends javax.swing.JFrame {
             public void run() {
                 new EDITOR_DATA(grafo, json).setVisible(true);
             }
+            
+            
+            
         });
     }
 
