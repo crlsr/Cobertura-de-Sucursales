@@ -204,8 +204,10 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         try{
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
             Estacion estacion = new Estacion(nombreEstacion," ");
-            funciones.colocarSucursal(grafo,estacion);
-            INPUT_AGREGAR_SUCURSAL.setText("");
+            if (!nombreEstacion.isBlank()){
+                    funciones.colocarSucursal(grafo,estacion);
+                    INPUT_AGREGAR_SUCURSAL.setText("");
+            }                            
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
         }

@@ -115,11 +115,11 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="CAMBIAR JSON"/>
+        <Property name="text" type="java.lang.String" value="CARGAR JSON"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="210" y="50" width="190" height="-1"/>
+          <AbsoluteConstraints x="210" y="50" width="170" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
