@@ -205,7 +205,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
             if (!nombreEstacion.isBlank()){
                     Estacion estacion = new Estacion(nombreEstacion," ");
-                    funciones.colocarSucursal(grafo,estacion);
+                    funciones.colocarSucursal(grafo,estacion, "");
                     INPUT_AGREGAR_SUCURSAL.setText("");                  
             }                            
             else {
