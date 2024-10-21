@@ -27,9 +27,10 @@ public class Funciones {
      * 
      * @param g el grafo que contiene las estaciones.
      * @param tinfo la estación en la que se desea colocar la sucursal.
+     * @param inicio string que contendra "*" si la funcion se llama al subir un json con sucursales ya cargadas
      * @author Pedro Sebastiano
      */
-    public void colocarSucursal(Grafo g, Estacion tinfo){
+    public void colocarSucursal(Grafo g, Estacion tinfo, String inicio){
         Vertice existe= g.getListavertices().buscarVertice(tinfo);
         if(existe != null){
             if(existe.getTinfo().getSucursal()){
@@ -39,8 +40,10 @@ public class Funciones {
             }else{
                 existe.getTinfo().setSucursal(true);
                 g.cambiarColorVertice(existe.getTinfo(), "green");
-                JOptionPane.showMessageDialog(null, "Sucursal agregada con exito");
-                this.revisarCobertura(g, g.getT());
+                if(!inicio.equals("*")){
+                    JOptionPane.showMessageDialog(null, "Sucursal agregada con exito");
+                    this.revisarCobertura(g, g.getT());
+                }
             }
         }else{
             JOptionPane.showMessageDialog(null,
@@ -87,9 +90,11 @@ public class Funciones {
      * @param tinfo la estación desde la cual se inicia la búsqueda.
      * @param t el radio de cobertura que se desea aplicar.
      * @param graph el grafo que contiene las estaciones.
+     * @return string con zonas comerciales de la parada, en caso de que no exista la estacion o 
+     * no exista una sucursal en ella retorna una cadena vacia
      * @author Pedro Sebastiano
      */
-    public void busquedaBFS(Estacion tinfo, int t, Grafo graph){
+    public String busquedaBFS(Estacion tinfo, int t, Grafo graph){
         Vertice v = graph.getListavertices().buscarVertice(tinfo);
         if (v!= null){
             if (v.getTinfo().getSucursal()){
@@ -98,11 +103,24 @@ public class Funciones {
                 colaEstaciones.encolar(v);
                 visitados.agregarVertice(v.getTinfo());
                 BFS(colaEstaciones, visitados, t, graph);
+                Vertice aux = visitados.getVfirst();
+                String cadena = "Zona comercial " + v.getTinfo().getNombre() + ": ";
+                while(aux!= null){
+                    cadena += aux.getTinfo().getNombre() + "\n";
+                    aux = aux.getNext();
+                }
+                return cadena;
             }else{
                 JOptionPane.showMessageDialog(null,
                     ("No existe una sucursal en la parada " + v.getTinfo().getNombre() + ", por lo tanto no se puede revisar su cobertura"),
                         "", JOptionPane.INFORMATION_MESSAGE);
+                return "";
             }
+        }else{
+            JOptionPane.showMessageDialog(null,
+                    ("No existe la parada " + tinfo.getNombre() + ", por lo tanto no se puede revisar su cobertura"),
+                        "", JOptionPane.INFORMATION_MESSAGE);
+            return "";
         }
     }
     
@@ -152,9 +170,11 @@ public class Funciones {
      * @param tinfo la estación desde la cual se inicia la búsqueda.
      * @param t el radio de cobertura que se desea aplicar.
      * @param graph el grafo que contiene las estaciones.
+     * @return string con zonas comerciales de la parada, en caso de que no exista la estacion o 
+     * no exista una sucursal en ella retorna una cadena vacia
      * @author Pedro Sebastiano
      */
-    public void busquedaDFS(Estacion tinfo, int t, Grafo graph){
+    public String busquedaDFS(Estacion tinfo, int t, Grafo graph){
         Vertice v = graph.getListavertices().buscarVertice(tinfo);
         if(v!= null){
             if (v.getTinfo().getSucursal()){
@@ -163,11 +183,24 @@ public class Funciones {
                 pilaEstaciones.apilar(v);
                 visitados.agregarVertice(v.getTinfo());
                 DFS(pilaEstaciones, visitados, t, graph);
+                Vertice aux = visitados.getVfirst();
+                String cadena = "Zona comercial " + v.getTinfo().getNombre() + ": ";
+                while(aux!= null){
+                    cadena += aux.getTinfo().getNombre() + "\n";
+                    aux = aux.getNext();
+                }
+                return cadena;
             }else{
                 JOptionPane.showMessageDialog(null,
                     ("No existe una sucursal en la parada " + v.getTinfo().getNombre() + ", por lo tanto no se puede revisar su cobertura"),
                         "", JOptionPane.INFORMATION_MESSAGE);
+                return "";
             }
+        }else{
+            JOptionPane.showMessageDialog(null,
+                    ("No existe la parada " + tinfo.getNombre() + ", por lo tanto no se puede revisar su cobertura"),
+                        "", JOptionPane.INFORMATION_MESSAGE);
+            return "";
         }
     }
     /**
