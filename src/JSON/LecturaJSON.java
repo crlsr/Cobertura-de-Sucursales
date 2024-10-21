@@ -195,10 +195,10 @@ public class LecturaJSON {
 
         newLine.put(lineName, newStations); //agregamos las estaciones a nuestro jsonm de la nueva linea
         principalData.put(newLine); //agregamos al json general la nueva linea.
-        updateData();
+        updateData(graph);
     }
 
-    public void updateData() {
+    public void updateData(Grafo g) {
         try (FileWriter sobreescribir = new FileWriter(this.getOriginPath())) {
             sobreescribir.write(this.getData().toString(4)); //sobre escribimos el archivo
         } catch (IOException e) {
@@ -206,7 +206,7 @@ public class LecturaJSON {
     }
 
     public void changeJSON(File newEndpoint, Grafo g) {
-        updateData();
+        updateData(g);
         g.destructor();
         String newPath = newEndpoint.getAbsolutePath();
         this.setOriginPath(newPath);
@@ -219,5 +219,23 @@ public class LecturaJSON {
         }
 
         dataConstructor(g);
+    }
+    
+    public void checkSucursal(Estacion station, Grafo graph){
+        String principalKeyWord = this.getData().names().getString(0);
+        JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
+
+        for (int i = 0; i < principalData.length(); i++) {
+            JSONObject lineValues = principalData.getJSONObject(i);
+            String lineKey = lineValues.keys().next();
+            JSONArray lineData = lineValues.getJSONArray(lineKey);
+
+            for (int j = 0; j < lineData.length(); j++) {
+                String line = lineData.getString(j);
+                if(station.getNombre().toLowerCase().equals(line.toLowerCase())){
+                    lineData.put(j, line+ "*");
+                }
+            }
+    }
     }
 }
