@@ -150,10 +150,6 @@ public class EDITOR_DATA extends javax.swing.JFrame {
                 if (!estaciones.isBlank()){
                     String[] estacionesnuevas = estaciones.split("\n");
                     funciones.agregarLinea(estacionesnuevas, linea, grafo);
-                    for (String value: estacionesnuevas){
-                        if (value.indexOf("-")!=-1){
-                        value.split("-");
-                        }}
                     json.addData(estacionesnuevas, linea, grafo);
                 }
                 else {
