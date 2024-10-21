@@ -46,6 +46,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         INPUT_ESTACIONES = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         REGRESAR = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,7 +110,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 280, 260));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/METRO.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, 100));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, 100));
 
         REGRESAR.setBackground(new java.awt.Color(0, 51, 51));
         REGRESAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -121,6 +122,9 @@ public class EDITOR_DATA extends javax.swing.JFrame {
             }
         });
         getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/metro_icon.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, 150));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 470));
@@ -218,6 +222,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
