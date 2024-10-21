@@ -42,6 +42,22 @@ public class Grafo {
     }
     
     /**
+     * Elimina todos los vertices del grafo, desconectando y removiendo cada estacion
+     * Este procedimiento limpia todo el grafo y establece el numero de vertices a 0 y 
+     * apunta al primero de la lista de vertices a null
+     * 
+     * @author Pedro Sebastiano
+     */
+    public void destructor(){
+        Vertice aux = this.getListavertices().getVfirst();
+        while(aux!= null){
+            this.eliminarVertice(aux.getTinfo());
+            aux = aux.getNext();
+        }
+        this.setNumVertices(0);
+        this.getListavertices().setVfirst(null);
+    }
+    /**
      * Agrega una nueva estación al grafo.
      * Verifica que el nombre de la estación no esté vacío y que no exista ya en el grafo.
      * Lo anade tanto en la lista de vertices como en graph (visual)
@@ -94,9 +110,6 @@ public class Grafo {
                 this.getListavertices().eliminarVertice(tinfo);
                 graph.removeNode(tinfo.getNombre());
                 this.setNumVertices(getNumVertices()-1);
-                JOptionPane.showMessageDialog(null,
-                    ((String) tinfo.getNombre() + " eliminado con exito"),
-                    "", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
@@ -181,7 +194,7 @@ public class Grafo {
      */
     public void mostrarGrafo() {
         Viewer viewer = graph.display();
-        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.EXIT); 
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
     }
     
     /**
