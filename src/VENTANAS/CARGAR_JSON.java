@@ -172,7 +172,7 @@ public class CARGAR_JSON extends javax.swing.JFrame {
     private void ESTABLECER_TActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ESTABLECER_TActionPerformed
         try {
             if (json != null){
-            int t = Integer.parseInt(INPUT_T.getText());
+            int t = Integer.parseInt(INPUT_T.getText());                              
             INPUT_T.setText("");
             if(t<grafo.getNumVertices()){
                 if (t>0){

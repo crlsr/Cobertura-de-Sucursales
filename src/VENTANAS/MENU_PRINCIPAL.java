@@ -32,8 +32,6 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         this.json =json;
         this.jsoncargado = true;
     }
-    
-         
 
     /**
      * This method is called from within the constructor to initialize the form.

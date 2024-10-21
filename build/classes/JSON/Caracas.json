@@ -63,21 +63,7 @@
         {"Zona Rental": "Plaza Venezuela"},
         "Bello Monte"
     ]},
-    {"Linea 6": [
-        "Palo Amarillo",
-        "Cabimas",
-        "Montalban 7",
-        "Partima",
-        "Guatire"
-    ]},
-    {"linea 7": [
-        "Palo Amarillo",
-        "Cabimas",
-        "Montalban 7",
-        "Partima",
-        "Guatire"
-    ]},
-    {"Linea 6 ": [
+    {"linea 6": [
         "Palo Amarillo",
         "Cabimas",
         "Montalban 7",
