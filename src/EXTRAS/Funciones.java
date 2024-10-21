@@ -442,7 +442,51 @@ public class Funciones {
         return sb.toString().trim();
     }
     
+    /**
+    * Genera una lista de estaciones cubiertas o que contienen una sucursal y devuelve una cadena de texto que contiene los nombres 
+    * de las estaciones cubiertas.
+    * 
+    *
+    * @param g El grafo que contiene las estaciones a verificar.
+    * @return Una cadena que representa la lista de estaciones cubiertas o que contienen una sucursal.
+    *         Si no hay estaciones cubiertas, se devuelve una cadena vacía.
+    * @author Pedro Sebastiano
+    */
+    public String verCubiertos(Grafo g){
+        ListaVertices cubiertos = new ListaVertices();
+        Vertice aux = g.getListavertices().getVfirst();
+        while(aux!= null){
+            if(aux.getTinfo().getCubierto() || aux.getTinfo().getSucursal()){
+                cubiertos.agregarVertice(aux.getTinfo());
+            }
+            aux = aux.getNext();
+        }
+        String estacionesCubiertas = cubiertos.print();
+        return estacionesCubiertas;
+    }
     
     
+    /**
+    * Genera una lista de estaciones no cubiertas y que no contienen una sucursal y devuelve una cadena de texto que contiene los nombres 
+    * de estas estaciones.
+    * 
+    *
+    * @param g El grafo que contiene las estaciones a verificar.
+    * @return Una cadena que representa la lista de estaciones no cubiertas y que no contienen una sucursal.
+    *         Si no hay estaciones no cubiertas, se devuelve una cadena vacía.
+    * @author Pedro Sebastiano
+    */
+    public String verNoCubiertos(Grafo g){
+        ListaVertices noCubiertos = new ListaVertices();
+        Vertice aux = g.getListavertices().getVfirst();
+        while(aux!= null){
+            if(!aux.getTinfo().getCubierto() && !aux.getTinfo().getSucursal()){
+                noCubiertos.agregarVertice(aux.getTinfo());
+            }
+            aux = aux.getNext();
+        }
+        String estacionesNoCubiertas = noCubiertos.print();
+        return estacionesNoCubiertas;
+    }
     
 }
