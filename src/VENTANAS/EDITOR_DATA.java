@@ -150,6 +150,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
                 if (!estaciones.isBlank()){
                     String[] estacionesnuevas = estaciones.split("\n");
                     funciones.agregarLinea(estacionesnuevas, linea, grafo);
+                    json.addData(estacionesnuevas, linea, grafo);
                 }
                 else {
                 JOptionPane.showMessageDialog(this, "Debe ingresar las estaciones 🚄️");
@@ -162,7 +163,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
             INPUT_ESTACIONES.setText("");
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
-         }
+        }       
     }//GEN-LAST:event_AGREGAR_LINEAActionPerformed
 
     /**

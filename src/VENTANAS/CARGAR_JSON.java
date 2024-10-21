@@ -15,13 +15,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author marco
  */
-public class CAMBIAR_JSON extends javax.swing.JFrame {
+public class CARGAR_JSON extends javax.swing.JFrame {
     static Grafo grafo;
     static LecturaJSON json;
     /**
      * Creates new form CAMBIAR_JSON
      */
-    public CAMBIAR_JSON(Grafo grafo,LecturaJSON json) {
+    public CARGAR_JSON(Grafo grafo,LecturaJSON json) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.grafo=grafo;
@@ -91,8 +91,8 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("CAMBIAR JSON");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 190, -1));
+        jLabel2.setText("CARGAR JSON");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 170, -1));
 
         jLabeljson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/IMAGEN_JSON.png"))); // NOI18N
         getContentPane().add(jLabeljson, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 200, -1, -1));
@@ -162,6 +162,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
             this.json.changeJSON(selected, this.grafo);
             }
         }
+        JOptionPane.showMessageDialog(this, "El JSON se ha cargado correctamente");
         }    
         catch (Exception e){
            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
@@ -212,14 +213,18 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CARGAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CARGAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CARGAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CAMBIAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CARGAR_JSON.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -228,7 +233,7 @@ public class CAMBIAR_JSON extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CAMBIAR_JSON(grafo,json).setVisible(true);
+                new CARGAR_JSON(grafo,json).setVisible(true);
             }
         });
     }

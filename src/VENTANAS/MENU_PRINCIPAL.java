@@ -46,7 +46,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
         EDITAR_DATA = new javax.swing.JButton();
         AGREGAR_SUCURSALES = new javax.swing.JButton();
-        CAMBIAR_JSON = new javax.swing.JButton();
+        CARGAR_JSON = new javax.swing.JButton();
         CERRAR = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -78,16 +78,16 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         });
         getContentPane().add(AGREGAR_SUCURSALES, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, -1));
 
-        CAMBIAR_JSON.setBackground(new java.awt.Color(0, 51, 51));
-        CAMBIAR_JSON.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        CAMBIAR_JSON.setForeground(new java.awt.Color(255, 255, 255));
-        CAMBIAR_JSON.setText("CAMBIAR JSON");
-        CAMBIAR_JSON.addActionListener(new java.awt.event.ActionListener() {
+        CARGAR_JSON.setBackground(new java.awt.Color(0, 51, 51));
+        CARGAR_JSON.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CARGAR_JSON.setForeground(new java.awt.Color(255, 255, 255));
+        CARGAR_JSON.setText("CARGAR JSON");
+        CARGAR_JSON.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CAMBIAR_JSONActionPerformed(evt);
+                CARGAR_JSONActionPerformed(evt);
             }
         });
-        getContentPane().add(CAMBIAR_JSON, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
+        getContentPane().add(CARGAR_JSON, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
 
         CERRAR.setBackground(new java.awt.Color(255, 0, 0));
         CERRAR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -124,11 +124,11 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_EDITAR_DATAActionPerformed
 
-    private void CAMBIAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAMBIAR_JSONActionPerformed
-        CAMBIAR_JSON MCJ = new CAMBIAR_JSON(grafo, json); 
+    private void CARGAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAR_JSONActionPerformed
+        CARGAR_JSON MCJ = new CARGAR_JSON(grafo, json); 
         MCJ.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_CAMBIAR_JSONActionPerformed
+    }//GEN-LAST:event_CARGAR_JSONActionPerformed
 
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
@@ -182,7 +182,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AGREGAR_SUCURSALES;
-    private javax.swing.JButton CAMBIAR_JSON;
+    private javax.swing.JButton CARGAR_JSON;
     private javax.swing.JButton CERRAR;
     private javax.swing.JButton EDITAR_DATA;
     private javax.swing.JLabel FONDO;
