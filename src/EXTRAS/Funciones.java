@@ -11,6 +11,7 @@ import EDD.Nodo;
 import EDD.Cola;
 import EDD.Pila;
 import EDD.ListaVertices;
+import JSON.LecturaJSON;
 /**
  * Clase Funciones
  * Esta clase contiene métodos para gestionar sucursales en el grafo de estaciones.
@@ -30,7 +31,7 @@ public class Funciones {
      * @param inicio string que contendra "*" si la funcion se llama al subir un json con sucursales ya cargadas
      * @author Pedro Sebastiano
      */
-    public void colocarSucursal(Grafo g, Estacion tinfo, String inicio){
+    public void colocarSucursal(Grafo g, Estacion tinfo, String inicio, LecturaJSON json){
         Vertice existe= g.getListavertices().buscarVertice(tinfo);
         if(existe != null){
             if(existe.getTinfo().getSucursal()){
@@ -41,6 +42,7 @@ public class Funciones {
                 existe.getTinfo().setSucursal(true);
                 g.cambiarColorVertice(existe.getTinfo(), "green");
                 if(!inicio.equals("*")){
+                    json.checkSucursal(tinfo, g);
                     JOptionPane.showMessageDialog(null, "Sucursal agregada con exito");
                     this.revisarCobertura(g, g.getT());
                 }
@@ -61,7 +63,7 @@ public class Funciones {
      * @param tinfo la estación de la que se desea eliminar la sucursal.
      * @author Pedro Sebastiano
      */
-    public void eliminarSucursal(Grafo g, Estacion tinfo){
+    public void eliminarSucursal(Grafo g, Estacion tinfo, LecturaJSON json){
         Vertice existe= g.getListavertices().buscarVertice(tinfo);
         if(existe != null){
         if(!existe.getTinfo().getSucursal()){

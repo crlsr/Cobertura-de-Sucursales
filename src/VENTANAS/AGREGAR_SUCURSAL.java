@@ -205,7 +205,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
             if (!nombreEstacion.isBlank()){
                     Estacion estacion = new Estacion(nombreEstacion," ");
-                    funciones.colocarSucursal(grafo,estacion, "");
+                    funciones.colocarSucursal(grafo,estacion, "", json);
                     INPUT_AGREGAR_SUCURSAL.setText("");                  
             }                            
             else {
@@ -240,7 +240,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
             if (!nombreEstacion.isBlank()){
                 Estacion estacion = new Estacion(nombreEstacion," ");
-                funciones.eliminarSucursal(grafo, estacion);
+                funciones.eliminarSucursal(grafo, estacion, json);
                 }
                 else {
                 JOptionPane.showMessageDialog(this, "Debe ingresar el nombre de una estación 🚄️");              
