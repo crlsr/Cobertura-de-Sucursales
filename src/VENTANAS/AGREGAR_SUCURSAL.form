@@ -154,7 +154,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="INPUT_MIS_SUCURSALES">
+        <Component class="javax.swing.JTextArea" name="INPUT_ESTACIONES_CUBIERTAS">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

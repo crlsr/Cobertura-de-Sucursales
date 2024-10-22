@@ -175,7 +175,7 @@ public class Funciones {
      * @author Pedro Sebastiano
      */
     public String busquedaDFS(Estacion tinfo, int t, Grafo graph){
-        Vertice v = graph.getListavertices().buscarVertice(tinfo);
+        Vertice v = graph.getListavertices().buscarVertice(tinfo);      
         if(v!= null){
             if (v.getTinfo().getSucursal()){
                 Pila pilaEstaciones = new Pila();
@@ -201,6 +201,7 @@ public class Funciones {
                     ("No existe la parada " + tinfo.getNombre() + ", por lo tanto no se puede revisar su cobertura"),
                         "", JOptionPane.INFORMATION_MESSAGE);
             return "";
+        
         }
     }
     /**
