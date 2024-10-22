@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import EXTRAS.Estacion;
 import EDD.Grafo;
-import EDD.Nodo;
 import EDD.Vertice;
 import java.io.FileWriter;
 import org.json.JSONArray;
@@ -225,7 +224,6 @@ public class LecturaJSON {
     public void checkSucursal(Estacion station, Grafo graph) {
         String principalKeyWord = this.getData().names().getString(0);
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
-
         for (int i = 0; i < principalData.length(); i++) {
             JSONObject lineValues = principalData.getJSONObject(i);
             String lineKey = lineValues.keys().next();
