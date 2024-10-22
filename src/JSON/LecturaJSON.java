@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import EXTRAS.Estacion;
 import EDD.Grafo;
-import EDD.Nodo;
 import EDD.Vertice;
 import java.io.FileWriter;
 import org.json.JSONArray;
@@ -84,7 +83,7 @@ public class LecturaJSON {
                     Object station = lineData.get(j);
                     if (station instanceof String) {
                         Estacion currentStation = new Estacion((String) station, lineKey);
-                        validacionSucursal(currentStation);
+                        validacionSucursal(currentStation, g);
 
                         if (g.getListavertices().buscarVertice(currentStation) == null) {
                             g.agregarVertice(currentStation);
@@ -106,10 +105,10 @@ public class LecturaJSON {
                         String toStation = connection.getString(fromStation);
 
                         Estacion fromEstacion = new Estacion(fromStation, lineKey);
-                        validacionSucursal(fromEstacion);
+                        validacionSucursal(fromEstacion, g);
 
                         Estacion toEstacion = new Estacion(toStation, "Transferencia");
-                        validacionSucursal(toEstacion);
+                        validacionSucursal(toEstacion, g);
 
                         if (g.getListavertices().buscarVertice(fromEstacion) == null) {
                             g.agregarVertice(fromEstacion);
@@ -150,9 +149,10 @@ public class LecturaJSON {
             Esta función valida si la esatción creada tiene o no asignada una sucursal (esto en función
             a si tiene un * en su nombre.
      */
-    public void validacionSucursal(Estacion station) {
+    public void validacionSucursal(Estacion station, Grafo graph) {
         if (station.getNombre().indexOf('*') != -1) {
             station.setSucursal(true);
+            graph.cambiarColorVertice(station, "green");
         }
     }
 
@@ -185,7 +185,7 @@ public class LecturaJSON {
             } else {
                 Estacion tempStation = new Estacion((String) station, lineName);
                 Vertice stationState = graph.getListavertices().buscarVertice(tempStation);
-                if (stationState != null) {
+                if (stationState == null) {
                     newStations.put((String) station); //agregamos las estaciones a nuestra nueva linea
                 } else {
                     JOptionPane.showMessageDialog(null, "Estación repetida");
@@ -220,8 +220,25 @@ public class LecturaJSON {
 
         dataConstructor(g);
     }
-    
-    public void checkSucursal(Estacion station, Grafo graph){
+
+    public void checkSucursal(Estacion station, Grafo graph) {
+        String principalKeyWord = this.getData().names().getString(0);
+        JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
+        for (int i = 0; i < principalData.length(); i++) {
+            JSONObject lineValues = principalData.getJSONObject(i);
+            String lineKey = lineValues.keys().next();
+            JSONArray lineData = lineValues.getJSONArray(lineKey);
+
+            for (int j = 0; j < lineData.length(); j++) {
+                String line = lineData.getString(j);
+                if (station.getNombre().toLowerCase().equals(line.toLowerCase())) {
+                    lineData.put(j, line + "*");
+                }
+            }
+        }
+    }
+
+    public void deleteSucursal(Estacion station, Grafo graph) {
         String principalKeyWord = this.getData().names().getString(0);
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
 
@@ -232,10 +249,10 @@ public class LecturaJSON {
 
             for (int j = 0; j < lineData.length(); j++) {
                 String line = lineData.getString(j);
-                if(station.getNombre().toLowerCase().equals(line.toLowerCase())){
-                    lineData.put(j, line+ "*");
+                if (station.getNombre().toLowerCase().equals(line.toLowerCase())) {
+                    lineData.put(j, line.replace("*", ""));
                 }
             }
-    }
+        }
     }
 }

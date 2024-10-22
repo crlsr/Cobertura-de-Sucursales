@@ -124,7 +124,7 @@ public class ListaVertices {
         if(!esVacio()){
             Vertice aux = vfirst;
             while(aux!= ultimo()){
-                cadena += aux.getTinfo().getNombre() + "\n";
+                cadena += "-->" + aux.getTinfo().getNombre() + "\n";
                 aux = aux.getNext();
             }
             
