@@ -12,8 +12,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import EXTRAS.Estacion;
 import EDD.Grafo;
-import EDD.Nodo;
 import EDD.Vertice;
+import EXTRAS.Funciones;
 import java.io.FileWriter;
 import org.json.JSONArray;
 
@@ -21,6 +21,7 @@ public class LecturaJSON {
 
     private JSONObject data;
     private String originPath;
+    private Funciones funtions = new Funciones();
 
     /*
         Constructor de LecturaJSON:
@@ -175,8 +176,8 @@ public class LecturaJSON {
                 String[] substation = station.split("-");
 
                 if (substation.length >= 2) {
-                    String fromStation = substation[0];
-                    String toStation = substation[1];
+                    String fromStation = funtions.formatearTitulo(substation[0]);
+                    String toStation = funtions.formatearTitulo(substation[1]);
                     JSONObject pathStations = new JSONObject();
 
                     pathStations.put(fromStation, toStation);
@@ -184,7 +185,7 @@ public class LecturaJSON {
                 }
 
             } else {
-                Estacion tempStation = new Estacion((String) station, lineName);
+                Estacion tempStation = new Estacion(funtions.formatearTitulo(station), lineName);
                 Vertice stationState = graph.getListavertices().buscarVertice(tempStation);
                 if (stationState == null) {
                     newStations.put((String) station); //agregamos las estaciones a nuestra nueva linea
@@ -232,12 +233,27 @@ public class LecturaJSON {
             JSONArray lineData = lineValues.getJSONArray(lineKey);
 
             for (int j = 0; j < lineData.length(); j++) {
-                String line = lineData.getString(j);
-                if (station.getNombre().toLowerCase().equals(line.toLowerCase())) {
-                    lineData.put(j, line + "*");
+                Object line = lineData.getString(j);
+                if (line instanceof String) {
+                    if (station.getNombre().equals((String) line)) {
+                        lineData.put(j, (String) line + "*");
+                    }
+                } else if (line instanceof JSONObject) {
+                    JSONObject transitionData = (JSONObject) line;
+                    String fromStation = transitionData.keys().next();
+                    String toStation = transitionData.getString(fromStation);
+                    if (station.getNombre().equals(fromStation)) {
+                        transitionData.put(fromStation + "*", toStation);
+                        transitionData.remove(fromStation);
+                        lineData.put(j, transitionData);
+                    } else if (station.getNombre().equals(toStation)) {
+                        transitionData.put(fromStation, toStation + "*");
+                        lineData.put(j, transitionData);
+                    }
                 }
             }
         }
+        updateData(graph);
     }
 
     public void deleteSucursal(Estacion station, Grafo graph) {
@@ -250,11 +266,30 @@ public class LecturaJSON {
             JSONArray lineData = lineValues.getJSONArray(lineKey);
 
             for (int j = 0; j < lineData.length(); j++) {
-                String line = lineData.getString(j);
+                Object line = lineData.getString(j);
+                /*
                 if (station.getNombre().toLowerCase().equals(line.toLowerCase())) {
                     lineData.put(j, line.replace("*", ""));
+                }*/
+                if (line instanceof String) {
+                    if (station.getNombre().equals((String) line)) {
+                        lineData.put(j, ((String) line).replace("*", ""));
+                    }
+                } else if (line instanceof JSONObject) {
+                    JSONObject transitionData = (JSONObject) line;
+                    String fromStation = transitionData.keys().next();
+                    String toStation = transitionData.getString(fromStation);
+                    if (station.getNombre().equals(fromStation)) {
+                        transitionData.put(fromStation.replace("*", ""), toStation);
+                        transitionData.remove(fromStation);
+                        lineData.put(j, transitionData);
+                    } else if (station.getNombre().equals(toStation)) {
+                        transitionData.put(fromStation, toStation.replace("*", ""));
+                        lineData.put(j, transitionData);
+                    }
                 }
             }
         }
+        updateData(graph);
     }
 }
