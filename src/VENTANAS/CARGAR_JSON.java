@@ -150,8 +150,11 @@ public class CARGAR_JSON extends javax.swing.JFrame {
             }else{
             this.json.changeJSON(selected, this.grafo);
             }
+            if(json != null){
+                JOptionPane.showMessageDialog(this, "El JSON se ha cargado correctamente");
+            }
         }
-        JOptionPane.showMessageDialog(this, "El JSON se ha cargado correctamente");
+        
         }    
         catch (Exception e){
            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");

@@ -85,10 +85,17 @@ public class LecturaJSON {
                     Object station = lineData.get(j);
                     if (station instanceof String) {
                         Estacion currentStation = new Estacion((String) station, lineKey);
-                        validacionSucursal(currentStation, g);
 
                         if (g.getListavertices().buscarVertice(currentStation) == null) {
-                            g.agregarVertice(currentStation);
+                            if (currentStation.getNombre().contains("*")) {
+                                currentStation.setNombre(currentStation.getNombre().replace("*", ""));
+                                g.agregarVertice(currentStation);
+                                currentStation.setSucursal(true);
+                                g.cambiarColorVertice(currentStation, "green");
+                            } else {
+                                g.agregarVertice(currentStation);
+                            }
+
                         }
 
                         if (previousStation != null) {
@@ -107,17 +114,36 @@ public class LecturaJSON {
                         String toStation = connection.getString(fromStation);
 
                         Estacion fromEstacion = new Estacion(fromStation, lineKey);
-                        validacionSucursal(fromEstacion, g);
 
                         Estacion toEstacion = new Estacion(toStation, "Transferencia");
-                        validacionSucursal(toEstacion, g);
 
                         if (g.getListavertices().buscarVertice(fromEstacion) == null) {
-                            g.agregarVertice(fromEstacion);
+                            if (fromEstacion.getNombre().contains("*")) {
+                                fromEstacion.setNombre(fromEstacion.getNombre().replace("*", ""));
+                                if (g.getListavertices().buscarVertice(toEstacion) == null) {
+                                    g.agregarVertice(fromEstacion);
+                                    fromEstacion.setSucursal(true);
+                                    g.cambiarColorVertice(fromEstacion, "green");
+                                }
+
+                            } else {
+                                g.agregarVertice(fromEstacion);
+                            }
+
                         }
 
                         if (g.getListavertices().buscarVertice(toEstacion) == null) {
-                            g.agregarVertice(toEstacion);
+                            if (toEstacion.getNombre().contains("*")) {
+                                toEstacion.setNombre(toEstacion.getNombre().replace("*", ""));
+                                if (g.getListavertices().buscarVertice(toEstacion) == null) {
+                                    toEstacion.setSucursal(true);
+                                    g.agregarVertice(toEstacion);
+                                    g.cambiarColorVertice(toEstacion, "green");
+                                }
+                            } else {
+                                g.agregarVertice(toEstacion);
+                            }
+
                         }
 
                         if (g.getListavertices().buscarVertice(fromEstacion)
@@ -145,18 +171,6 @@ public class LecturaJSON {
         }
     }
 
-    /*
-    
-        Validación de Sucursal:
-            Esta función valida si la esatción creada tiene o no asignada una sucursal (esto en función
-            a si tiene un * en su nombre.
-     */
-    public void validacionSucursal(Estacion station, Grafo graph) {
-        if (station.getNombre().indexOf('*') != -1) {
-            station.setSucursal(true);
-            graph.cambiarColorVertice(station, "green");
-        }
-    }
 
     /*
         Sobreescribir archivo:
@@ -179,7 +193,6 @@ public class LecturaJSON {
                     String fromStation = funtions.formatearTitulo(substation[0]);
                     String toStation = funtions.formatearTitulo(substation[1]);
                     JSONObject pathStations = new JSONObject();
-
                     pathStations.put(fromStation, toStation);
                     newStations.put(pathStations);
                 }
@@ -188,9 +201,7 @@ public class LecturaJSON {
                 Estacion tempStation = new Estacion(funtions.formatearTitulo(station), lineName);
                 Vertice stationState = graph.getListavertices().buscarVertice(tempStation);
                 if (stationState == null) {
-                    newStations.put((String) station); //agregamos las estaciones a nuestra nueva linea
-                } else {
-                    JOptionPane.showMessageDialog(null, "Estación repetida");
+                    newStations.put(tempStation.getNombre()); //agregamos las estaciones a nuestra nueva linea
                 }
             }
         }
@@ -232,20 +243,20 @@ public class LecturaJSON {
             JSONArray lineData = lineValues.getJSONArray(lineKey);
 
             for (int j = 0; j < lineData.length(); j++) {
-                Object line = lineData.getString(j);
+                Object line = lineData.get(j);
                 if (line instanceof String) {
-                    if (station.getNombre().equals((String) line)) {
+                    if (station.getNombre().toLowerCase().equals(((String) line).toLowerCase())) {
                         lineData.put(j, (String) line + "*");
                     }
                 } else if (line instanceof JSONObject) {
                     JSONObject transitionData = (JSONObject) line;
                     String fromStation = transitionData.keys().next();
                     String toStation = transitionData.getString(fromStation);
-                    if (station.getNombre().equals(fromStation)) {
+                    if (station.getNombre().toLowerCase().equals(fromStation.toLowerCase())) {
                         transitionData.put(fromStation + "*", toStation);
                         transitionData.remove(fromStation);
                         lineData.put(j, transitionData);
-                    } else if (station.getNombre().equals(toStation)) {
+                    } else if (station.getNombre().toLowerCase().equals(toStation.toLowerCase())) {
                         transitionData.put(fromStation, toStation + "*");
                         lineData.put(j, transitionData);
                     }
@@ -265,24 +276,20 @@ public class LecturaJSON {
             JSONArray lineData = lineValues.getJSONArray(lineKey);
 
             for (int j = 0; j < lineData.length(); j++) {
-                Object line = lineData.getString(j);
-                /*
-                if (station.getNombre().toLowerCase().equals(line.toLowerCase())) {
-                    lineData.put(j, line.replace("*", ""));
-                }*/
+                Object line = lineData.get(j);
                 if (line instanceof String) {
-                    if (station.getNombre().equals((String) line)) {
+                    if (station.getNombre().toLowerCase().equals(((String) line).toLowerCase().replace("*", ""))) {
                         lineData.put(j, ((String) line).replace("*", ""));
                     }
                 } else if (line instanceof JSONObject) {
                     JSONObject transitionData = (JSONObject) line;
                     String fromStation = transitionData.keys().next();
                     String toStation = transitionData.getString(fromStation);
-                    if (station.getNombre().equals(fromStation)) {
+                    if (station.getNombre().toLowerCase().equals(fromStation.toLowerCase().replace("*", ""))) {
                         transitionData.put(fromStation.replace("*", ""), toStation);
                         transitionData.remove(fromStation);
                         lineData.put(j, transitionData);
-                    } else if (station.getNombre().equals(toStation)) {
+                    } else if (station.getNombre().toLowerCase().equals(toStation.toLowerCase().replace("*", ""))) {
                         transitionData.put(fromStation, toStation.replace("*", ""));
                         lineData.put(j, transitionData);
                     }

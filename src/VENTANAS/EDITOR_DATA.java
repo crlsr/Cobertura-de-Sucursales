@@ -149,8 +149,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
             if (!linea.isBlank()){
                 if (!estaciones.isBlank()){
                     String[] estacionesnuevas = estaciones.split("\n");
-                    funciones.agregarLinea(estacionesnuevas, linea, grafo);
-                    json.addData(estacionesnuevas, linea, grafo);
+                    funciones.agregarLinea(estacionesnuevas, linea, grafo, json);
                 }
                 else {
                 JOptionPane.showMessageDialog(this, "Debe ingresar las estaciones 🚄️");
