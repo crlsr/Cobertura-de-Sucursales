@@ -204,11 +204,18 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         try{
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
             if (!nombreEstacion.isBlank()){
+<<<<<<< HEAD
                 INPUT_ESTACIONAR_SUCURSAL.setText("");
                 INPUT_ESTACIONES_CUBIERTAS.setText("");
                 Estacion estacion = new Estacion(nombreEstacion," ");
                 funciones.colocarSucursal(grafo,estacion, "");
                 INPUT_AGREGAR_SUCURSAL.setText("");}                            
+=======
+                    Estacion estacion = new Estacion(nombreEstacion," ");
+                    funciones.colocarSucursal(grafo,estacion, "", json);
+                    INPUT_AGREGAR_SUCURSAL.setText("");                  
+            }                            
+>>>>>>> 635db8137e7d339a33d53eb3f28c2917d4425b68
             else {
             JOptionPane.showMessageDialog(this, "Error, debes escribir el nombre de una estación 🏪🏬");}
         }catch(Exception e) {
@@ -242,7 +249,12 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
                 INPUT_ESTACIONAR_SUCURSAL.setText("");
                 INPUT_ESTACIONES_CUBIERTAS.setText("");
                 Estacion estacion = new Estacion(nombreEstacion," ");
+<<<<<<< HEAD
                 funciones.eliminarSucursal(grafo, estacion);}
+=======
+                funciones.eliminarSucursal(grafo, estacion, json);
+                }
+>>>>>>> 635db8137e7d339a33d53eb3f28c2917d4425b68
                 else {
                 JOptionPane.showMessageDialog(this, "Debe ingresar el nombre de una estación 🚄️");}
             INPUT_AGREGAR_SUCURSAL.setText("");}
