@@ -226,7 +226,6 @@ public class LecturaJSON {
     public void checkSucursal(Estacion station, Grafo graph) {
         String principalKeyWord = this.getData().names().getString(0);
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
-
         for (int i = 0; i < principalData.length(); i++) {
             JSONObject lineValues = principalData.getJSONObject(i);
             String lineKey = lineValues.keys().next();

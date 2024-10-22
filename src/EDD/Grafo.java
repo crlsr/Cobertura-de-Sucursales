@@ -50,9 +50,11 @@ public class Grafo {
      */
     public void destructor(){
         Vertice aux = this.getListavertices().getVfirst();
+        Vertice aux2 = null;
         while(aux!= null){
-            this.eliminarVertice(aux.getTinfo());
+            aux2 = aux;
             aux = aux.getNext();
+            this.eliminarVertice(aux2.getTinfo());
         }
         this.setNumVertices(0);
         this.getListavertices().setVfirst(null);

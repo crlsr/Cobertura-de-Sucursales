@@ -106,7 +106,7 @@ public class CARGAR_JSON extends javax.swing.JFrame {
                 CERRARActionPerformed(evt);
             }
         });
-        getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
+        getContentPane().add(CERRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/ICONO_RADIO.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
@@ -135,17 +135,6 @@ public class CARGAR_JSON extends javax.swing.JFrame {
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CERRARActionPerformed
-
-    private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
-        if(json!=null && grafo.getT()>0){
-        MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json); 
-        MP.setVisible(true);
-        this.setVisible(false);        
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Agregue un JSON y establesca el radio de cobertura primero");
-        }
-    }//GEN-LAST:event_REGRESARActionPerformed
 
     private void CARGAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAR_JSONActionPerformed
         try {
@@ -195,6 +184,17 @@ public class CARGAR_JSON extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingresa los datos correctamente ❌");
         }
     }//GEN-LAST:event_ESTABLECER_TActionPerformed
+
+    private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
+        if(json!=null && grafo.getT()>0){
+            MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json);
+            MP.setVisible(true);
+            this.setVisible(false);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Agregue un JSON y establesca el radio de cobertura primero");
+        }
+    }//GEN-LAST:event_REGRESARActionPerformed
 
     /**
      * @param args the command line arguments

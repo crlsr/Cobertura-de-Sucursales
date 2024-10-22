@@ -28,10 +28,10 @@ public class Funciones {
      * 
      * @param g el grafo que contiene las estaciones.
      * @param tinfo la estación en la que se desea colocar la sucursal.
-     * @param inicio string que contendra "*" si la funcion se llama al subir un json con sucursales ya cargadas
+     * @param json objeto json que se recibe para colocar un * en el json y guardar la sucursal
      * @author Pedro Sebastiano
      */
-    public void colocarSucursal(Grafo g, Estacion tinfo, String inicio, LecturaJSON json){
+    public void colocarSucursal(Grafo g, Estacion tinfo, LecturaJSON json){
         Vertice existe= g.getListavertices().buscarVertice(tinfo);
         if(existe != null){
             if(existe.getTinfo().getSucursal()){
@@ -41,11 +41,9 @@ public class Funciones {
             }else{
                 existe.getTinfo().setSucursal(true);
                 g.cambiarColorVertice(existe.getTinfo(), "green");
-                if(!inicio.equals("*")){
-                    json.checkSucursal(tinfo, g);
-                    JOptionPane.showMessageDialog(null, "Sucursal agregada con exito");
-                    this.revisarCobertura(g, g.getT());
-                }
+                JOptionPane.showMessageDialog(null, "Sucursal agregada con exito");
+                this.revisarCobertura(g, g.getT());
+                json.checkSucursal(tinfo, g);
             }
         }else{
             JOptionPane.showMessageDialog(null,
@@ -61,20 +59,21 @@ public class Funciones {
      * 
      * @param g el grafo que contiene las estaciones.
      * @param tinfo la estación de la que se desea eliminar la sucursal.
+     * @param json objeto json que se recibe para eliminar un * en el json y retirar la sucursal
      * @author Pedro Sebastiano
      */
     public void eliminarSucursal(Grafo g, Estacion tinfo, LecturaJSON json){
         Vertice existe= g.getListavertices().buscarVertice(tinfo);
         if(existe != null){
-        if(!existe.getTinfo().getSucursal()){
-            JOptionPane.showMessageDialog(null,
-               ("No existe una sucursal en " + tinfo.getNombre()),
-                        "", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            existe.getTinfo().setSucursal(false);
-            g.cambiarColorVertice(existe.getTinfo(), "yellow"); 
-            JOptionPane.showMessageDialog(null, "Sucursal eliminada con exito");
-        }
+            if(!existe.getTinfo().getSucursal()){
+                JOptionPane.showMessageDialog(null,
+                ("No existe una sucursal en " + tinfo.getNombre()),
+                            "", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                existe.getTinfo().setSucursal(false);
+                g.cambiarColorVertice(existe.getTinfo(), "yellow"); 
+                JOptionPane.showMessageDialog(null, "Sucursal eliminada con exito");
+            }
         }else{
             JOptionPane.showMessageDialog(null,
                ("No existe la parada " + tinfo.getNombre()),
@@ -106,9 +105,9 @@ public class Funciones {
                 visitados.agregarVertice(v.getTinfo());
                 BFS(colaEstaciones, visitados, t, graph);
                 Vertice aux = visitados.getVfirst();
-                String cadena = "Zona comercial " + v.getTinfo().getNombre() + ": ";
+                String cadena = "Zona comercial " + v.getTinfo().getNombre() + ": \n";
                 while(aux!= null){
-                    cadena += aux.getTinfo().getNombre() + "\n";
+                    cadena += "-->" + aux.getTinfo().getNombre() + "\n";
                     aux = aux.getNext();
                 }
                 return cadena;
@@ -177,7 +176,7 @@ public class Funciones {
      * @author Pedro Sebastiano
      */
     public String busquedaDFS(Estacion tinfo, int t, Grafo graph){
-        Vertice v = graph.getListavertices().buscarVertice(tinfo);
+        Vertice v = graph.getListavertices().buscarVertice(tinfo);      
         if(v!= null){
             if (v.getTinfo().getSucursal()){
                 Pila pilaEstaciones = new Pila();
@@ -186,9 +185,9 @@ public class Funciones {
                 visitados.agregarVertice(v.getTinfo());
                 DFS(pilaEstaciones, visitados, t, graph);
                 Vertice aux = visitados.getVfirst();
-                String cadena = "Zona comercial " + v.getTinfo().getNombre() + ": ";
+                String cadena = "Zona comercial " + v.getTinfo().getNombre() + ": \n";
                 while(aux!= null){
-                    cadena += aux.getTinfo().getNombre() + "\n";
+                    cadena += "-->" + aux.getTinfo().getNombre() + "\n";
                     aux = aux.getNext();
                 }
                 return cadena;
@@ -203,6 +202,7 @@ public class Funciones {
                     ("No existe la parada " + tinfo.getNombre() + ", por lo tanto no se puede revisar su cobertura"),
                         "", JOptionPane.INFORMATION_MESSAGE);
             return "";
+        
         }
     }
     /**
