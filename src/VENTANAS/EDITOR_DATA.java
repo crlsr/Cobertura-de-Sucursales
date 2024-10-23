@@ -6,6 +6,8 @@ package VENTANAS;
 import EDD.Grafo;
 import EXTRAS.Funciones;
 import JSON.LecturaJSON;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +27,11 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         this.grafo=grafo;
         this.json=json;
         funciones = new Funciones();
+    }
+    
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
+        return retValue;
     }
 
     /**
@@ -46,9 +53,12 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         INPUT_ESTACIONES = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         REGRESAR = new javax.swing.JButton();
+        INSTRUCCIONES = new javax.swing.JButton();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EDITOR DE DATA");
+        setIconImage(getIconImage());
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -122,6 +132,17 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         });
         getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
+        INSTRUCCIONES.setBackground(new java.awt.Color(0, 51, 51));
+        INSTRUCCIONES.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        INSTRUCCIONES.setForeground(new java.awt.Color(255, 255, 255));
+        INSTRUCCIONES.setText("INSTRUCCIONES");
+        INSTRUCCIONES.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INSTRUCCIONESActionPerformed(evt);
+            }
+        });
+        getContentPane().add(INSTRUCCIONES, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, -1, -1));
+
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 470));
 
@@ -149,8 +170,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
             if (!linea.isBlank()){
                 if (!estaciones.isBlank()){
                     String[] estacionesnuevas = estaciones.split("\n");
-                    funciones.agregarLinea(estacionesnuevas, linea, grafo);
-                    json.addData(estacionesnuevas, linea, grafo);
+                    funciones.agregarLinea(estacionesnuevas, linea, grafo, json);
                 }
                 else {
                 JOptionPane.showMessageDialog(this, "Debe ingresar las estaciones 🚄️");
@@ -165,6 +185,21 @@ public class EDITOR_DATA extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
         }       
     }//GEN-LAST:event_AGREGAR_LINEAActionPerformed
+
+    private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
+        JOptionPane.showMessageDialog(this, "Instrucciones Editor Data\n" 
+                                          + "Al ingresar los datos hagalo con la siguiente estrucutura:\n"
+                                          + "Nombre de Linea \n"
+                                          + "Estación nueva 1\n" +
+                                            "Estación nueva 2\n" +
+                                            "Estación nueva 3\n" +
+                                            "Estación nueva 4-Estación existente\n" +
+                                            "Estación nueva 5\n" +
+                                            "Estación nueva N\n"
+                                          + "Es necesario agregar al menos una conexion peatonal\n"
+                                          + "Por ejemplo: Estacion nueva 4-Plaza Venezuela\n"
+                                          + "Al finalizar, haga click en el boton AGREGAR LINEA para guardar los datos en la red de transporte");
+    }//GEN-LAST:event_INSTRUCCIONESActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,6 +248,7 @@ public class EDITOR_DATA extends javax.swing.JFrame {
     private javax.swing.JLabel FONDO;
     private javax.swing.JTextArea INPUT_ESTACIONES;
     private javax.swing.JTextField INPUT_LINEA;
+    private javax.swing.JButton INSTRUCCIONES;
     private javax.swing.JButton REGRESAR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

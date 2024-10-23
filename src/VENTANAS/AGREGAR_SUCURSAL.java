@@ -10,12 +10,15 @@ import EXTRAS.Funciones;
 import EXTRAS.Estacion;
 import JSON.LecturaJSON;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  *
  * @author marco
  */
 public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
+
     static Grafo grafo;
     static Funciones funciones;
     static LecturaJSON json;
@@ -26,10 +29,17 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     public AGREGAR_SUCURSAL(Grafo grafo, LecturaJSON json) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.grafo=grafo;
-        this.json=json;   
+        this.grafo = grafo;
+        this.json = json;
         funciones = new Funciones();
     }
+   
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
+        return retValue;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,9 +67,12 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         VER_COBERTURA_BFS = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         REGRESAR = new javax.swing.JButton();
+        INSTRUCCIONES = new javax.swing.JButton();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SUCURSALES");
+        setIconImage(getIconImage());
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -190,6 +203,17 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         });
         getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
 
+        INSTRUCCIONES.setBackground(new java.awt.Color(0, 51, 51));
+        INSTRUCCIONES.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        INSTRUCCIONES.setForeground(new java.awt.Color(255, 255, 255));
+        INSTRUCCIONES.setText("INSTRUCCIONES");
+        INSTRUCCIONES.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INSTRUCCIONESActionPerformed(evt);
+            }
+        });
+        getContentPane().add(INSTRUCCIONES, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 430, -1, -1));
+
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 470));
 
@@ -201,24 +225,24 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     }//GEN-LAST:event_CERRARActionPerformed
 
     private void AGREGAR_SUCURSALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_SUCURSALActionPerformed
-        try{
+        try {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
-            if (!nombreEstacion.isBlank()){
+            if (!nombreEstacion.isBlank()) {
                 INPUT_ESTACIONAR_SUCURSAL.setText("");
                 INPUT_ESTACIONES_CUBIERTAS.setText("");
-                Estacion estacion = new Estacion(nombreEstacion," ");
-                funciones.colocarSucursal(grafo,estacion,json);
+                Estacion estacion = new Estacion(nombreEstacion, " ");
+                funciones.colocarSucursal(grafo, estacion, json);
                 INPUT_AGREGAR_SUCURSAL.setText("");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Error, debes escribir el nombre de una estación 🏪🏬");
             }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");    
-        }   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+        }
     }//GEN-LAST:event_AGREGAR_SUCURSALActionPerformed
 
     private void VER_COBERTURA_DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTURA_DFSActionPerformed
-        try{
+        try {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
             if (!nombreEstacion.isBlank()) {
                 funciones.coberturaTotal(grafo.getT(), grafo);
@@ -231,45 +255,48 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
                     INPUT_ESTACIONAR_SUCURSAL.setText(estaciones_no_cubiertas);
                     INPUT_ESTACIONES_CUBIERTAS.setText(estaciones_cubiertas);
                 }
-            }else {
-                JOptionPane.showMessageDialog(this, "Debe ingresar las estaciones 🚄️");}
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe ingresar las estaciones 🚄️");
+            }
             INPUT_AGREGAR_SUCURSAL.setText("");
-        }catch(Exception e) {
-            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+        }
     }//GEN-LAST:event_VER_COBERTURA_DFSActionPerformed
 
     private void ELIMINAR_SUCURSALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ELIMINAR_SUCURSALActionPerformed
-        try{
+        try {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
-            if (!nombreEstacion.isBlank()){
+            if (!nombreEstacion.isBlank()) {
                 INPUT_ESTACIONAR_SUCURSAL.setText("");
                 INPUT_ESTACIONES_CUBIERTAS.setText("");
-                Estacion estacion = new Estacion(nombreEstacion," ");
+                Estacion estacion = new Estacion(nombreEstacion, " ");
                 funciones.eliminarSucursal(grafo, estacion, json);
-                }else {
+            } else {
                 JOptionPane.showMessageDialog(this, "Debe ingresar el nombre de una estación 🚄️");
-                }
+            }
             INPUT_AGREGAR_SUCURSAL.setText("");
-        }catch(Exception e) {
-        JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
         }
     }//GEN-LAST:event_ELIMINAR_SUCURSALActionPerformed
 
     private void VER_COBERTUTA_TOTALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTUTA_TOTALActionPerformed
-        try{
+        try {
             funciones.eliminarCobertura(grafo);
             funciones.coberturaTotal(grafo.getT(), grafo);
             grafo.mostrarGrafo();
-            String stringCubiertos= funciones.verCubiertos(grafo);
-            String stringNoCubiertos =funciones.verNoCubiertos(grafo);
+            String stringCubiertos = funciones.verCubiertos(grafo);
+            String stringNoCubiertos = funciones.verNoCubiertos(grafo);
             INPUT_ESTACIONES_CUBIERTAS.setText(stringCubiertos);
             INPUT_ESTACIONAR_SUCURSAL.setText(stringNoCubiertos);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+        }
     }//GEN-LAST:event_VER_COBERTUTA_TOTALActionPerformed
 
     private void VER_COBERTURA_BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTURA_BFSActionPerformed
-        try{
+        try {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
             if (!nombreEstacion.isBlank()) {
                 funciones.coberturaTotal(grafo.getT(), grafo);
@@ -282,18 +309,36 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
                     INPUT_ESTACIONAR_SUCURSAL.setText(estaciones_no_cubiertas);
                     INPUT_ESTACIONES_CUBIERTAS.setText(estaciones_cubiertas);
                 }
-            }else {
-                JOptionPane.showMessageDialog(this, "Debe ingresar las estaciones 🚄️");}
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe ingresar las estaciones 🚄️");
+            }
             INPUT_AGREGAR_SUCURSAL.setText("");
-        }catch(Exception e) {
-            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
+        }
     }//GEN-LAST:event_VER_COBERTURA_BFSActionPerformed
 
     private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
-            MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json);
-            MP.setVisible(true);
-            this.setVisible(false);
+        MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json);
+        MP.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_REGRESARActionPerformed
+
+    private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
+        JOptionPane.showMessageDialog(this,  "Instrucciones Manejo Sucursales\n"
+                                          + "Ingrese una parada en la barra de texto, y escoja uno de los botones segun lo que desee\n"
+                                          + "Haga click en el botón AGREGAR SUCURSAL para añadir nuevas sucursales\n"
+                                          + "Haga click en el botón ELIMINAR SUCURSAL para eliminar sucursales anteriores\n"
+                                          + "Haga click en el botón VER COBERTURA BFS/DFS para ver la zona comercial de una sucursal\n"
+                                          + "Haga click en el botón VER COBERTURA TOTAL para ver la cobertura de todas las sucursales\n"
+                                          + "Oprime ver cobertura total para ver un grafo con todas las sucursales\n"
+                                          + "Guia de colores grafo:\n"
+                                          + "Amarillo: Parada no cubierta;\n"
+                                          + "Azul: Parada cubierta por otra sucursal cercana\n"
+                                          + "Verde: Parada donde existe una sucursal"
+);
+        
+    }//GEN-LAST:event_INSTRUCCIONESActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,6 +386,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     private javax.swing.JTextField INPUT_AGREGAR_SUCURSAL;
     private javax.swing.JTextArea INPUT_ESTACIONAR_SUCURSAL;
     private javax.swing.JTextArea INPUT_ESTACIONES_CUBIERTAS;
+    private javax.swing.JButton INSTRUCCIONES;
     private javax.swing.JButton REGRESAR;
     private javax.swing.JButton VER_COBERTURA_BFS;
     private javax.swing.JButton VER_COBERTURA_DFS;

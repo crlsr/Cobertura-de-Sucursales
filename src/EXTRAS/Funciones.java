@@ -43,7 +43,7 @@ public class Funciones {
                 g.cambiarColorVertice(existe.getTinfo(), "green");
                 JOptionPane.showMessageDialog(null, "Sucursal agregada con exito");
                 this.revisarCobertura(g, g.getT());
-                json.checkSucursal(tinfo, g);
+                json.checkSucursal(existe.getTinfo(), g);
             }
         }else{
             JOptionPane.showMessageDialog(null,
@@ -73,6 +73,7 @@ public class Funciones {
                 existe.getTinfo().setSucursal(false);
                 g.cambiarColorVertice(existe.getTinfo(), "yellow"); 
                 JOptionPane.showMessageDialog(null, "Sucursal eliminada con exito");
+                json.deleteSucursal(existe.getTinfo(), g);
             }
         }else{
             JOptionPane.showMessageDialog(null,
@@ -388,9 +389,10 @@ public class Funciones {
     * estaciones a añadir a la línea.
     * @param linea el nombre de la línea que se está añadiendo.
     * @param graph el grafo que contiene las estaciones y conexiones.
+    * @param json recibe el json para agregar la linea en el json
     *  @author Pedro Sebastiano
     */
-    public void agregarLinea(String[] estacionesNuevas, String linea, Grafo graph) {
+    public void agregarLinea(String[] estacionesNuevas, String linea, Grafo graph, LecturaJSON json) {
         if (!linea.isBlank()) {
             if (estacionesNuevas.length > 0) {
                 String estacionTransferencia;
@@ -421,6 +423,7 @@ public class Funciones {
                     JOptionPane.showMessageDialog(null, "No se ha especificado una estación de transferencia.");
                     return;
                 }
+                json.addData(estacionesNuevas, linea, graph);
                 Vertice anterior = null;
                 for (String estacion : estacionesNuevas) {
                     String estacionNombre = formatearTitulo(estacion.trim());
@@ -447,6 +450,7 @@ public class Funciones {
                         }
                     }
                 }
+                JOptionPane.showMessageDialog(null, "Linea agregada con exito✅️");
             }else{
                 JOptionPane.showMessageDialog(null, "No se han proporcionado estaciones.");
             }
