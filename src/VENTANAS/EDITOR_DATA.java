@@ -187,16 +187,18 @@ public class EDITOR_DATA extends javax.swing.JFrame {
     }//GEN-LAST:event_AGREGAR_LINEAActionPerformed
 
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
-        JOptionPane.showMessageDialog(this, "DEBES INGRESAR LOS DATOS CON LA SIGUIENTE ESTRUCTURA:");
-        JOptionPane.showMessageDialog(this, "LINEA X DONDE X ES EL NUMERO DE LINEA");
-        JOptionPane.showMessageDialog(this, "Palo Amarillo\n" +
-                                            "Cabimas\n" +
-                                            "Montalban 7\n" +
-                                            "Metropolitana-Plaza Venezuela\n" +
-                                            "Partima\n" +
-                                            "Guatire");
-        JOptionPane.showMessageDialog(this, "LA CUARTA ESTACION A INGRESAR DEBE CONTENER LA ESTACION Y LA TRANSFERENCIA DE LINEA");
-        JOptionPane.showMessageDialog(this, "OPRIME AGREGAR LINEA PARA GUARDAR LOS DATOS ANEXADOS AL GRAFO Y AL JSON");
+        JOptionPane.showMessageDialog(this, "Debes ingresar los datos con la siguiente estructura:\n"
+                                          + "Linea x \n"
+                                          + "Donde x es el numero de linea\n"+
+                                            "Estación nueva 1\n" +
+                                            "Estación nueva 2\n" +
+                                            "Estación nueva 3\n" +
+                                            "Estación nueva 4 -Estación existente\n" +
+                                            "Estación nueva 5\n" +
+                                            "Estación nueva \n"
+                                          + "Una de las estaciones a ingresar debe contener la estacion y la transferencia de linea\n"
+                                          + "Por ejemplo: estacion nueva 4 -Plaza venezuela"
+                                          + "Oprime agregar linea para guardar los datos anexados al grafo y al json");
     }//GEN-LAST:event_INSTRUCCIONESActionPerformed
 
     /**

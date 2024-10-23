@@ -164,8 +164,8 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_AGREGAR_SUCURSALESActionPerformed
 
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
-        JOptionPane.showMessageDialog(this, "CARGA EL JSON E INGRESA UN RADIO DE COBERTURA");
-        JOptionPane.showMessageDialog(this, "LUEGO OPRIME UNA OPCIÓN PARA EDITAR EL JSON O AGREGAR SUCURSALE NUEVAS");
+        JOptionPane.showMessageDialog(this, "Carga el json e ingresa un radio de cobertura\n"
+                                          + "Luego oprime una opción para editar el json o agregar sucursales nuevas");
     }//GEN-LAST:event_INSTRUCCIONESActionPerformed
 
     /**

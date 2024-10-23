@@ -325,11 +325,12 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     }//GEN-LAST:event_REGRESARActionPerformed
 
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
-        JOptionPane.showMessageDialog(this, "INGRESA UNA SUCURSAL EN LA BARRA DE TEXTO, ESCOGE UN BOTON PARA REALIZAR UNA ACCION");
-        JOptionPane.showMessageDialog(this, "OPRIME VER COBERTURA TOTAL PARA VER EL GRAFO CON TODAS LAS SUCURSALES");
-        JOptionPane.showMessageDialog(this, "AMARILLO: SUCURSAL VACIA;\n "
-                                          + "AZUL: ESTA CUBIERTA POR UNA ESTACION CON SUCURSAL\n"
-                                          + "VERDE: EXISTE UNA SUCURSAL EN ESA ESTACIÓN");
+        JOptionPane.showMessageDialog(this, "Ingresa una sucursal en la barra de texto, escoge un boton para realizar una accion\n"
+                                          + "Oprime ver cobertura total para ver el grafo con todas las sucursales\n"
+                                          + "Amarillo: Sucursal vacia;\n"
+                                          + "Azul: Esta cubierta por una estacion con sucursal\n"
+                                          + "Verde: Existe una sucursal en esa estación"
+);
         
     }//GEN-LAST:event_INSTRUCCIONESActionPerformed
 

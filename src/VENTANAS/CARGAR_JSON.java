@@ -222,7 +222,7 @@ public class CARGAR_JSON extends javax.swing.JFrame {
     }//GEN-LAST:event_REGRESARActionPerformed
 
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
-        JOptionPane.showMessageDialog(this, "CARGA UN ARCHIVO JSON E INGRESA UN RADIO DE COBERTURA PARA PODER ACCEDER A LAS DEMAS FUNCIONES");
+        JOptionPane.showMessageDialog(this, "Carga un archivo json e ingresa un radio de cobertura para poder acceder a las demas funciones");
     }//GEN-LAST:event_INSTRUCCIONESActionPerformed
 
     /**
