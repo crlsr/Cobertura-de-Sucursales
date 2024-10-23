@@ -6,6 +6,8 @@ package VENTANAS;
 
 import EDD.Grafo;
 import JSON.LecturaJSON;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -28,6 +30,12 @@ public class CARGAR_JSON extends javax.swing.JFrame {
         this.json=json;        
     }
 
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
+        return retValue;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,9 +54,12 @@ public class CARGAR_JSON extends javax.swing.JFrame {
         CERRAR = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         ESTABLECER_T = new javax.swing.JButton();
+        INSTRUCCIONES = new javax.swing.JButton();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CARGAR JSON");
+        setIconImage(getIconImage());
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,6 +132,17 @@ public class CARGAR_JSON extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ESTABLECER_T, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
+
+        INSTRUCCIONES.setBackground(new java.awt.Color(0, 51, 51));
+        INSTRUCCIONES.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        INSTRUCCIONES.setForeground(new java.awt.Color(255, 255, 255));
+        INSTRUCCIONES.setText("INSTRUCCIONES");
+        INSTRUCCIONES.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INSTRUCCIONESActionPerformed(evt);
+            }
+        });
+        getContentPane().add(INSTRUCCIONES, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, -1, -1));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 400));
@@ -199,6 +221,10 @@ public class CARGAR_JSON extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_REGRESARActionPerformed
 
+    private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
+        JOptionPane.showMessageDialog(this, "CARGA UN ARCHIVO JSON E INGRESA UN RADIO DE COBERTURA PARA PODER ACCEDER A LAS DEMAS FUNCIONES");
+    }//GEN-LAST:event_INSTRUCCIONESActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +273,7 @@ public class CARGAR_JSON extends javax.swing.JFrame {
     private javax.swing.JButton ESTABLECER_T;
     private javax.swing.JLabel FONDO;
     private javax.swing.JTextField INPUT_T;
+    private javax.swing.JButton INSTRUCCIONES;
     private javax.swing.JButton REGRESAR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

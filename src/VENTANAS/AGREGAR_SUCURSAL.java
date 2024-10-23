@@ -10,6 +10,9 @@ import EXTRAS.Funciones;
 import EXTRAS.Estacion;
 import JSON.LecturaJSON;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 /**
  *
  * @author marco
@@ -30,6 +33,13 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         this.json = json;
         funciones = new Funciones();
     }
+   
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
+        return retValue;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,9 +67,12 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         VER_COBERTURA_BFS = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         REGRESAR = new javax.swing.JButton();
+        INSTRUCCIONES = new javax.swing.JButton();
         FONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SUCURSALES");
+        setIconImage(getIconImage());
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -190,6 +203,17 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         });
         getContentPane().add(REGRESAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
 
+        INSTRUCCIONES.setBackground(new java.awt.Color(0, 51, 51));
+        INSTRUCCIONES.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        INSTRUCCIONES.setForeground(new java.awt.Color(255, 255, 255));
+        INSTRUCCIONES.setText("INSTRUCCIONES");
+        INSTRUCCIONES.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INSTRUCCIONESActionPerformed(evt);
+            }
+        });
+        getContentPane().add(INSTRUCCIONES, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 430, -1, -1));
+
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/FONDO_AZUL.png"))); // NOI18N
         getContentPane().add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 470));
 
@@ -300,6 +324,15 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_REGRESARActionPerformed
 
+    private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
+        JOptionPane.showMessageDialog(this, "INGRESA UNA SUCURSAL EN LA BARRA DE TEXTO, ESCOGE UN BOTON PARA REALIZAR UNA ACCION");
+        JOptionPane.showMessageDialog(this, "OPRIME VER COBERTURA TOTAL PARA VER EL GRAFO CON TODAS LAS SUCURSALES");
+        JOptionPane.showMessageDialog(this, "AMARILLO: SUCURSAL VACIA;\n "
+                                          + "AZUL: ESTA CUBIERTA POR UNA ESTACION CON SUCURSAL\n"
+                                          + "VERDE: EXISTE UNA SUCURSAL EN ESA ESTACIÓN");
+        
+    }//GEN-LAST:event_INSTRUCCIONESActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -346,6 +379,7 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     private javax.swing.JTextField INPUT_AGREGAR_SUCURSAL;
     private javax.swing.JTextArea INPUT_ESTACIONAR_SUCURSAL;
     private javax.swing.JTextArea INPUT_ESTACIONES_CUBIERTAS;
+    private javax.swing.JButton INSTRUCCIONES;
     private javax.swing.JButton REGRESAR;
     private javax.swing.JButton VER_COBERTURA_BFS;
     private javax.swing.JButton VER_COBERTURA_DFS;
