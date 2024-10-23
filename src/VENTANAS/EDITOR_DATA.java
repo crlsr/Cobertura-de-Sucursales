@@ -187,18 +187,18 @@ public class EDITOR_DATA extends javax.swing.JFrame {
     }//GEN-LAST:event_AGREGAR_LINEAActionPerformed
 
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
-        JOptionPane.showMessageDialog(this, "Debes ingresar los datos con la siguiente estructura:\n"
-                                          + "Linea x \n"
-                                          + "Donde x es el numero de linea\n"+
-                                            "Estación nueva 1\n" +
+        JOptionPane.showMessageDialog(this, "Instrucciones Editor Data\n" 
+                                          + "Al ingresar los datos hagalo con la siguiente estrucutura:\n"
+                                          + "Nombre de Linea \n"
+                                          + "Estación nueva 1\n" +
                                             "Estación nueva 2\n" +
                                             "Estación nueva 3\n" +
-                                            "Estación nueva 4 -Estación existente\n" +
+                                            "Estación nueva 4-Estación existente\n" +
                                             "Estación nueva 5\n" +
-                                            "Estación nueva \n"
-                                          + "Una de las estaciones a ingresar debe contener la estacion y la transferencia de linea\n"
-                                          + "Por ejemplo: estacion nueva 4 -Plaza venezuela"
-                                          + "Oprime agregar linea para guardar los datos anexados al grafo y al json");
+                                            "Estación nueva N\n"
+                                          + "Es necesario agregar al menos una conexion peatonal\n"
+                                          + "Por ejemplo: Estacion nueva 4-Plaza Venezuela\n"
+                                          + "Al finalizar, haga click en el boton AGREGAR LINEA para guardar los datos en la red de transporte");
     }//GEN-LAST:event_INSTRUCCIONESActionPerformed
 
     /**

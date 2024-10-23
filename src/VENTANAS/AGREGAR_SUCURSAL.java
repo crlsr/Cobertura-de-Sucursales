@@ -325,11 +325,17 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
     }//GEN-LAST:event_REGRESARActionPerformed
 
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
-        JOptionPane.showMessageDialog(this, "Ingresa una sucursal en la barra de texto, escoge un boton para realizar una accion\n"
-                                          + "Oprime ver cobertura total para ver el grafo con todas las sucursales\n"
-                                          + "Amarillo: Sucursal vacia;\n"
-                                          + "Azul: Esta cubierta por una estacion con sucursal\n"
-                                          + "Verde: Existe una sucursal en esa estación"
+        JOptionPane.showMessageDialog(this,  "Instrucciones Manejo Sucursales\n"
+                                          + "Ingrese una parada en la barra de texto, y escoja uno de los botones segun lo que desee\n"
+                                          + "Haga click en el botón AGREGAR SUCURSAL para añadir nuevas sucursales\n"
+                                          + "Haga click en el botón ELIMINAR SUCURSAL para eliminar sucursales anteriores\n"
+                                          + "Haga click en el botón VER COBERTURA BFS/DFS para ver la zona comercial de una sucursal\n"
+                                          + "Haga click en el botón VER COBERTURA TOTAL para ver la cobertura de todas las sucursales\n"
+                                          + "Oprime ver cobertura total para ver un grafo con todas las sucursales\n"
+                                          + "Guia de colores grafo:\n"
+                                          + "Amarillo: Parada no cubierta;\n"
+                                          + "Azul: Parada cubierta por otra sucursal cercana\n"
+                                          + "Verde: Parada donde existe una sucursal"
 );
         
     }//GEN-LAST:event_INSTRUCCIONESActionPerformed

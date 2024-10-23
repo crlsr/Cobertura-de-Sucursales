@@ -78,7 +78,7 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         AGREGAR_SUCURSALES.setBackground(new java.awt.Color(0, 51, 51));
         AGREGAR_SUCURSALES.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AGREGAR_SUCURSALES.setForeground(new java.awt.Color(255, 255, 255));
-        AGREGAR_SUCURSALES.setText("AGREGAR SUCURSALES");
+        AGREGAR_SUCURSALES.setText("MANEJO SUCURSALES");
         AGREGAR_SUCURSALES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AGREGAR_SUCURSALESActionPerformed(evt);
@@ -164,8 +164,11 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_AGREGAR_SUCURSALESActionPerformed
 
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
-        JOptionPane.showMessageDialog(this, "Carga el json e ingresa un radio de cobertura\n"
-                                          + "Luego oprime una opción para editar el json o agregar sucursales nuevas");
+        JOptionPane.showMessageDialog(this, "Instrucciones Menu Principal\n"
+                                          + "Haga click en el botón CARGAR JSON para subir un archivo .JSON y establecer un radio de cobertura\n"
+                                          + "Haga click en el botón MANEJO SUCURSALES para explorar el control de sucursales en las estaciones\n"
+                                          + "Haga click en el botón EDITAR DATA para agregar nuevas lineas a las redes de transporte\n"
+                                          + "Nota: Inicialmente, se debe cargar un archivo .JSON y establecer un radio de cobertura");
     }//GEN-LAST:event_INSTRUCCIONESActionPerformed
 
     /**
