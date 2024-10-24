@@ -229,7 +229,6 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
      * @param evt 
      * Termina con la ejecución al oprimir el botón.
      * Cierra la interfaz.
-     * no retorna.
      * @author Marco Betancourt
      */
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed

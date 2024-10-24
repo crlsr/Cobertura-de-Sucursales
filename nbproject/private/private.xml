@@ -2,23 +2,8 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/EDD/ListaAdyacencia.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/DIAGRAMA_DE_CLASES/DIAGRAMA%20DE%20CLASES%20COBERTURA%20DE%20SUCURSALES.cdg</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/VENTANAS/AGREGAR_SUCURSAL.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/JSON/LecturaJSON.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/VENTANAS/CARGAR_JSON.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/EDD/Grafo.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/VENTANAS/EDITOR_DATA.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/JSON/Caracas.json</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/proyectocoberturasucursales/ProyectoCoberturaSucursales.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/EXTRAS/Estacion.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/EDD/ListaVertices.java</file>
-            <file>file:/Users/carlosrodriguez/Documents/GitHub/Cobertura-de-Sucursales/src/EXTRAS/Funciones.java</file>
+            <file>file:/C:/Users/marco/OneDrive/Documents/NetBeansProjects/Cobertura-de-Sucursales/src/VENTANAS/MENU_PRINCIPAL.java</file>
         </group>
->>>>>>> 740dadbb0a17e7ffe58724f123dd148a3644208a
     </open-files>
 </project-private>
