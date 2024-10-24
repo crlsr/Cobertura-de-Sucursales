@@ -23,8 +23,8 @@ public class LecturaJSON {
     private String originPath;
     private Funciones funtions = new Funciones();
 
-    /*
-        Constructor de LecturaJSON:
+    /**
+     * Constructor de LecturaJSON:
             Recibe como parametro un archivo al cual llamaremos endpoint para poder acceder al archivo JSON
             Luego hacemos un try-with-resourses pasandole como resourse el archivo con el JSON (así en caso de que haya un
                 error en la lectura del archivo, maneje mejor la excepción y lo cierre al terminar de extraer sus datos).
@@ -32,7 +32,10 @@ public class LecturaJSON {
             Por ultimo validamos cualquier error mostrando que hibieron errores al internar abrir el archivo en cuestión.
     
             NOTA: Se le pasa al JSONObject un JSONTokener para poder acceder a la informacion del archivo como string y pasarlo aformato JSONObject.
+     * @param endpoint 
+     * @author Carlos Rodríguez
      */
+    
     public LecturaJSON(File endpoint) {
         this.originPath = endpoint.getAbsolutePath();
         try (FileReader reader = new FileReader(endpoint)) {
@@ -44,31 +47,59 @@ public class LecturaJSON {
     }
 
     //Métodos para poder acceder al información de nuestro JSON y listas de retorno de nuestros vertices.
+    
+    /**
+     * Getter del JSONObject de LecturaJSON
+     * @return data: JSONObject general del objeto 
+     * @author Carlos Rodríguez
+     */
     public JSONObject getData() {
         return data;
     }
-
+    
+    /**
+     * Getter del path del archivo del archivo con el que se comunica el LecturaJSON
+     * @return originPath
+     * @author Carlos Rodríguez
+     */
     public String getOriginPath() {
         return originPath;
     }
 
     //Métodos para cambiar atributos:
+    
+    /**
+     * Setter del JSONObject contenido dentro de un LecturaJSON
+     * @param data
+     * @author Carlos Rodríguez
+     */
     public void setData(JSONObject data) {
         this.data = data;
     }
 
+    /**
+     * Setter del path del archivo con el que se comunica un LecturaJSON
+     * @param originPath 
+     * @author Carlos Rodríguez
+     */
     public void setOriginPath(String originPath) {
         this.originPath = originPath;
     }
-
-    /*
+    
+    
+    //Métodos para el manejo edición del JSON:
+    
+    /**
+     * 
     Creador de nuestra lista de vertices:
-    Esta función tiene como fin acceder a nuestro JSON y a partir de ahí empezar a recorrer sus keywords y values con el
-    fin de poder crear una estación con cada una como un objeto de tipo estación y luego convertirlos en vertices para
-    `       agregarlos a nuestra lisat de vertices. Todo esto accediendo primero a su keyword principal la cual contiene las keyword
-    de las paradas (Ejm: Linea1, Linea2, etc...), y a partir de ahí acceder a los values de las lineas convirtiendolos en un ARREGLO
-    usando la libreria JSONArray al igual que como haremos con el contenido de la keyword principal, para así poder recorrerla con mayor
-    facilidad y construirlo con mayor soltura.
+        Esta función tiene como fin acceder a nuestro JSON y a partir de ahí empezar a recorrer sus keywords y values con el
+        fin de poder crear una estación con cada una como un objeto de tipo estación y luego convertirlos en vertices para
+        agregarlos a nuestra lisat de vertices. Todo esto accediendo primero a su keyword principal la cual contiene las keyword
+        de las paradas (Ejm: Linea1, Linea2, etc...), y a partir de ahí acceder a los values de las lineas convirtiendolos en un ARREGLO
+        usando la libreria JSONArray al igual que como haremos con el contenido de la keyword principal, para así poder recorrerla con mayor
+        facilidad y construirlo con mayor soltura.
+     * @param g : parametro de tipo Grafo
+     * @author Carlos Rodríguez
      */
     public void dataConstructor(Grafo g) {
         String principalKeyWord = this.getData().names().getString(0);
@@ -172,11 +203,15 @@ public class LecturaJSON {
     }
 
 
-    /*
-        Sobreescribir archivo:
-            Esta función tiene como fin sobre escribir nuestro JSON original actualizando el JSONArray de Lineas
-            del metro y reflejando eso en el archivo original, esto se logra usando la libreria FileWriter la cual
-            nos permite poder editar un archivo partiendo de su path en el directorio.
+    /**
+     Sobreescribir archivo:
+        Esta función tiene como fin sobre escribir nuestro JSON original actualizando el JSONArray de Lineas
+        del metro y reflejando eso en el archivo original, esto se logra usando la libreria FileWriter la cual
+        nos permite poder editar un archivo partiendo de su path en el directorio.
+     * @param data: Parametro de tipo String[]
+     * @param lineName: Parametro de tipo String
+     * @param graph: Parametro de tipo Grafo
+     * @author Carlos Rodríguez
      */
     public void addData(String[] data, String lineName, Grafo graph) {
         String principalKeyWord = this.getData().names().getString(0); //Obtenemos la keyword principal
@@ -208,18 +243,33 @@ public class LecturaJSON {
 
         newLine.put(lineName, newStations); //agregamos las estaciones a nuestro jsonm de la nueva linea
         principalData.put(newLine); //agregamos al json general la nueva linea.
-        updateData(graph);
+        updateData();
     }
-
-    public void updateData(Grafo g) {
+    
+    /**
+    Actualizar Archivo:
+       Esta función tiene como fin recibir los datos del JSONOBject presentes dentro del LecturaJSON
+       para actualizar el JSON con el que se comunica la clase (esto se hace usando el path).
+     * @author Carlos Rodríguez
+     */
+    public void updateData() {
         try (FileWriter sobreescribir = new FileWriter(this.getOriginPath())) {
             sobreescribir.write(this.getData().toString(4)); //sobre escribimos el archivo
         } catch (IOException e) {
         }
     }
-
+    
+    /**
+    Función para cambair el JSON:
+         Esta función lo que hace es recibir los nuevos parametros del nuevo JSON y llama a los setters
+         del objeto para redefinir sus atributos 
+     * @param newEndpoint: Parametrp de tipo File
+     * @param g: Parametro de tipo Grafo
+     * @author Carlos Rodríguez
+     * 
+     */
     public void changeJSON(File newEndpoint, Grafo g) {
-        updateData(g);
+        updateData();
         g.destructor();
         String newPath = newEndpoint.getAbsolutePath();
         this.setOriginPath(newPath);
@@ -233,7 +283,17 @@ public class LecturaJSON {
 
         dataConstructor(g);
     }
-
+    
+    /**
+    Función Validar Sucursal:
+         Esta función tiene como fin recibir la estación a la que se le agregue la sucursal y marcar dentro del JSON
+         dicha sucursal con un * para que la proxima vez que se llame, tenga la sucursal ya predefinida. Al finalizar dicho proceso
+         actualiza el JSON con los nuevis datos usando la función updateData().
+        
+     * @param station: Parametro de tipo Estación
+     * @param graph: Parametro de tipo Grafo
+     * @author Carlos Rodríguez
+     */
     public void checkSucursal(Estacion station, Grafo graph) {
         String principalKeyWord = this.getData().names().getString(0);
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
@@ -263,9 +323,20 @@ public class LecturaJSON {
                 }
             }
         }
-        updateData(graph);
+        updateData();
     }
-
+    
+    
+    /**
+     Función Eliminar Sucursal:
+         Esta función tiene como fin recibir la estación que se desea eliminar y se le elimina
+         el * dentro del JSON para que la proxima vez que se construyan los datos esta estación
+         no se cree con sucursal.
+          * 
+     * @param station: Parametro de tipo Estación
+     * @param graph: Parametro de tipo Grafo
+     * @author Carlos Rodríguez
+     */
     public void deleteSucursal(Estacion station, Grafo graph) {
         String principalKeyWord = this.getData().names().getString(0);
         JSONArray principalData = this.getData().getJSONArray(principalKeyWord);
@@ -296,6 +367,6 @@ public class LecturaJSON {
                 }
             }
         }
-        updateData(graph);
+        updateData();
     }
 }
