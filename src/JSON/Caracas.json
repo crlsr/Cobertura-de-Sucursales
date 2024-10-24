@@ -57,10 +57,16 @@
         "La Paz",
         "Maternidad",
         "Capuchinos",
-        "Teatros",
+        "Teatros*",
         "Nuevo Circo",
         "Parque Central",
         {"Zona Rental": "Plaza Venezuela"},
         "Bello Monte"
+    ]},
+    {"Linea 5 (por El Culo Te La Inco)": [
+        {"Bello Campo": "Altamira"},
+        "Las Mercedes",
+        "Valle Arriba",
+        "La Pastora"
     ]}
 ]}
