@@ -29,9 +29,16 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         funciones = new Funciones();
     }
     
+    /**
+     * @return icono 
+     * Se carga una imagen desde el package de imagenes, usando la libreria toolkit 
+     * se obtiene una una representacion de dicha imagen.
+     * retorna una variable de tipo imagen igualada a la instacia antes mencionada.
+     * @author Marco Betancourt
+     */
     public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
-        return retValue;
+        Image icono = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
+        return icono;
     }
 
     /**
@@ -152,17 +159,42 @@ public class EDITOR_DATA extends javax.swing.JFrame {
     private void INPUT_LINEAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_LINEAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_INPUT_LINEAActionPerformed
-
+    
+    /**
+     * @param evt 
+     * Termina con la ejecución al oprimir el botón.
+     * Cierra la interfaz.
+     * no retorna.
+     * @author Marco Betancourt
+     */
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CERRARActionPerformed
 
+    
+    /**
+     * @param evt 
+     * Verifica si el Json se ha cargado "no esta vacio" y si se ha agregado el radio cobertura.
+     * Si se cumple la condición abre la ventana "MENU_PRINCIPAL" y cierra esta ventana.
+     * @author Marco Betancourt
+     */
     private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
         MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json);
         MP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_REGRESARActionPerformed
 
+    
+    /**
+     * @param evt
+     * Crea dos variables de tipo String y las iguala a un text field y a un text area.
+     * Verifica si las variables no estan en blanco
+     * Si se cumple la condición crea una variable de tipo String en un arreglo para 
+     * realizar un salto de linea con cada linea de la variable.
+     * Utiliza la función agregarLinea para agregar la linea al grafo y al json.
+     * Si no se cumple manda error.
+     * @author Marco Betancourt
+     */
     private void AGREGAR_LINEAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_LINEAActionPerformed
         try{
             String linea = INPUT_LINEA.getText();
@@ -186,6 +218,11 @@ public class EDITOR_DATA extends javax.swing.JFrame {
         }       
     }//GEN-LAST:event_AGREGAR_LINEAActionPerformed
 
+    /**
+     * @param evt
+     * Crea un JOptionPane el cual devuelve un mensaje con las instrucciones que se encuentran en esa ventana.
+     * @author Marco Betancourt
+     */
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
         JOptionPane.showMessageDialog(this, "Instrucciones Editor Data\n" 
                                           + "Al ingresar los datos hagalo con la siguiente estrucutura:\n"

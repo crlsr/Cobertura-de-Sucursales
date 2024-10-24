@@ -35,9 +35,16 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         this.jsoncargado = true;
     }
     
+    /**
+     * @return icono 
+     * Se carga una imagen desde el package de imagenes, usando la libreria toolkit 
+     * se obtiene una una representacion de dicha imagen.
+     * Retorna una variable de tipo imagen igualada a la instacia antes mencionada.
+     * @author Marco Betancourt
+     */
     public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
-        return retValue;
+        Image icono = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
+        return icono;
     }
 
     /**
@@ -133,6 +140,14 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * @param evt 
+     * Verifica si el json esta cargado
+     * Si se cumple la condición abre la ventana "EDITOR_DATA" y cierra esta ventana.
+     * Si no pasa un mensaje de error.
+     * @author Marco Betancourt
+     */
     private void EDITAR_DATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITAR_DATAActionPerformed
         if(jsoncargado){
         EDITOR_DATA MED = new EDITOR_DATA(grafo, json); 
@@ -143,16 +158,38 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_EDITAR_DATAActionPerformed
 
+    
+    /**
+     * @param evt
+     * Abre la ventana "EDITOR_DATA" y cierra esta ventana.
+     * @author Marco Betancourt
+     */
     private void CARGAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAR_JSONActionPerformed
         CARGAR_JSON MCJ = new CARGAR_JSON(grafo, json); 
         MCJ.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CARGAR_JSONActionPerformed
 
+    
+    /**
+     * @param evt 
+     * Termina con la ejecución al oprimir el botón.
+     * Cierra la interfaz.
+     * no retorna.
+     * @author Marco Betancourt
+     */
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CERRARActionPerformed
 
+    
+    /**
+     * @param evt 
+     * Verifica si el json esta cargado
+     * Si se cumple la condición abre la ventana "AGREGAR_SUCURSAL" y cierra esta ventana.
+     * Si no pasa un mensaje de error.
+     * @author Marco Betancourt
+     */
     private void AGREGAR_SUCURSALESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_SUCURSALESActionPerformed
         if(jsoncargado){
         AGREGAR_SUCURSAL MAG = new AGREGAR_SUCURSAL(grafo, json);
@@ -163,6 +200,12 @@ public class MENU_PRINCIPAL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AGREGAR_SUCURSALESActionPerformed
 
+
+    /**
+     * @param evt
+     * Crea un JOptionPane el cual devuelve un mensaje con las instrucciones que se encuentran en esa ventana.
+     * @author Marco Betancourt
+     */
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
         JOptionPane.showMessageDialog(this, "Instrucciones Menu Principal\n"
                                           + "Haga click en el botón CARGAR JSON para subir un archivo .JSON y establecer un radio de cobertura\n"
