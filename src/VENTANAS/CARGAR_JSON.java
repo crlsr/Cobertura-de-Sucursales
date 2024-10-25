@@ -30,11 +30,17 @@ public class CARGAR_JSON extends javax.swing.JFrame {
         this.json=json;        
     }
 
+    /**
+     * @return icono 
+     * Se carga una imagen desde el package de imagenes, usando la libreria toolkit 
+     * se obtiene una una representacion de dicha imagen.
+     * retorna una variable de tipo imagen igualada a la instacia antes mencionada.
+     * @author Marco Betancourt
+     */
     public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
-        return retValue;
+        Image icono = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
+        return icono;
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,10 +160,25 @@ public class CARGAR_JSON extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_INPUT_TActionPerformed
 
+    /**
+     * @param evt 
+     * Termina con la ejecución al oprimir el botón.
+     * Cierra la interfaz.
+     * @author Marco Betancourt
+     */    
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CERRARActionPerformed
 
+    
+    /**
+     * @param evt 
+     * Carga un archivo JSON para actualizar el grafo.
+     * Abre un diálogo para permitir al usuario seleccionar un archivo JSON.
+     * Lee el contenido del archivo y actualiza el grafo en base a la información contenida en el JSON.
+     * Maneja posibles excepciones durante el proceso de carga y actualización.
+     * @author Marco Betancourt
+     */
     private void CARGAR_JSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAR_JSONActionPerformed
         try {
         JFileChooser finder = new JFileChooser();
@@ -176,13 +197,22 @@ public class CARGAR_JSON extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "El JSON se ha cargado correctamente");
             }
         }
-        
         }    
         catch (Exception e){
            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado!!!");
        }
     }//GEN-LAST:event_CARGAR_JSONActionPerformed
 
+    
+    /**
+     * @param evt
+     * Verifica si el json no es vacio.
+     * Crea una variable de tipo entero que almacena lo que ingresa el usuario.
+     * Verifica si la variable es positiva y menor al numero de estaciones que tiene el json utilizado.
+     * Si es asi actualiza el valor de la variable.
+     * Si no manda un mensaje de error.
+     * @author Marco Betancourt
+     */
     private void ESTABLECER_TActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ESTABLECER_TActionPerformed
         try {
             if (json != null){
@@ -209,7 +239,13 @@ public class CARGAR_JSON extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingresa los datos correctamente ❌");
         }
     }//GEN-LAST:event_ESTABLECER_TActionPerformed
-
+    
+    /**
+     * @param evt 
+     * Verifica si el Json se ha cargado "no esta vacio" y si se ha agregado el radio cobertura.
+     * Si se cumple la condición abre la ventana "MENU_PRINCIPAL" y cierra la ventana en la que esta ubicado.
+     * @author Marco Betancourt
+     */
     private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
         if(json!=null && grafo.getT()>0){
             MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json);
@@ -221,6 +257,12 @@ public class CARGAR_JSON extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_REGRESARActionPerformed
 
+    
+    /**
+     * @param evt
+     * Crea un JOptionPane el cual devuelve un mensaje con las instrucciones que se encuentran en esa ventana.
+     * @author Marco Betancourt
+     */
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
         JOptionPane.showMessageDialog(this, "Instrucciones Cargar JSON\n"
                                           + "Haga click en el botón CARGAR JSON y seleccione un archivo .JSON con la red de transporte\n"

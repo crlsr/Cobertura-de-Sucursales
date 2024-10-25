@@ -34,12 +34,17 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         funciones = new Funciones();
     }
    
+    /**
+     * @return icono 
+     * Se carga una imagen desde el package de imagenes, usando la libreria toolkit 
+     * se obtiene una una representacion de dicha imagen.
+     * retorna una variable de tipo imagen igualada a la instacia antes mencionada.
+     * @author Marco Betancourt
+     */
     public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
-        return retValue;
+        Image icono = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/ICONO.png"));
+        return icono;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -220,10 +225,24 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * @param evt 
+     * Termina con la ejecución al oprimir el botón.
+     * Cierra la interfaz.
+     * @author Marco Betancourt
+     */
     private void CERRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CERRARActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CERRARActionPerformed
 
+    
+    /**
+     * @param evt
+     * Crea una variable de tipo String la iguala al nombre de la sucursal ingresada por el usuario.
+     * Valida que no este vacio, crea una nueva instancia de tipo Estacion.
+     * Agrega la nueva instancia al grafo usando la funcion colocarSucursal.
+     * @author Marco Betancourt
+     */
     private void AGREGAR_SUCURSALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGREGAR_SUCURSALActionPerformed
         try {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
@@ -241,6 +260,15 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AGREGAR_SUCURSALActionPerformed
 
+    /**
+     * @param evt 
+     * Obtiene el nombre de la estación ingresada por el usuario. 
+     * Calcula la cobertura total del grafo. 
+     * Encuentra las estaciones no cubiertas por ninguna sucursal. 
+     * Realiza una búsqueda BFS desde la estación especificada para determinar las estaciones alcanzables. 
+     * Actualiza la interfaz de usuario mostrando las estaciones cubiertas y no cubiertas.
+     * @author Marco Betancourt
+     */
     private void VER_COBERTURA_DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTURA_DFSActionPerformed
         try {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
@@ -264,6 +292,14 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_VER_COBERTURA_DFSActionPerformed
 
+    
+    /**
+     * @param evt
+     * Crea una variable de tipo String la iguala al nombre de la sucursal ingresada por el usuario.
+     * Valida que no este vacio, crea una nueva instancia de tipo Estacion.
+     * Elimina la instancia al grafo usando la funcion colocarSucursal.
+     * @author Marco Betancourt
+     */
     private void ELIMINAR_SUCURSALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ELIMINAR_SUCURSALActionPerformed
         try {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
@@ -281,6 +317,15 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ELIMINAR_SUCURSALActionPerformed
 
+    /**
+     * @param evt 
+     * Elimina cualquier cálculo de cobertura previo del grafo. 
+     * Calcula la cobertura total de todas las estaciones en el grafo.
+     * Muestra una representación visual del grafo actualizado. 
+     * Obtiene las listas de estaciones cubiertas y no cubiertas.  
+     * Muestra las listas de estaciones cubiertas y no cubiertas en los campos de texto correspondientes.
+     * @author Marco Betancourt
+     */
     private void VER_COBERTUTA_TOTALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTUTA_TOTALActionPerformed
         try {
             funciones.eliminarCobertura(grafo);
@@ -295,6 +340,16 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_VER_COBERTUTA_TOTALActionPerformed
 
+    
+    /**
+     * @param evt 
+     * Obtiene el nombre de la estación ingresada por el usuario. 
+     * Calcula la cobertura total del grafo. 
+     * Encuentra las estaciones no cubiertas por ninguna sucursal. 
+     * Realiza una búsqueda BFS desde la estación especificada para determinar las estaciones alcanzables. 
+     * Actualiza la interfaz de usuario mostrando las estaciones cubiertas y no cubiertas.
+     * @author Marco Betancourt
+     */
     private void VER_COBERTURA_BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VER_COBERTURA_BFSActionPerformed
         try {
             String nombreEstacion = INPUT_AGREGAR_SUCURSAL.getText();
@@ -318,12 +373,23 @@ public class AGREGAR_SUCURSAL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_VER_COBERTURA_BFSActionPerformed
 
+    /**
+     * @param evt 
+     * Verifica si el Json se ha cargado "no esta vacio" y si se ha agregado el radio cobertura.
+     * Si se cumple la condición abre la ventana "MENU_PRINCIPAL" y cierra la ventana en la que esta ubicado.
+     * @author Marco Betancourt
+     */    
     private void REGRESARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGRESARActionPerformed
         MENU_PRINCIPAL MP = new MENU_PRINCIPAL(grafo, json);
         MP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_REGRESARActionPerformed
 
+    /**
+     * @param evt
+     * Crea un JOptionPane el cual devuelve un mensaje con las instrucciones que se encuentran en esa ventana.
+     * @author Marco Betancourt
+     */
     private void INSTRUCCIONESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INSTRUCCIONESActionPerformed
         JOptionPane.showMessageDialog(this,  "Instrucciones Manejo Sucursales\n"
                                           + "Ingrese una parada en la barra de texto, y escoja uno de los botones segun lo que desee\n"
